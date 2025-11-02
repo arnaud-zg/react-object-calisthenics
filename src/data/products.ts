@@ -17,7 +17,7 @@ export const PRODUCTS: Product[] = [
   new Product(
     new ProductId("thunderfury"),
     new ProductName("Thunderfury, Blessed Blade of the Windseeker"),
-    new Money(485),
+    new Money(115105),
     new ImageUrl(
       "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG"
     ),
@@ -63,7 +63,7 @@ export const PRODUCTS: Product[] = [
   new Product(
     new ProductId("ashbringer"),
     new ProductName("Ashbringer"),
-    new Money(750),
+    new Money(288527),
     new ImageUrl(
       "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg"
     ),
@@ -104,7 +104,7 @@ export const PRODUCTS: Product[] = [
   new Product(
     new ProductId("sulfuras"),
     new ProductName("Sulfuras, Hand of Ragnaros"),
-    new Money(900),
+    new Money(31244),
     new ImageUrl(
       "https://static.wikia.nocookie.net/wowpedia/images/6/6e/Sulfuras_Hand_of_Ragnaros_TCG.jpg"
     ),
@@ -145,7 +145,7 @@ export const PRODUCTS: Product[] = [
   new Product(
     new ProductId("valanyr"),
     new ProductName("Val'anyr, Hammer of Ancient Kings"),
-    new Money(650),
+    new Money(363651),
     new ImageUrl(
       "https://static.wikia.nocookie.net/wowpedia/images/7/76/Val%27anyr%2C_Hammer_of_Ancient_Kings_TCG.jpg"
     ),
@@ -186,7 +186,7 @@ export const PRODUCTS: Product[] = [
   new Product(
     new ProductId("doomhammer"),
     new ProductName("Doomhammer"),
-    new Money(680),
+    new Money(363651),
     new ImageUrl(
       "https://static.wikia.nocookie.net/wowpedia/images/a/a2/Doomhammer_TCG.jpg"
     ),
