@@ -31,14 +31,15 @@ function App() {
       </p>
 
       <div className="flex flex-col gap-2">
-        {/* <a
-          href="https://your-substack-link.substack.com/p/code-colocation-react"
+        <a
+          href="https://open.substack.com/pub/arnaudzg/p/applying-object-calisthenics-principles?r=iih51&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
           target="_blank"
-          rel="noopener noreferrer"
+          rel="noreferrer"
           className="text-[#61dafb] hover:underline font-semibold transition-colors duration-200"
         >
-          🔗 Read my article about applying object calisthenics to user interface code
-        </a> */}
+          🔗 Read my article about applying object calisthenics principles to
+          front-end applications
+        </a>
         <a
           href="https://github.com/arnaud-zg/react-object-calisthenics"
           target="_blank"
