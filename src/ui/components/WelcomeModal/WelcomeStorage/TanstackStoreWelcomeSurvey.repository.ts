@@ -32,7 +32,7 @@ welcomeStore.subscribe(() => {
   }
 });
 
-export class TanStackWelcomeSurveyRepository
+export class TanStackStoreWelcomeSurveyRepository
   implements WelcomeStorageRepository
 {
   getSurvey = (): WelcomeSurveyStoreState["survey"] => {
