@@ -12,7 +12,6 @@ import { ShippingPolicy } from "@/domain/cart/policy/ShippingPolicy";
 import { Money } from "@/domain/cart/value-objects/Money";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
-import { useImmutableInstance } from "@/lib/useImmutableInstance";
 import { ShoppingCartItem } from "@/ui/components/Cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
@@ -34,6 +33,7 @@ import {
 } from "@/ui/primitives/modal";
 import { Separator } from "@/ui/primitives/separator";
 import { type FC, type RefObject, useState } from "react";
+import { useImmutableInstance } from "use-immutable-instance";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardLogic } from "./ProductCard/ProductCard.logic";
 
