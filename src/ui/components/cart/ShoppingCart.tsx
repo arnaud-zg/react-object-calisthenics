@@ -58,6 +58,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
         <Button
           size="default"
           onClick={() => welcomeModalHandle.current.open()}
+          data-umami-event="knowledge-level.open"
         >
           {new Skill(welcomeSurvey?.skill ?? "beginner").label()}
         </Button>
@@ -366,6 +367,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     disabled={cart.isEmpty()}
                     className="w-full"
                     size="default"
+                    data-umami-event="shopping-cart.complete-purchase"
                   >
                     Complete Purchase
                   </Button>
@@ -390,6 +392,11 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href="https://github.com/arnaud-zg"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                          umami?.track("contact.link-click", {
+                            platform: "github",
+                          });
+                        }}
                       >
                         <Github className="h-5 w-5" />
                       </a>
@@ -401,6 +408,11 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href="https://www.linkedin.com/in/arnaudzheng/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        onClick={() => {
+                          umami?.track("contact.link-click", {
+                            platform: "linkedin",
+                          });
+                        }}
                       >
                         <Linkedin className="h-5 w-5" />
                       </a>

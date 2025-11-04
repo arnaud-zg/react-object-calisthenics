@@ -67,6 +67,7 @@ export function ShoppingCartItem({
                     className="h-8 w-8 p-0 rounded-r-none hover:bg-gray-100"
                     aria-label="Decrease quantity"
                     disabled={item.getQuantity().toValue() <= 1}
+                    data-umami-event="shopping-cart.decrease-quantity"
                   >
                     <Minus className="h-4 w-4" />
                   </Button>
@@ -88,6 +89,7 @@ export function ShoppingCartItem({
                     disabled={
                       item.getQuantity().toValue() >= CartItem.MAX_QUANTITY
                     }
+                    data-umami-event="shopping-cart.increase-quantity"
                   >
                     <Plus className="h-4 w-4" />
                   </Button>
@@ -100,6 +102,7 @@ export function ShoppingCartItem({
                     size="icon"
                     className="h-8 w-8 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
                     aria-label="Remove item"
+                    data-umami-event="shopping-cart.remove-item"
                   >
                     <Trash2 className="h-4 w-4" />
                   </Button>

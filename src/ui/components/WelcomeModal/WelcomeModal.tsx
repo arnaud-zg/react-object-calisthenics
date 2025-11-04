@@ -94,6 +94,10 @@ const WelcomeModalComponent = (
 
                       if (!safeValue) return;
                       field.handleChange(safeValue);
+
+                      umami?.track("knowledge-level.select", {
+                        level: safeValue,
+                      });
                     }}
                     className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-800 focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-300"
                   >

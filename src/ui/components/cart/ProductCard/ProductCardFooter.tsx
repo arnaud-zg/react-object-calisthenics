@@ -31,7 +31,12 @@ export function ProductCardFooter({
   return (
     <CardFooter className="p-4 pt-0 flex flex-col gap-2">
       <Button
-        onClick={() => onAddToCart(product)}
+        onClick={() => {
+          onAddToCart(product);
+          umami?.track("product.add-to-cart", {
+            productId: product.displayId(),
+          });
+        }}
         className="w-full flex items-center justify-center gap-2"
         variant="default"
       >
@@ -43,6 +48,11 @@ export function ProductCardFooter({
           <Button
             className="w-full flex items-center justify-center gap-2"
             variant="link"
+            onClick={() => {
+              umami?.track("product.watch-video", {
+                productId: product.displayId(),
+              });
+            }}
           >
             <Clapperboard className="h-4 w-4" /> Watch Video
           </Button>
@@ -71,6 +81,9 @@ export function ProductCardFooter({
         <Button
           onClick={() => {
             window.open(loreLink, "_blank");
+            umami?.track("product.read-lore", {
+              productId: product.displayId(),
+            });
           }}
           className="w-full flex items-center justify-center gap-2"
           variant="link"
