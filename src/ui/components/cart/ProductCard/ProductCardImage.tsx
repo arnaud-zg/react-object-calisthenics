@@ -10,7 +10,9 @@ export const ProductCardImage = ({ product }: ProductCardImageProps) => {
       <img
         src={product.displayImage()}
         alt={product.displayName()}
-        className="object-cover w-full h-full transition-transform hover:scale-105"
+        loading="lazy"
+        decoding="async"
+        className="object-cover w-full h-full transition-transform hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
       />
     </div>
   );

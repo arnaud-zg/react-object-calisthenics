@@ -99,7 +99,7 @@ const WelcomeModalComponent = (
                         level: safeValue,
                       });
                     }}
-                    className="w-full rounded-md border border-gray-300 p-2 text-sm text-gray-800 focus:border-violet-500 focus:outline-none focus:ring-2 focus:ring-violet-300"
+                    className="w-full cursor-pointer rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/50"
                   >
                     <option value="">-- Select knowledge level --</option>
                     <option value="beginner">
@@ -134,7 +134,7 @@ const WelcomeModalComponent = (
                 <Button
                   type="submit"
                   disabled={!canSubmit}
-                  className={`w-full ${!canSubmit && "cursor-not-allowed bg-gray-300 text-gray-500"}`}
+                  className="w-full"
                   size="default"
                 >
                   {actionLabel}
