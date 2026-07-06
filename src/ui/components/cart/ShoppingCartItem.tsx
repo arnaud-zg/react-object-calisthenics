@@ -64,17 +64,20 @@ export function ShoppingCartItem({
                     onClick={onDecreaseQuantity}
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 p-0 rounded-r-none hover:bg-gray-100"
-                    aria-label="Decrease quantity"
+                    className="h-9 w-9 p-0 rounded-r-none hover:bg-gray-100"
+                    aria-label={`Decrease quantity of ${item.getName()}`}
                     disabled={item.getQuantity().toValue() <= 1}
                     data-umami-event="shopping-cart.decrease-quantity"
                   >
-                    <Minus className="h-4 w-4" />
+                    <Minus className="h-4 w-4" aria-hidden="true" />
                   </Button>
 
                   <Separator orientation="vertical" />
 
-                  <span className="px-3 py-1 min-w-[30px] text-center text-sm font-medium">
+                  <span
+                    className="px-3 py-1 min-w-[30px] text-center text-sm font-medium"
+                    aria-live="polite"
+                  >
                     {item.getQuantity().toValue()}
                   </span>
 
@@ -84,14 +87,14 @@ export function ShoppingCartItem({
                     onClick={onIncreaseQuantity}
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 p-0 rounded-l-none hover:bg-gray-100"
-                    aria-label="Increase quantity"
+                    className="h-9 w-9 p-0 rounded-l-none hover:bg-gray-100"
+                    aria-label={`Increase quantity of ${item.getName()}`}
                     disabled={
                       item.getQuantity().toValue() >= CartItem.MAX_QUANTITY
                     }
                     data-umami-event="shopping-cart.increase-quantity"
                   >
-                    <Plus className="h-4 w-4" />
+                    <Plus className="h-4 w-4" aria-hidden="true" />
                   </Button>
 
                   <Separator orientation="vertical" />
@@ -100,11 +103,11 @@ export function ShoppingCartItem({
                     onClick={onRemoveItem}
                     variant="ghost"
                     size="icon"
-                    className="h-8 w-8 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
-                    aria-label="Remove item"
+                    className="h-9 w-9 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                    aria-label={`Remove ${item.getName()} from cart`}
                     data-umami-event="shopping-cart.remove-item"
                   >
-                    <Trash2 className="h-4 w-4" />
+                    <Trash2 className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </div>

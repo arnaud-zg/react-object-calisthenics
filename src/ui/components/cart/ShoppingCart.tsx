@@ -12,7 +12,7 @@ import { ShippingPolicy } from "@/domain/cart/policy/ShippingPolicy";
 import { Money } from "@/domain/cart/value-objects/Money";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
-import { ShoppingCartItem } from "@/ui/components/Cart/ShoppingCartItem";
+import { ShoppingCartItem } from "@/ui/components/cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 import { Badge } from "@/ui/primitives/badge";
@@ -33,7 +33,7 @@ import {
 } from "@/ui/primitives/modal";
 import { Separator } from "@/ui/primitives/separator";
 import { type FC, type RefObject, useState } from "react";
-import { useImmutableInstance } from "use-immutable-instance";
+import { useImmutableInstance } from "immutable-instance";
 import { ProductCard } from "./ProductCard/ProductCard";
 import { ProductCardLogic } from "./ProductCard/ProductCard.logic";
 
@@ -50,14 +50,15 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
   );
 
   return (
-    <div className="container">
-      <div className="flex justify-between">
-        <h1 className="text-3xl font-bold text-gray-900 mb-8">
+    <div className="mx-auto w-full max-w-7xl">
+      <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-3xl font-bold text-gray-900">
           Azeroth's Finest Wares
         </h1>
         <Button
           size="default"
           onClick={() => welcomeModalHandle.current.open()}
+          className="self-start sm:self-auto"
           data-umami-event="knowledge-level.open"
         >
           {new Skill(welcomeSurvey?.skill ?? "beginner").label()}
@@ -76,14 +77,17 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               onClick={() => {
                 setShowCart(true);
                 const element = document.querySelector("#cart");
-                if (element) {
-                  element.scrollIntoView({ behavior: "smooth" });
-                }
+                const prefersReducedMotion = window.matchMedia(
+                  "(prefers-reduced-motion: reduce)"
+                ).matches;
+                element?.scrollIntoView({
+                  behavior: prefersReducedMotion ? "auto" : "smooth",
+                });
               }}
               className="lg:hidden relative"
               variant="outline"
             >
-              <ShoppingCartIcon className="h-4 w-4 mr-2" />
+              <ShoppingCartIcon className="h-4 w-4 mr-2" aria-hidden="true" />
               Cart <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
             </Button>
           </div>
@@ -105,7 +109,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
           className={`lg:col-span-1 mt-14 ${showCart ? "block" : "hidden lg:block"}`}
           id="cart"
         >
-          <Card className="bg-card border-0 shadow-sm sticky top-10">
+          <Card className="bg-card border-0 shadow-sm sticky top-20">
             <CardHeader className="pb-0 pt-4 px-4">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl font-semibold text-card-foreground">
@@ -120,8 +124,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     size="icon"
                     onClick={() => setShowCart(false)}
                     className="rounded-full lg:hidden"
+                    aria-label="Close cart"
                   >
-                    <X className="h-4 w-4" />
+                    <X className="h-4 w-4" aria-hidden="true" />
                   </Button>
                 </div>
               </div>
@@ -143,7 +148,10 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                       ease: [0.4, 0.0, 0.2, 1],
                     }}
                   >
-                    <ShoppingCartIcon className="h-12 w-12 mx-auto text-muted-foreground mb-4" />
+                    <ShoppingCartIcon
+                      className="h-12 w-12 mx-auto text-muted-foreground mb-4"
+                      aria-hidden="true"
+                    />
                   </motion.div>
                   <motion.p
                     className="text-muted-foreground"
@@ -392,13 +400,14 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href="https://github.com/arnaud-zg"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Arnaud's GitHub profile (opens in a new tab)"
                         onClick={() => {
                           umami?.track("contact.link-click", {
                             platform: "github",
                           });
                         }}
                       >
-                        <Github className="h-5 w-5" />
+                        <Github className="h-5 w-5" aria-hidden="true" />
                       </a>
                     </Button>
 
@@ -408,13 +417,14 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href="https://www.linkedin.com/in/arnaudzheng/"
                         target="_blank"
                         rel="noopener noreferrer"
+                        aria-label="Arnaud's LinkedIn profile (opens in a new tab)"
                         onClick={() => {
                           umami?.track("contact.link-click", {
                             platform: "linkedin",
                           });
                         }}
                       >
-                        <Linkedin className="h-5 w-5" />
+                        <Linkedin className="h-5 w-5" aria-hidden="true" />
                       </a>
                     </Button>
                   </div>
