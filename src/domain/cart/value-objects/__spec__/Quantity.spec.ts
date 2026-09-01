@@ -35,9 +35,7 @@ describe("Quantity", () => {
 
   it("should throw an error when trying to decrement 0", () => {
     const zeroQuantity = new Quantity(0);
-    expect(() => zeroQuantity.decrement()).toThrowError(
-      "Quantity cannot be less than 0"
-    );
+    expect(() => zeroQuantity.decrement()).toThrowError("Quantity cannot be less than 0");
   });
 
   it("should be immutable (methods return a new instance)", () => {

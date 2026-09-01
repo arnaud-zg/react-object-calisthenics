@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { Money } from "@/domain/cart/value-objects/Money";
 import {
   ImageUrl,
@@ -13,7 +14,6 @@ import {
   Stats,
 } from "@/domain/cart/value-objects/Product/ProductDetails";
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
-import { describe, expect, it } from "vitest";
 import { CartItem } from "../CartItem";
 
 const PRODUCT = new Product(
@@ -21,7 +21,7 @@ const PRODUCT = new Product(
   new ProductName("Thunderfury, Blessed Blade of the Windseeker"),
   new Money(485),
   new ImageUrl(
-    "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG"
+    "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
   ),
   new KnowledgeContent(
     new ProfileDetails(
@@ -30,8 +30,8 @@ const PRODUCT = new Product(
       [new Effect("Chance to strike enemies with lightning.")],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
     ),
     new ProfileDetails(
       "Thunderfury is forged with elemental fury. Great for battle, with bonus lightning damage and attack speed.",
@@ -43,8 +43,8 @@ const PRODUCT = new Product(
       ],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
     ),
     new ProfileDetails(
       "Thunderfury, Blessed Blade of the Windseeker, is a legendary weapon of immense power. It channels elemental air, unleashing lightning with each strike. Its artifact status is confirmed by its rarity and crafting requirements.",
@@ -57,10 +57,10 @@ const PRODUCT = new Product(
       ],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
-    )
-  )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
+    ),
+  ),
 );
 
 describe("CartItem", () => {
@@ -70,11 +70,9 @@ describe("CartItem", () => {
 
   it("should return correct id, name, image and quantity", () => {
     expect(cartItem.getId()).toBe("thunderfury");
-    expect(cartItem.getName()).toBe(
-      "Thunderfury, Blessed Blade of the Windseeker"
-    );
+    expect(cartItem.getName()).toBe("Thunderfury, Blessed Blade of the Windseeker");
     expect(cartItem.getImage()).toBe(
-      "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG"
+      "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
     );
     expect(cartItem.getQuantity().toValue()).toBe(5);
   });

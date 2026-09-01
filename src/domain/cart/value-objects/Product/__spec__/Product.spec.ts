@@ -1,18 +1,7 @@
 import { describe, expect, it } from "vitest";
 import { Money } from "../../Money";
-import {
-  ImageUrl,
-  KnowledgeContent,
-  Product,
-  ProductId,
-  ProductName,
-} from "../Product";
-import {
-  Effect,
-  ExtraResources,
-  ProfileDetails,
-  Stats,
-} from "../ProductDetails";
+import { ImageUrl, KnowledgeContent, Product, ProductId, ProductName } from "../Product";
+import { Effect, ExtraResources, ProfileDetails, Stats } from "../ProductDetails";
 
 describe("Product Value Objects", () => {
   it("should create a ProductId and return value", () => {
@@ -37,16 +26,8 @@ describe("Product Value Objects", () => {
 describe("KnowledgeContent and Product", () => {
   const stats = new Stats(10, 20, 5);
   const effects = [new Effect("Fire damage")];
-  const extraResources = new ExtraResources(
-    "https://lore.link",
-    "https://video.link"
-  );
-  const profile = new ProfileDetails(
-    "A legendary sword",
-    stats,
-    effects,
-    extraResources
-  );
+  const extraResources = new ExtraResources("https://lore.link", "https://video.link");
+  const profile = new ProfileDetails("A legendary sword", stats, effects, extraResources);
 
   const knowledge = new KnowledgeContent(profile, profile, profile);
 
@@ -55,7 +36,7 @@ describe("KnowledgeContent and Product", () => {
     new ProductName("Excalibur"),
     new Money(500),
     new ImageUrl("http://image.link"),
-    knowledge
+    knowledge,
   );
 
   it("should return correct product info", () => {

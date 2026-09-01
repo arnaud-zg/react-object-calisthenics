@@ -1,3 +1,4 @@
+import { describe, expect, it } from "vitest";
 import { Money } from "@/domain/cart/value-objects/Money";
 import {
   ImageUrl,
@@ -12,7 +13,6 @@ import {
   ProfileDetails,
   Stats,
 } from "@/domain/cart/value-objects/Product/ProductDetails";
-import { describe, expect, it } from "vitest";
 import { Cart } from "../Cart";
 
 const PRODUCT_1 = new Product(
@@ -20,7 +20,7 @@ const PRODUCT_1 = new Product(
   new ProductName("Thunderfury, Blessed Blade of the Windseeker"),
   new Money(485),
   new ImageUrl(
-    "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG"
+    "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
   ),
   new KnowledgeContent(
     new ProfileDetails(
@@ -29,8 +29,8 @@ const PRODUCT_1 = new Product(
       [new Effect("Chance to strike enemies with lightning.")],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
     ),
     new ProfileDetails(
       "Thunderfury is forged with elemental fury. Great for battle, with bonus lightning damage and attack speed.",
@@ -42,8 +42,8 @@ const PRODUCT_1 = new Product(
       ],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
     ),
     new ProfileDetails(
       "Thunderfury, Blessed Blade of the Windseeker, is a legendary weapon of immense power. It channels elemental air, unleashing lightning with each strike. Its artifact status is confirmed by its rarity and crafting requirements.",
@@ -56,10 +56,10 @@ const PRODUCT_1 = new Product(
       ],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos"
-      )
-    )
-  )
+        "https://www.youtube.com/embed/2TGRpvb5Nos",
+      ),
+    ),
+  ),
 );
 
 const PRODUCT_2 = new Product(
@@ -67,7 +67,7 @@ const PRODUCT_2 = new Product(
   new ProductName("Ashbringer"),
   new Money(750),
   new ImageUrl(
-    "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg"
+    "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg",
   ),
   new KnowledgeContent(
     new ProfileDetails(
@@ -76,8 +76,8 @@ const PRODUCT_2 = new Product(
       [new Effect("Bonus against undead enemies.")],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc"
-      )
+        "https://www.youtube.com/embed/lso8Ygk4rKc",
+      ),
     ),
     new ProfileDetails(
       "Ashbringer channels holy energy to smite foes, cleansing corruption and undead.",
@@ -85,8 +85,8 @@ const PRODUCT_2 = new Product(
       [new Effect("Holy damage +25%"), new Effect("Undead vulnerability.")],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc"
-      )
+        "https://www.youtube.com/embed/lso8Ygk4rKc",
+      ),
     ),
     new ProfileDetails(
       "Ashbringer is the embodiment of righteousness. It delivers devastating holy strikes and vanquishes evil.",
@@ -98,10 +98,10 @@ const PRODUCT_2 = new Product(
       ],
       new ExtraResources(
         "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc"
-      )
-    )
-  )
+        "https://www.youtube.com/embed/lso8Ygk4rKc",
+      ),
+    ),
+  ),
 );
 
 describe("Cart", () => {
@@ -116,8 +116,10 @@ describe("Cart", () => {
 
     expect(cartAfterAdd.isEmpty()).toBe(false);
     expect(cartAfterAdd.getItemsCopy().length).toBe(1);
-    expect(cartAfterAdd.getItemsCopy()[0].getId()).toBe("thunderfury");
-    expect(cartAfterAdd.getItemsCopy()[0].getQuantity().toValue()).toBe(1);
+    const [addedItem] = cartAfterAdd.getItemsCopy();
+    expect(addedItem).toBeDefined();
+    expect(addedItem?.getId()).toBe("thunderfury");
+    expect(addedItem?.getQuantity().toValue()).toBe(1);
   });
 
   it("should increment quantity if product already exists", () => {
@@ -125,8 +127,8 @@ describe("Cart", () => {
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_1);
 
-    const item = cart.getItemsCopy()[0];
-    expect(item.getQuantity().toValue()).toBe(2);
+    const [item] = cart.getItemsCopy();
+    expect(item?.getQuantity().toValue()).toBe(2);
   });
 
   it("should decrement item quantity", () => {
@@ -135,15 +137,15 @@ describe("Cart", () => {
     cart = cart.addItem(PRODUCT_1);
 
     const cartAfterDecrement = cart.decrementItem(PRODUCT_1);
-    const item = cartAfterDecrement.getItemsCopy()[0];
-    expect(item.getQuantity().toValue()).toBe(1);
+    const [item] = cartAfterDecrement.getItemsCopy();
+    expect(item?.getQuantity().toValue()).toBe(1);
   });
 
   it("should not decrement below MIN_QUANTITY", () => {
     const cart = new Cart().addItem(PRODUCT_1);
     const cartAfterDecrement = cart.decrementItem(PRODUCT_1);
-    const item = cartAfterDecrement.getItemsCopy()[0];
-    expect(item.getQuantity().toValue()).toBe(1);
+    const [item] = cartAfterDecrement.getItemsCopy();
+    expect(item?.getQuantity().toValue()).toBe(1);
   });
 
   it("should delete item from cart", () => {
@@ -152,8 +154,9 @@ describe("Cart", () => {
     cart = cart.addItem(PRODUCT_2);
 
     const cartAfterDelete = cart.deleteItem(PRODUCT_1);
+    const [remainingItem] = cartAfterDelete.getItemsCopy();
     expect(cartAfterDelete.getItemsCopy().length).toBe(1);
-    expect(cartAfterDelete.getItemsCopy()[0].getId()).toBe("ashbringer");
+    expect(remainingItem?.getId()).toBe("ashbringer");
   });
 
   it("should calculate subtotal correctly", () => {

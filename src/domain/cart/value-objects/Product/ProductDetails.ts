@@ -10,7 +10,7 @@ export class Stats {
   constructor(
     private readonly _power: number,
     private readonly _durability: number,
-    private readonly _manaBoost: number
+    private readonly _manaBoost: number,
   ) {
     if (_power < 0 || _durability < 0 || _manaBoost < 0) {
       throw new Error("Stats cannot be negative");
@@ -33,7 +33,7 @@ export class Stats {
 export class ExtraResources {
   constructor(
     private readonly _loreLink: string,
-    private readonly _videoUrl: string
+    private readonly _videoUrl: string,
   ) {}
 
   getLoreLink(): string {
@@ -50,7 +50,7 @@ export class ProfileDetails {
     private readonly _description: string,
     private readonly _stats: Stats,
     private readonly _effects: Effect[],
-    private readonly _extraResources: ExtraResources
+    private readonly _extraResources: ExtraResources,
   ) {}
 
   describe(): string {

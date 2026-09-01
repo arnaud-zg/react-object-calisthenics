@@ -4,9 +4,7 @@ import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
-function Modal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Root>) {
+function Modal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) {
   return <DialogPrimitive.Root data-slot="modal" {...props} />;
 }
 
@@ -16,15 +14,11 @@ function ModalTrigger({
   return <DialogPrimitive.Trigger data-slot="modal-trigger" {...props} />;
 }
 
-function ModalPortal({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Portal>) {
+function ModalPortal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Portal>) {
   return <DialogPrimitive.Portal data-slot="modal-portal" {...props} />;
 }
 
-function ModalClose({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Close>) {
+function ModalClose({ ...props }: React.ComponentProps<typeof DialogPrimitive.Close>) {
   return <DialogPrimitive.Close data-slot="modal-close" {...props} />;
 }
 
@@ -37,7 +31,7 @@ function ModalOverlay({
       data-slot="modal-overlay"
       className={cn(
         "fixed inset-0 z-50 bg-black/50 backdrop-blur-sm data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:fade-in-0 data-[state=closed]:fade-out-0",
-        className
+        className,
       )}
       {...props}
     />
@@ -59,7 +53,7 @@ function ModalContent({
         data-slot="modal-content"
         className={cn(
           "fixed left-1/2 top-1/2 z-50 grid w-full max-w-[calc(100%-2rem)] -translate-x-1/2 -translate-y-1/2 gap-4 rounded-2xl border bg-background p-6 shadow-lg duration-200 data-[state=open]:animate-in data-[state=closed]:animate-out data-[state=open]:zoom-in-95 data-[state=closed]:zoom-out-95 sm:max-w-lg",
-          className
+          className,
         )}
         {...props}
       >
@@ -92,10 +86,7 @@ function ModalFooter({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="modal-footer"
-      className={cn(
-        "flex flex-col-reverse gap-2 sm:flex-row sm:justify-end",
-        className
-      )}
+      className={cn("flex flex-col-reverse gap-2 sm:flex-row sm:justify-end", className)}
       {...props}
     />
   );
@@ -129,13 +120,13 @@ function ModalDescription({
 
 export {
   Modal,
-  ModalTrigger,
-  ModalPortal,
   ModalClose,
-  ModalOverlay,
   ModalContent,
-  ModalHeader,
-  ModalFooter,
-  ModalTitle,
   ModalDescription,
+  ModalFooter,
+  ModalHeader,
+  ModalOverlay,
+  ModalPortal,
+  ModalTitle,
+  ModalTrigger,
 };

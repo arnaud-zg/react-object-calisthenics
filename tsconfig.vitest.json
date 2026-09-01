@@ -1,0 +1,21 @@
+{
+  "$schema": "https://json.schemastore.org/tsconfig",
+  "extends": "@arnaud-zg/configs/tsconfig/react-vitest.json",
+  "compilerOptions": {
+    "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
+    "jsx": "react-jsx",
+    "outDir": "./node_modules/.tmp/vitest",
+    "types": ["vitest/globals", "@testing-library/jest-dom", "vite/client"],
+    "verbatimModuleSyntax": true,
+    "baseUrl": ".",
+    "paths": {
+      "@/*": ["./src/*"]
+    }
+  },
+  "include": [
+    "src/**/*.spec.ts",
+    "src/**/*.spec.tsx",
+    "vitest.config.ts",
+    "vitest.setup.ts"
+  ]
+}

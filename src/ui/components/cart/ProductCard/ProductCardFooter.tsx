@@ -1,3 +1,4 @@
+import { BookOpenText, Clapperboard, ShoppingCart } from "lucide-react";
 import type {
   KnowledgeProfile,
   Product,
@@ -12,7 +13,6 @@ import {
   ModalTitle,
   ModalTrigger,
 } from "@/ui/primitives/modal";
-import { BookOpenText, Clapperboard, ShoppingCart } from "lucide-react";
 
 interface ProductCardFooterProps {
   product: Product;

@@ -37,7 +37,7 @@ export class KnowledgeContent {
   constructor(
     private readonly _beginnerProfile: ProfileDetails,
     private readonly _adventurerProfile: ProfileDetails,
-    private readonly _expertProfile: ProfileDetails
+    private readonly _expertProfile: ProfileDetails,
   ) {}
 
   getProfileDescription(level: KnowledgeProfile): string {
@@ -49,7 +49,7 @@ export class KnowledgeContent {
   }
 
   getProfileStats(
-    level: KnowledgeProfile
+    level: KnowledgeProfile,
   ): Record<"power" | "durability" | "manaBoost", number> {
     return this.getProfile(level).getStats();
   }
@@ -75,7 +75,7 @@ export class Product {
     private readonly _name: ProductName,
     private readonly _price: Money,
     private readonly _imageUrl: ImageUrl,
-    private readonly _knowledge: KnowledgeContent
+    private readonly _knowledge: KnowledgeContent,
   ) {}
 
   displayId(): string {
@@ -103,22 +103,20 @@ export class Product {
   }
 
   getProfileStats(
-    level: KnowledgeProfile
+    level: KnowledgeProfile,
   ): Record<"power" | "durability" | "manaBoost", number> {
     return this._knowledge.getProfileStats(level);
   }
 
   getLoreLink(level: KnowledgeProfile): string {
     if (level === "beginner") return this._knowledge.getProfileLoreLink(level);
-    if (level === "adventurer")
-      return this._knowledge.getProfileLoreLink(level);
+    if (level === "adventurer") return this._knowledge.getProfileLoreLink(level);
     return this._knowledge.getProfileLoreLink(level);
   }
 
   getVideoUrl(level: KnowledgeProfile): string {
     if (level === "beginner") return this._knowledge.getProfileVideoUrl(level);
-    if (level === "adventurer")
-      return this._knowledge.getProfileVideoUrl(level);
+    if (level === "adventurer") return this._knowledge.getProfileVideoUrl(level);
     return this._knowledge.getProfileVideoUrl(level);
   }
 }

@@ -1,6 +1,6 @@
-import logo from "@/assets/logo.svg";
-import { Link, createFileRoute } from "@tanstack/react-router";
+import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, Github, ShoppingCart } from "lucide-react";
+import logo from "@/assets/logo.svg";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -28,13 +28,13 @@ function App() {
         </h1>
         <p className="max-w-3xl text-center leading-relaxed text-gray-300">
           This site is a hands-on demo showing how to apply{" "}
-          <strong className="text-white">Object Calisthenics</strong> in a
-          front-end app. You'll see how keeping objects small, simple, and
-          focused makes your React code easier to understand and maintain.
+          <strong className="text-white">Object Calisthenics</strong> in a front-end app.
+          You'll see how keeping objects small, simple, and focused makes your React code
+          easier to understand and maintain.
         </p>
         <p className="max-w-3xl text-center leading-relaxed text-gray-300">
-          Take a few moments to explore the interactive experience, then dive
-          into the code to see these principles in action.
+          Take a few moments to explore the interactive experience, then dive into the
+          code to see these principles in action.
         </p>
       </div>
 

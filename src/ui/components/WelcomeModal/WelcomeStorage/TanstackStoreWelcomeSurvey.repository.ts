@@ -23,18 +23,13 @@ const welcomeStore = new Store<WelcomeSurveyStoreState>(loadInitialState());
 
 welcomeStore.subscribe(() => {
   try {
-    localStorage.setItem(
-      WELCOME_SURVEY_KEY,
-      JSON.stringify(welcomeStore.state)
-    );
+    localStorage.setItem(WELCOME_SURVEY_KEY, JSON.stringify(welcomeStore.state));
   } catch (error) {
     console.error("Failed to save welcome survey to localStorage:", error);
   }
 });
 
-export class TanStackStoreWelcomeSurveyRepository
-  implements WelcomeStorageRepository
-{
+export class TanStackStoreWelcomeSurveyRepository implements WelcomeStorageRepository {
   getSurvey = (): WelcomeSurveyStoreState["survey"] => {
     return welcomeStore.state.survey;
   };

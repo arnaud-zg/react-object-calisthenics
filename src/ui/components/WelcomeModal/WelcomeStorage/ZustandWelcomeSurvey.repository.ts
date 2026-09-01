@@ -18,13 +18,11 @@ const useWelcomeStore = create<WelcomeModalState>()(
       survey: null,
       setSurvey: (data) => set({ survey: data }),
     }),
-    { name: WELCOME_SURVEY_KEY }
-  )
+    { name: WELCOME_SURVEY_KEY },
+  ),
 );
 
-export class ZustandWelcomeSurveyRepository
-  implements WelcomeStorageRepository
-{
+export class ZustandWelcomeSurveyRepository implements WelcomeStorageRepository {
   getSurvey = (): WelcomeSurveyStoreState["survey"] => {
     return useWelcomeStore.getState().survey;
   };

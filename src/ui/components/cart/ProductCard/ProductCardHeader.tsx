@@ -8,9 +8,7 @@ interface ProductCardHeaderProps {
 }
 
 export function ProductCardHeader({ product }: ProductCardHeaderProps) {
-  const formattedPrice = goldSilverCopperFormatter.format(
-    product.displayPrice()
-  );
+  const formattedPrice = goldSilverCopperFormatter.format(product.displayPrice());
 
   return (
     <CardHeader className="p-4 pb-0 lg:min-h-20">

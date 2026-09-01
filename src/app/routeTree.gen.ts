@@ -25,7 +25,7 @@ const ShoppingCartIndexRoute = ShoppingCartIndexRouteImport.update({
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
-  '/shopping-cart': typeof ShoppingCartIndexRoute
+  '/shopping-cart/': typeof ShoppingCartIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
@@ -38,7 +38,7 @@ export interface FileRoutesById {
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shopping-cart'
+  fullPaths: '/' | '/shopping-cart/'
   fileRoutesByTo: FileRoutesByTo
   to: '/' | '/shopping-cart'
   id: '__root__' | '/' | '/shopping-cart/'
@@ -61,7 +61,7 @@ declare module '@tanstack/react-router' {
     '/shopping-cart/': {
       id: '/shopping-cart/'
       path: '/shopping-cart'
-      fullPath: '/shopping-cart'
+      fullPath: '/shopping-cart/'
       preLoaderRoute: typeof ShoppingCartIndexRouteImport
       parentRoute: typeof rootRouteImport
     }

@@ -8,9 +8,7 @@ describe("Money", () => {
   });
 
   it("should throw an error if initialized with a negative amount", () => {
-    expect(() => new Money(-50)).toThrowError(
-      "Money amount cannot be negative"
-    );
+    expect(() => new Money(-50)).toThrowError("Money amount cannot be negative");
   });
 
   it("should add two Money instances correctly", () => {
@@ -34,7 +32,7 @@ describe("Money", () => {
     const largeMoney = new Money(50);
 
     expect(() => smallMoney.subtract(largeMoney)).toThrowError(
-      "Resulting Money cannot be negative"
+      "Resulting Money cannot be negative",
     );
   });
 

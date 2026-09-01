@@ -1,8 +1,8 @@
 import { describe, expect, it, vi } from "vitest";
+import { Skill } from "../value-objects/Skill";
 import { WelcomeSurvey } from "../WelcomeSurvey";
 import type { WelcomeSurveyData } from "../WelcomeSurvey.data";
 import type { WelcomeStorageRepository } from "../WelcomeSurveyStorage.repository";
-import { Skill } from "../value-objects/Skill";
 
 class MockWelcomeStorageRepository implements WelcomeStorageRepository {
   saved: WelcomeSurveyData | null = null;

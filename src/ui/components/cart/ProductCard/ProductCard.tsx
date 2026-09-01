@@ -14,21 +14,13 @@ interface ProductCardProps {
   onAddToCart: (product: Product) => void;
 }
 
-export function ProductCard({
-  product,
-  profile,
-  onAddToCart,
-}: ProductCardProps) {
+export function ProductCard({ product, profile, onAddToCart }: ProductCardProps) {
   return (
     <Card className="overflow-hidden transition-all hover:shadow-lg gap-1">
       <ProductCardImage product={product} />
       <ProductCardHeader product={product} />
       <ProductCardContent product={product} profile={profile} />
-      <ProductCardFooter
-        product={product}
-        profile={profile}
-        onAddToCart={onAddToCart}
-      />
+      <ProductCardFooter product={product} profile={profile} onAddToCart={onAddToCart} />
     </Card>
   );
 }

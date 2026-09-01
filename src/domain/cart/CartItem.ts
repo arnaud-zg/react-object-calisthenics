@@ -8,7 +8,7 @@ export class CartItem {
 
   constructor(
     private readonly product: Product,
-    private readonly quantity: Quantity
+    private readonly quantity: Quantity,
   ) {}
 
   increaseQuantity(): CartItem {

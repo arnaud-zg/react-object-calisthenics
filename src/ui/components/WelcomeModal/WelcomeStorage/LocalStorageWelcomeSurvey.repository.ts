@@ -8,9 +8,7 @@ import {
   WelcomeSurveyStoreStateSchema,
 } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 
-export class LocalStorageWelcomeSurveyRepository
-  implements WelcomeStorageRepository
-{
+export class LocalStorageWelcomeSurveyRepository implements WelcomeStorageRepository {
   private listeners = new Set<Listener>();
   private cache: WelcomeSurveyStoreState = { survey: null };
 
@@ -27,9 +25,7 @@ export class LocalStorageWelcomeSurveyRepository
     }
 
     try {
-      const parsed = WelcomeSurveyStoreStateSchema.safeParse(
-        JSON.parse(rawData)
-      );
+      const parsed = WelcomeSurveyStoreStateSchema.safeParse(JSON.parse(rawData));
       this.cache = parsed.success ? parsed.data : { survey: null };
     } catch {
       this.cache = { survey: null };
