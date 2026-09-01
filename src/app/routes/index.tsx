@@ -1,5 +1,6 @@
+import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { createFileRoute, Link } from "@tanstack/react-router";
-import { ArrowRight, BookOpen, Github, ShoppingCart } from "lucide-react";
+import { ArrowRight, BookOpen, ShoppingCart } from "lucide-react";
 import logo from "@/assets/logo.svg";
 
 export const Route = createFileRoute("/")({
@@ -67,7 +68,7 @@ function App() {
           className={linkClassName}
           data-umami-event="home.github"
         >
-          <Github className="h-4 w-4 shrink-0" aria-hidden="true" />
+          <GitHubLogoIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
           View the GitHub project
         </a>
       </div>

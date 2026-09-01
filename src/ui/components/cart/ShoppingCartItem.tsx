@@ -1,5 +1,5 @@
-import { motion } from "framer-motion";
 import { Minus, Plus, Trash2 } from "lucide-react";
+import { motion } from "motion/react";
 import { CartItem } from "@/domain/cart/CartItem";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Button } from "@/ui/primitives/button";

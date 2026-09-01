@@ -1,6 +1,7 @@
-import { AnimatePresence, motion } from "framer-motion";
+import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { useImmutableInstance } from "immutable-instance";
-import { Github, Linkedin, ShoppingCart as ShoppingCartIcon, X } from "lucide-react";
+import { ShoppingCart as ShoppingCartIcon, X } from "lucide-react";
+import { AnimatePresence, motion } from "motion/react";
 import { type FC, type RefObject, useState } from "react";
 import { PRODUCTS } from "@/data/products";
 import { Cart } from "@/domain/cart/Cart";
@@ -373,7 +374,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                           });
                         }}
                       >
-                        <Github className="h-5 w-5" aria-hidden="true" />
+                        <GitHubLogoIcon className="h-5 w-5" aria-hidden="true" />
                       </a>
                     </Button>
 
@@ -390,7 +391,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                           });
                         }}
                       >
-                        <Linkedin className="h-5 w-5" aria-hidden="true" />
+                        <LinkedInLogoIcon className="h-5 w-5" aria-hidden="true" />
                       </a>
                     </Button>
                   </div>

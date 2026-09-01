@@ -42,6 +42,7 @@ export class TanStackStoreWelcomeSurveyRepository implements WelcomeStorageRepos
   };
 
   subscribe = (callback: () => void): (() => void) => {
-    return welcomeStore.subscribe(callback);
+    const subscription = welcomeStore.subscribe(callback);
+    return () => subscription.unsubscribe();
   };
 }
