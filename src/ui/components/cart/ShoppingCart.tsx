@@ -361,7 +361,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         rel="noopener noreferrer"
                         aria-label="Arnaud's GitHub profile (opens in a new tab)"
                         onClick={() => {
-                          umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
+                          window.umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "github",
                           });
                         }}
@@ -378,7 +378,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         rel="noopener noreferrer"
                         aria-label="Arnaud's LinkedIn profile (opens in a new tab)"
                         onClick={() => {
-                          umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
+                          window.umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "linkedin",
                           });
                         }}

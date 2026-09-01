@@ -91,7 +91,7 @@ const WelcomeModalComponent = (
                       if (!safeValue) return;
                       field.handleChange(safeValue);
 
-                      umami?.track(ANALYTICS_CONFIG.events.selectKnowledgeLevel, {
+                      window.umami?.track(ANALYTICS_CONFIG.events.selectKnowledgeLevel, {
                         level: safeValue,
                       });
                     }}

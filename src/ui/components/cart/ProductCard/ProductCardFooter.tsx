@@ -34,7 +34,7 @@ export function ProductCardFooter({
       <Button
         onClick={() => {
           onAddToCart(product);
-          umami?.track(ANALYTICS_CONFIG.events.addToCart, {
+          window.umami?.track(ANALYTICS_CONFIG.events.addToCart, {
             productId: product.displayId(),
           });
         }}
@@ -50,7 +50,7 @@ export function ProductCardFooter({
             className="w-full flex items-center justify-center gap-2"
             variant="link"
             onClick={() => {
-              umami?.track(ANALYTICS_CONFIG.events.watchVideo, {
+              window.umami?.track(ANALYTICS_CONFIG.events.watchVideo, {
                 productId: product.displayId(),
               });
             }}
@@ -82,7 +82,7 @@ export function ProductCardFooter({
         <Button
           onClick={() => {
             window.open(loreLink, "_blank");
-            umami?.track(ANALYTICS_CONFIG.events.readLore, {
+            window.umami?.track(ANALYTICS_CONFIG.events.readLore, {
               productId: product.displayId(),
             });
           }}
