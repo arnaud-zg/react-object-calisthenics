@@ -1,5 +1,6 @@
 import { useForm } from "@tanstack/react-form";
 import { forwardRef, type Ref, useImperativeHandle, useState } from "react";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
 import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
 import { Button } from "@/ui/primitives/button";
@@ -90,7 +91,7 @@ const WelcomeModalComponent = (
                       if (!safeValue) return;
                       field.handleChange(safeValue);
 
-                      umami?.track("knowledge-level.select", {
+                      umami?.track(ANALYTICS_CONFIG.events.selectKnowledgeLevel, {
                         level: safeValue,
                       });
                     }}

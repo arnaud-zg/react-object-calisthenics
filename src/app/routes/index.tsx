@@ -2,6 +2,8 @@ import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { createFileRoute, Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, ShoppingCart } from "lucide-react";
 import logo from "@/assets/logo.svg";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
+import { SITE_CONFIG } from "@/config/site.config";
 
 export const Route = createFileRoute("/")({
   component: App,
@@ -43,7 +45,7 @@ function App() {
         <Link
           to="/shopping-cart"
           className="inline-flex items-center gap-2 rounded-md bg-[#61dafb] px-5 py-3 font-semibold text-[#282c34] transition-colors duration-200 hover:bg-white outline-none focus-visible:ring-2 focus-visible:ring-white focus-visible:ring-offset-2 focus-visible:ring-offset-[#282c34]"
-          data-umami-event="home.shopping-cart"
+          data-umami-event={ANALYTICS_CONFIG.events.homeShoppingCart}
         >
           <ShoppingCart className="h-5 w-5" aria-hidden="true" />
           Try the Shopping Cart Experience
@@ -51,22 +53,22 @@ function App() {
         </Link>
 
         <a
-          href="https://open.substack.com/pub/arnaudzg/p/applying-object-calisthenics-principles?r=iih51&utm_campaign=post&utm_medium=web&showWelcomeOnShare=true"
+          href={SITE_CONFIG.articleUrl}
           target="_blank"
           rel="noreferrer"
           className={linkClassName}
-          data-umami-event="home.article"
+          data-umami-event={ANALYTICS_CONFIG.events.homeArticle}
         >
           <BookOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
           Read my article about object calisthenics
         </a>
 
         <a
-          href="https://github.com/arnaud-zg/react-object-calisthenics"
+          href={SITE_CONFIG.repositoryUrl}
           target="_blank"
           rel="noopener noreferrer"
           className={linkClassName}
-          data-umami-event="home.github"
+          data-umami-event={ANALYTICS_CONFIG.events.homeGithub}
         >
           <GitHubLogoIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
           View the GitHub project

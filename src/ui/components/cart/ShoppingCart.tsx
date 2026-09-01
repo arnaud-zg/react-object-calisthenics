@@ -3,6 +3,8 @@ import { useImmutableInstance } from "immutable-instance";
 import { ShoppingCart as ShoppingCartIcon, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
 import { type FC, type RefObject, useState } from "react";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
+import { SITE_CONFIG } from "@/config/site.config";
 import { PRODUCTS } from "@/data/products";
 import { Cart } from "@/domain/cart/Cart";
 import { ShippingPolicy } from "@/domain/cart/policy/ShippingPolicy";
@@ -47,7 +49,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
           size="default"
           onClick={() => welcomeModalHandle.current.open()}
           className="self-start sm:self-auto"
-          data-umami-event="knowledge-level.open"
+          data-umami-event={ANALYTICS_CONFIG.events.openKnowledgeLevel}
         >
           {new Skill(welcomeSurvey?.skill ?? "beginner").label()}
         </Button>
@@ -343,7 +345,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     disabled={cart.isEmpty()}
                     className="w-full"
                     size="default"
-                    data-umami-event="shopping-cart.complete-purchase"
+                    data-umami-event={ANALYTICS_CONFIG.events.completePurchase}
                   >
                     Complete Purchase
                   </Button>
@@ -364,12 +366,12 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     {/* GitHub icon button */}
                     <Button asChild size="icon" variant="outline">
                       <a
-                        href="https://github.com/arnaud-zg"
+                        href={SITE_CONFIG.author.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Arnaud's GitHub profile (opens in a new tab)"
                         onClick={() => {
-                          umami?.track("contact.link-click", {
+                          umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "github",
                           });
                         }}
@@ -381,12 +383,12 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     {/* LinkedIn icon button */}
                     <Button asChild size="icon" variant="outline">
                       <a
-                        href="https://www.linkedin.com/in/arnaudzheng/"
+                        href={SITE_CONFIG.author.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
                         aria-label="Arnaud's LinkedIn profile (opens in a new tab)"
                         onClick={() => {
-                          umami?.track("contact.link-click", {
+                          umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "linkedin",
                           });
                         }}

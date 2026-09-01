@@ -1,20 +1,14 @@
 import { useImmutableInstance } from "immutable-instance";
 import { useSyncExternalStore } from "react";
+import { welcomeSurveyStorage } from "@/config/storage.config";
 import { WelcomeSurvey } from "@/domain/welcomeSurvey/WelcomeSurvey";
-import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
-// import { LocalStorageWelcomeSurveyRepository } from "./WelcomeStorage/LocalStorageWelcomeSurvey.repository";
-import { TanStackStoreWelcomeSurveyRepository } from "./WelcomeStorage/TanstackStoreWelcomeSurvey.repository";
-// import { ZustandWelcomeSurveyRepository } from "./WelcomeStorage/ZustandWelcomeSurvey.repository";
-
-export const welcomeStorage: WelcomeStorageRepository =
-  new TanStackStoreWelcomeSurveyRepository();
 
 export const useWelcomeModalSurvey = () => {
   const welcomeSurvey = useSyncExternalStore(
-    welcomeStorage.subscribe,
-    welcomeStorage.getSurvey,
+    welcomeSurveyStorage.subscribe,
+    welcomeSurveyStorage.getSurvey,
   );
-  const welcomeSurveyApi = useImmutableInstance(new WelcomeSurvey(welcomeStorage));
+  const welcomeSurveyApi = useImmutableInstance(new WelcomeSurvey(welcomeSurveyStorage));
 
   return {
     welcomeSurvey,

@@ -1,4 +1,8 @@
+import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import type { Money } from "@/domain/cart/value-objects/Money";
+
+const { copperPerSilver, silverPerGold } = COMMERCE_CONFIG.currency;
+const copperPerGold = copperPerSilver * silverPerGold;
 
 /**
  * Converts copper-based Money values into Azeroth-style currency
@@ -8,11 +12,11 @@ class GoldSilverCopperFormatter {
   convertCopper(copper: Money) {
     const safeCopper = Math.round(copper.toAmount());
 
-    const gold = Math.floor(safeCopper / 10000);
-    const remainderAfterGold = safeCopper - gold * 10000;
+    const gold = Math.floor(safeCopper / copperPerGold);
+    const remainderAfterGold = safeCopper - gold * copperPerGold;
 
-    const silver = Math.floor(remainderAfterGold / 100);
-    const remainingCopper = remainderAfterGold - silver * 100;
+    const silver = Math.floor(remainderAfterGold / copperPerSilver);
+    const remainingCopper = remainderAfterGold - silver * copperPerSilver;
 
     return { gold, silver, copper: remainingCopper };
   }
