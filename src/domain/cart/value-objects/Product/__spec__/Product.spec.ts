@@ -24,12 +24,27 @@ describe("Product Value Objects", () => {
 });
 
 describe("KnowledgeContent and Product", () => {
-  const stats = new Stats(10, 20, 5);
-  const effects = [new Effect("Fire damage")];
-  const extraResources = new ExtraResources("https://lore.link", "https://video.link");
-  const profile = new ProfileDetails("A legendary sword", stats, effects, extraResources);
+  const statsByLevel = {
+    beginner: { power: 1, durability: 2, manaBoost: 3 },
+    adventurer: { power: 4, durability: 5, manaBoost: 6 },
+    expert: { power: 7, durability: 8, manaBoost: 9 },
+  } as const;
 
-  const knowledge = new KnowledgeContent(profile, profile, profile);
+  const profileFor = (level: "beginner" | "adventurer" | "expert") => {
+    const { power, durability, manaBoost } = statsByLevel[level];
+    return new ProfileDetails(
+      `${level} tale`,
+      new Stats(power, durability, manaBoost),
+      [new Effect(`${level} effect`)],
+      new ExtraResources(`https://lore.link/${level}`, `https://video.link/${level}`),
+    );
+  };
+
+  const knowledge = new KnowledgeContent(
+    profileFor("beginner"),
+    profileFor("adventurer"),
+    profileFor("expert"),
+  );
 
   const product = new Product(
     new ProductId("sword01"),
@@ -46,23 +61,14 @@ describe("KnowledgeContent and Product", () => {
     expect(product.displayImage()).toBe("http://image.link");
   });
 
-  it("should return profile description, effects, stats, lore link, and video URL", () => {
-    const levels: ("beginner" | "adventurer" | "expert")[] = [
-      "beginner",
-      "adventurer",
-      "expert",
-    ];
-
-    for (const level of levels) {
-      expect(product.describeProfile(level)).toBe("A legendary sword");
-      expect(product.listProfileEffects(level)).toEqual(["Fire damage"]);
-      expect(product.getProfileStats(level)).toEqual({
-        power: 10,
-        durability: 20,
-        manaBoost: 5,
-      });
-      expect(product.getLoreLink(level)).toBe("https://lore.link");
-      expect(product.getVideoUrl(level)).toBe("https://video.link");
-    }
-  });
+  it.each(["beginner", "adventurer", "expert"] as const)(
+    "should route %s to its own profile's description, effects, stats, lore link, and video URL",
+    (level) => {
+      expect(product.describeProfile(level)).toBe(`${level} tale`);
+      expect(product.listProfileEffects(level)).toEqual([`${level} effect`]);
+      expect(product.getProfileStats(level)).toEqual(statsByLevel[level]);
+      expect(product.getLoreLink(level)).toBe(`https://lore.link/${level}`);
+      expect(product.getVideoUrl(level)).toBe(`https://video.link/${level}`);
+    },
+  );
 });

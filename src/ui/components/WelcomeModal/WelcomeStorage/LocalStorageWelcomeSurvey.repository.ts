@@ -10,7 +10,7 @@ import {
 
 export class LocalStorageWelcomeSurveyRepository implements WelcomeStorageRepository {
   private listeners = new Set<Listener>();
-  private cache: WelcomeSurveyStoreState = { survey: null };
+  private cache: WelcomeSurveyStoreState | undefined;
 
   getSurvey = (): WelcomeSurveyStoreState["survey"] => {
     if (this.cache !== undefined) {

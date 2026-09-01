@@ -109,14 +109,10 @@ export class Product {
   }
 
   getLoreLink(level: KnowledgeProfile): string {
-    if (level === "beginner") return this._knowledge.getProfileLoreLink(level);
-    if (level === "adventurer") return this._knowledge.getProfileLoreLink(level);
     return this._knowledge.getProfileLoreLink(level);
   }
 
   getVideoUrl(level: KnowledgeProfile): string {
-    if (level === "beginner") return this._knowledge.getProfileVideoUrl(level);
-    if (level === "adventurer") return this._knowledge.getProfileVideoUrl(level);
     return this._knowledge.getProfileVideoUrl(level);
   }
 }

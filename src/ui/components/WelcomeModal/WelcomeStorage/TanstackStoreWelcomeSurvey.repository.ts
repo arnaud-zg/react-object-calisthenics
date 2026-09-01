@@ -6,7 +6,14 @@ import {
   type WelcomeSurveyStoreState,
 } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 
+// This module runs at import time both in the browser and, once the app is prerendered
+// (see the SEO PR later in the stack), under Node during a server-side render. Node has
+// no localStorage, so every access is guarded rather than assumed.
+const isBrowser = typeof localStorage !== "undefined";
+
 const loadInitialState = (): WelcomeSurveyStoreState => {
+  if (!isBrowser) return { survey: null };
+
   try {
     const stored = localStorage.getItem(WELCOME_SURVEY_KEY);
 
@@ -22,6 +29,8 @@ const loadInitialState = (): WelcomeSurveyStoreState => {
 const welcomeStore = new Store<WelcomeSurveyStoreState>(loadInitialState());
 
 welcomeStore.subscribe(() => {
+  if (!isBrowser) return;
+
   try {
     localStorage.setItem(WELCOME_SURVEY_KEY, JSON.stringify(welcomeStore.state));
   } catch (error) {
