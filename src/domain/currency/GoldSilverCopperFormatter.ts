@@ -1,36 +1,21 @@
-import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import type { Money } from "@/domain/cart/value-objects/Money";
-
-const { copperPerSilver, silverPerGold } = COMMERCE_CONFIG.currency;
-const copperPerGold = copperPerSilver * silverPerGold;
+import { GoldSilverCopperAmount } from "@/domain/currency/GoldSilverCopperAmount";
 
 /**
- * Converts copper-based Money values into Azeroth-style currency
- * (Gold, Silver, Copper) and formats them for display.
+ * Formats a copper-based Money value as Azeroth-style currency (Gold, Silver, Copper).
+ * Conversion itself lives in GoldSilverCopperAmount, this class only renders it.
  */
 class GoldSilverCopperFormatter {
-  convertCopper(copper: Money) {
-    const safeCopper = Math.round(copper.toAmount());
-
-    const gold = Math.floor(safeCopper / copperPerGold);
-    const remainderAfterGold = safeCopper - gold * copperPerGold;
-
-    const silver = Math.floor(remainderAfterGold / copperPerSilver);
-    const remainingCopper = remainderAfterGold - silver * copperPerSilver;
-
-    return { gold, silver, copper: remainingCopper };
-  }
-
   format(amount: Money): string {
-    const { gold, silver, copper } = this.convertCopper(amount);
+    const converted = GoldSilverCopperAmount.fromCopper(amount);
+    const parts: string[] = [];
 
-    const formatted: string[] = [];
+    if (converted.hasGold()) parts.push(`${converted.gold()} 🟡`);
+    if (converted.hasSilver() || converted.hasGold())
+      parts.push(`${converted.silver()} ⚪`);
+    parts.push(`${converted.copper()} 🟤`);
 
-    if (gold > 0) formatted.push(`${gold} 🟡`);
-    if (silver > 0 || gold > 0) formatted.push(`${silver} ⚪`);
-    formatted.push(`${copper} 🟤`);
-
-    return formatted.join(" ");
+    return parts.join(" ");
   }
 }
 

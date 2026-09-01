@@ -1,7 +1,14 @@
 import { describe, expect, it } from "vitest";
 import { Money } from "../../Money";
-import { ImageUrl, KnowledgeContent, Product, ProductId, ProductName } from "../Product";
-import { Effect, ExtraResources, ProfileDetails, Stats } from "../ProductDetails";
+import {
+  ExtraResources,
+  ImageUrl,
+  KnowledgeContent,
+  Product,
+  ProductId,
+  ProductName,
+} from "../Product";
+import { Effect, ProfileDetails, Stats } from "../ProductDetails";
 
 describe("Product Value Objects", () => {
   it("should create a ProductId and return value", () => {
@@ -21,28 +28,31 @@ describe("Product Value Objects", () => {
     expect(imageUrl.toValue()).toBe("http://image.link");
     expect(() => new ImageUrl("")).toThrow("Image URL cannot be empty");
   });
+
+  it("should return the lore link and video URL", () => {
+    const resources = new ExtraResources("https://lore.link", "https://video.link");
+    expect(resources.getLoreLink()).toBe("https://lore.link");
+    expect(resources.getVideoUrl()).toBe("https://video.link");
+  });
 });
 
 describe("KnowledgeContent and Product", () => {
   const statsByLevel = {
     beginner: { power: 1, durability: 2, manaBoost: 3 },
-    adventurer: { power: 4, durability: 5, manaBoost: 6 },
+    intermediate: { power: 4, durability: 5, manaBoost: 6 },
     expert: { power: 7, durability: 8, manaBoost: 9 },
   } as const;
 
-  const profileFor = (level: "beginner" | "adventurer" | "expert") => {
+  const profileFor = (level: "beginner" | "intermediate" | "expert") => {
     const { power, durability, manaBoost } = statsByLevel[level];
-    return new ProfileDetails(
-      `${level} tale`,
-      new Stats(power, durability, manaBoost),
-      [new Effect(`${level} effect`)],
-      new ExtraResources(`https://lore.link/${level}`, `https://video.link/${level}`),
-    );
+    return new ProfileDetails(`${level} tale`, new Stats(power, durability, manaBoost), [
+      new Effect(`${level} effect`),
+    ]);
   };
 
   const knowledge = new KnowledgeContent(
     profileFor("beginner"),
-    profileFor("adventurer"),
+    profileFor("intermediate"),
     profileFor("expert"),
   );
 
@@ -52,6 +62,7 @@ describe("KnowledgeContent and Product", () => {
     new Money(500),
     new ImageUrl("http://image.link"),
     knowledge,
+    new ExtraResources("https://lore.link/excalibur", "https://video.link/excalibur"),
   );
 
   it("should return correct product info", () => {
@@ -61,14 +72,23 @@ describe("KnowledgeContent and Product", () => {
     expect(product.displayImage()).toBe("http://image.link");
   });
 
-  it.each(["beginner", "adventurer", "expert"] as const)(
-    "should route %s to its own profile's description, effects, stats, lore link, and video URL",
+  it("should return the same lore link and video URL regardless of knowledge level", () => {
+    expect(product.getLoreLink()).toBe("https://lore.link/excalibur");
+    expect(product.getVideoUrl()).toBe("https://video.link/excalibur");
+  });
+
+  it.each(["beginner", "intermediate", "expert"] as const)(
+    "should route %s to its own profile's description, effects, and stats",
     (level) => {
+      const { power, durability, manaBoost } = statsByLevel[level];
+
       expect(product.describeProfile(level)).toBe(`${level} tale`);
       expect(product.listProfileEffects(level)).toEqual([`${level} effect`]);
-      expect(product.getProfileStats(level)).toEqual(statsByLevel[level]);
-      expect(product.getLoreLink(level)).toBe(`https://lore.link/${level}`);
-      expect(product.getVideoUrl(level)).toBe(`https://video.link/${level}`);
+      expect(product.listProfileStats(level)).toEqual([
+        { label: "Power", value: power },
+        { label: "Durability", value: durability },
+        { label: "Mana Boost", value: manaBoost },
+      ]);
     },
   );
 });

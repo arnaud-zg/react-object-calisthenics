@@ -6,6 +6,11 @@ export class Effect {
   }
 }
 
+export interface NamedStat {
+  label: string;
+  value: number;
+}
+
 export class Stats {
   constructor(
     private readonly _power: number,
@@ -21,55 +26,37 @@ export class Stats {
     return new Stats(this._power + amount, this._durability, this._manaBoost);
   }
 
-  asObject(): Record<"power" | "durability" | "manaBoost", number> {
-    return {
-      power: this._power,
-      durability: this._durability,
-      manaBoost: this._manaBoost,
-    };
+  /** Only the stats worth showing: zero-value ones are omitted rather than rendered as 0. */
+  list(): NamedStat[] {
+    return [
+      { label: "Power", value: this._power },
+      { label: "Durability", value: this._durability },
+      { label: "Mana Boost", value: this._manaBoost },
+    ].filter((stat) => stat.value > 0);
   }
 }
 
-export class ExtraResources {
-  constructor(
-    private readonly _loreLink: string,
-    private readonly _videoUrl: string,
-  ) {}
-
-  getLoreLink(): string {
-    return this._loreLink;
-  }
-
-  getVideoUrl(): string {
-    return this._videoUrl;
-  }
-}
-
+/**
+ * The description, stats, and effects for one knowledge level of a product. A product's
+ * lore link and video live on Product itself (see ExtraResources), they don't vary by
+ * knowledge level.
+ */
 export class ProfileDetails {
   constructor(
     private readonly _description: string,
     private readonly _stats: Stats,
     private readonly _effects: Effect[],
-    private readonly _extraResources: ExtraResources,
   ) {}
 
   describe(): string {
     return this._description;
   }
 
-  getStats(): Record<"power" | "durability" | "manaBoost", number> {
-    return this._stats.asObject();
+  listStats(): NamedStat[] {
+    return this._stats.list();
   }
 
   listEffects(): string[] {
     return this._effects.map((effect) => effect.toValue());
-  }
-
-  getLoreLink(): string {
-    return this._extraResources.getLoreLink();
-  }
-
-  getVideoUrl(): string {
-    return this._extraResources.getVideoUrl();
   }
 }

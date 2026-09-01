@@ -59,6 +59,17 @@ describe("Money", () => {
     expect(multipliedMoney.toAmount()).toBe(120);
   });
 
+  it("should report whether it is at least another amount", () => {
+    expect(new Money(100).isAtLeast(new Money(100))).toBe(true);
+    expect(new Money(101).isAtLeast(new Money(100))).toBe(true);
+    expect(new Money(99).isAtLeast(new Money(100))).toBe(false);
+  });
+
+  it("should report whether it is zero", () => {
+    expect(new Money(0).isZero()).toBe(true);
+    expect(new Money(1).isZero()).toBe(false);
+  });
+
   it("should support chained operations", () => {
     const startingMoney = new Money(50);
     const resultMoney = startingMoney

@@ -38,6 +38,32 @@ describe("Quantity", () => {
     expect(() => zeroQuantity.decrement()).toThrowError("Quantity cannot be less than 0");
   });
 
+  it("should report whether it is at least or at most another quantity", () => {
+    expect(new Quantity(5).isAtLeast(new Quantity(5))).toBe(true);
+    expect(new Quantity(6).isAtLeast(new Quantity(5))).toBe(true);
+    expect(new Quantity(4).isAtLeast(new Quantity(5))).toBe(false);
+
+    expect(new Quantity(5).isAtMost(new Quantity(5))).toBe(true);
+    expect(new Quantity(4).isAtMost(new Quantity(5))).toBe(true);
+    expect(new Quantity(6).isAtMost(new Quantity(5))).toBe(false);
+  });
+
+  it("should clamp to the minimum when below it", () => {
+    const clamped = new Quantity(0).clampBetween(new Quantity(1), new Quantity(10));
+    expect(clamped.toValue()).toBe(1);
+  });
+
+  it("should clamp to the maximum when above it", () => {
+    const clamped = new Quantity(50).clampBetween(new Quantity(1), new Quantity(10));
+    expect(clamped.toValue()).toBe(10);
+  });
+
+  it("should pass through unchanged when already within bounds", () => {
+    const withinBounds = new Quantity(7);
+    const clamped = withinBounds.clampBetween(new Quantity(1), new Quantity(10));
+    expect(clamped).toBe(withinBounds);
+  });
+
   it("should be immutable (methods return a new instance)", () => {
     const baseQuantity = new Quantity(3);
     const incrementedQuantity = baseQuantity.increment();

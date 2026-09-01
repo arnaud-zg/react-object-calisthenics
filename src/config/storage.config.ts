@@ -1,5 +1,5 @@
+import { TanStackStoreWelcomeSurveyRepository } from "@/domain/welcomeSurvey/infrastructure/TanstackStoreWelcomeSurvey.repository";
 import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
-import { TanStackStoreWelcomeSurveyRepository } from "@/ui/components/WelcomeModal/WelcomeStorage/TanstackStoreWelcomeSurvey.repository";
 
 /**
  * The active WelcomeSurvey storage strategy. LocalStorageWelcomeSurveyRepository and

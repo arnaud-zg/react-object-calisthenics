@@ -1,4 +1,5 @@
 import { BookOpenText, Clapperboard, ShoppingCart } from "lucide-react";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import type {
   KnowledgeProfile,
   Product,
@@ -25,15 +26,15 @@ export function ProductCardFooter({
   profile,
   onAddToCart,
 }: ProductCardFooterProps) {
-  const loreLink = product.getLoreLink(profile);
-  const videoUrl = product.getVideoUrl(profile);
+  const loreLink = product.getLoreLink();
+  const videoUrl = product.getVideoUrl();
 
   return (
     <CardFooter className="p-4 pt-0 flex flex-col gap-2">
       <Button
         onClick={() => {
           onAddToCart(product);
-          umami?.track("product.add-to-cart", {
+          umami?.track(ANALYTICS_CONFIG.events.addToCart, {
             productId: product.displayId(),
           });
         }}
@@ -49,7 +50,7 @@ export function ProductCardFooter({
             className="w-full flex items-center justify-center gap-2"
             variant="link"
             onClick={() => {
-              umami?.track("product.watch-video", {
+              umami?.track(ANALYTICS_CONFIG.events.watchVideo, {
                 productId: product.displayId(),
               });
             }}
@@ -81,7 +82,7 @@ export function ProductCardFooter({
         <Button
           onClick={() => {
             window.open(loreLink, "_blank");
-            umami?.track("product.read-lore", {
+            umami?.track(ANALYTICS_CONFIG.events.readLore, {
               productId: product.displayId(),
             });
           }}
