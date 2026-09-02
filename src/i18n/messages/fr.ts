@@ -91,4 +91,10 @@ export const fr: Messages = {
     en: "English",
     fr: "Français",
   },
+  seo: {
+    homeDescription:
+      "Démo React interactive montrant comment appliquer les règles de la calisthénie des objets pour un code front-end propre et maintenable.",
+    shopDescription:
+      "Une boutique fantastique illustrant la calisthénie des objets : classes immuables, panier en collection de première classe, composants React testables.",
+  },
 };

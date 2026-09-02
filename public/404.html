@@ -17,6 +17,11 @@
     </script>
   </head>
   <body>
-    Redirecting
+    <span id="message">Redirecting</span>
+    <script>
+      if (location.pathname.startsWith(`${repoBase}/fr`)) {
+        document.getElementById("message").textContent = "Redirection en cours";
+      }
+    </script>
   </body>
 </html>
