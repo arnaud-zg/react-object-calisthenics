@@ -30,7 +30,7 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
 
   return (
     <CardContent className="p-4 pt-2 flex flex-col">
-      <p className="flex gap-1.5 text-sm text-gray-600 mb-3">
+      <p className="flex gap-1.5 text-sm text-muted-foreground mb-3">
         <Scroll className="h-4 w-4 shrink-0 mt-0.5" aria-hidden="true" />
         <span>{description}</span>
       </p>
@@ -47,7 +47,7 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
               return (
                 <li key={label} className="flex items-center gap-1.5">
                   <StatIcon
-                    className="h-3.5 w-3.5 shrink-0 text-gray-500"
+                    className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
                     aria-hidden="true"
                   />
                   <strong>{label}:</strong> {value}
@@ -67,7 +67,7 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
           {effects.map((effect) => (
             <li key={effect} className="flex items-center gap-1.5">
               <Sparkle
-                className="h-3.5 w-3.5 shrink-0 text-gray-500"
+                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
                 aria-hidden="true"
               />
               {effect}

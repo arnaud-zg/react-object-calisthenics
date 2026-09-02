@@ -2,15 +2,23 @@ import type { Product } from "@/domain/cart/value-objects/Product/Product";
 
 interface ProductCardImageProps {
   product: Product;
+  /** The first cards above the fold should load eagerly instead of competing with the LCP image. */
+  priority?: boolean;
 }
 
-export const ProductCardImage = ({ product }: ProductCardImageProps) => {
+export const ProductCardImage = ({
+  product,
+  priority = false,
+}: ProductCardImageProps) => {
   return (
-    <div className="aspect-[4/3] relative overflow-hidden">
+    <div className="aspect-[4/3] relative overflow-hidden bg-muted">
       <img
         src={product.displayImage()}
-        alt={product.displayName()}
-        loading="lazy"
+        // Decorative: the product name right below already conveys the same information,
+        // announcing it twice would be redundant for screen reader users.
+        alt=""
+        loading={priority ? "eager" : "lazy"}
+        fetchPriority={priority ? "high" : "auto"}
         decoding="async"
         className="object-cover w-full h-full transition-transform hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
       />

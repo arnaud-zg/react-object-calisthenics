@@ -4,11 +4,36 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
+    <!--
+      Applies the saved/system theme before first paint, avoiding a flash of the wrong
+      theme. Kept as a tiny inline script since it must run before any CSS is applied.
+    -->
+    <script>
+      (() => {
+        let isDark = false;
+        try {
+          const stored = localStorage.getItem("theme");
+          isDark =
+            stored === "dark" ||
+            (stored !== "light" && window.matchMedia("(prefers-color-scheme: dark)").matches);
+        } catch (_error) {
+          // Storage can be unavailable (private browsing); default to light.
+        }
+        document.documentElement.classList.toggle("dark", isDark);
+      })();
+    </script>
+
     <!-- Favicon -->
     <link rel="icon" href="/favicon.ico" />
+    <link rel="manifest" href="/manifest.json" />
+
+    <!-- Third-party origins this page actually loads from -->
+    <link rel="preconnect" href="https://static.wikia.nocookie.net" crossorigin />
+    <link rel="preconnect" href="https://cloud.umami.is" />
 
     <!-- Theme color -->
-    <meta name="theme-color" content="#000000" />
+    <meta name="theme-color" media="(prefers-color-scheme: light)" content="#ffffff" />
+    <meta name="theme-color" media="(prefers-color-scheme: dark)" content="#09090b" />
 
     <!-- SEO Meta -->
     <title>Maintainable Frontend Architecture with React</title>

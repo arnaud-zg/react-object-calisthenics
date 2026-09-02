@@ -20,5 +20,6 @@ export const ANALYTICS_CONFIG = {
     addToCart: "product.add-to-cart",
     watchVideo: "product.watch-video",
     readLore: "product.read-lore",
+    webVital: "web-vitals.report",
   },
 } as const;

@@ -12,11 +12,11 @@ export function ProductCardHeader({ product }: ProductCardHeaderProps) {
 
   return (
     <CardHeader className="p-4 pb-0 lg:min-h-20">
-      <div className="flex flex-col gap-2 min-h-[85px]">
-        <h3 className="text-lg font-semibold text-gray-900 flex items-center gap-2 items-start">
-          {product.displayName()}
-        </h3>
-        <Badge variant="secondary">{formattedPrice}</Badge>
+      <div className="flex min-h-[85px] flex-col gap-2">
+        <h3 className="text-lg font-semibold text-foreground">{product.displayName()}</h3>
+        <Badge variant="secondary" className="w-fit">
+          {formattedPrice}
+        </Badge>
       </div>
     </CardHeader>
   );

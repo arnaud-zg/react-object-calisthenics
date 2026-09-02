@@ -12,7 +12,7 @@ function ShoppingCartRoute() {
   return (
     <main
       id="main-content"
-      className="relative min-h-screen bg-gray-50 py-8 px-4 sm:px-6 lg:px-8"
+      className="relative flex-1 bg-muted/30 py-8 px-4 sm:px-6 lg:px-8"
     >
       <ShoppingCart welcomeModalHandle={ref} />
       <WelcomeModal
