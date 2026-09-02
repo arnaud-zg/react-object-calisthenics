@@ -19,14 +19,14 @@ interface ProductCardContentProps {
 }
 
 const STAT_ICONS: Record<string, typeof Swords> = {
-  power: Swords,
-  durability: Shield,
+  Power: Swords,
+  Durability: Shield,
 };
 
 export function ProductCardContent({ product, profile }: ProductCardContentProps) {
   const description = product.describeProfile(profile);
   const effects = product.listProfileEffects(profile);
-  const stats = product.getProfileStats(profile);
+  const stats = product.listProfileStats(profile);
 
   return (
     <CardContent className="p-4 pt-2 flex flex-col">
@@ -35,22 +35,22 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
         <span>{description}</span>
       </p>
 
-      {profile !== "beginner" && (
+      {profile !== "beginner" && stats.length > 0 && (
         <div className="flex flex-col gap-1 mb-2">
           <h4 className="font-semibold flex items-center gap-1.5">
             <BarChart3 className="h-4 w-4" aria-hidden="true" />
             Stats:
           </h4>
           <ul className="text-sm list-none flex flex-col gap-1">
-            {Object.entries(stats).map(([key, value]) => {
-              const StatIcon = STAT_ICONS[key] ?? Wand2;
+            {stats.map(({ label, value }) => {
+              const StatIcon = STAT_ICONS[label] ?? Wand2;
               return (
-                <li key={key} className="flex items-center gap-1.5">
+                <li key={label} className="flex items-center gap-1.5">
                   <StatIcon
                     className="h-3.5 w-3.5 shrink-0 text-gray-500"
                     aria-hidden="true"
                   />
-                  <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
+                  <strong>{label}:</strong> {value}
                 </li>
               );
             })}

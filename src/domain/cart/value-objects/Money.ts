@@ -1,5 +1,5 @@
 export class Money {
-  constructor(private _amount: number) {
+  constructor(private readonly _amount: number) {
     if (_amount < 0) {
       throw new Error("Money amount cannot be negative");
     }
@@ -21,6 +21,14 @@ export class Money {
 
   multiply(factor: number): Money {
     return new Money(this._amount * factor);
+  }
+
+  isAtLeast(other: Money): boolean {
+    return this._amount >= other._amount;
+  }
+
+  isZero(): boolean {
+    return this._amount === 0;
   }
 
   toAmount(): number {

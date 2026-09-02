@@ -1,80 +1,56 @@
 import { COMMERCE_CONFIG } from "@/config/commerce.config";
-import { Money } from "@/domain/cart/value-objects/Money";
+import type { Money } from "@/domain/cart/value-objects/Money";
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
 
 export class CartItem {
-  static readonly MAX_QUANTITY = COMMERCE_CONFIG.quantityPerItem.max;
-  static readonly MIN_QUANTITY = COMMERCE_CONFIG.quantityPerItem.min;
+  static readonly MAX_QUANTITY = new Quantity(COMMERCE_CONFIG.quantityPerItem.max);
+  static readonly MIN_QUANTITY = new Quantity(COMMERCE_CONFIG.quantityPerItem.min);
 
   constructor(
-    private readonly product: Product,
-    private readonly quantity: Quantity,
+    private readonly _product: Product,
+    private readonly _quantity: Quantity,
   ) {}
 
-  increaseQuantity(): CartItem {
-    const currentValue = this.quantity.toValue();
-
-    if (currentValue >= CartItem.MAX_QUANTITY) {
-      return this;
-    }
-
-    const newQuantity = this.quantity.increment();
-    return new CartItem(this.product, newQuantity);
+  id(): string {
+    return this._product.displayId();
   }
 
-  decreaseQuantity(): CartItem {
-    const currentValue = this.quantity.toValue();
-
-    if (currentValue <= CartItem.MIN_QUANTITY) {
-      return this;
-    }
-
-    const newQuantity = this.quantity.decrement();
-    return new CartItem(this.product, newQuantity);
+  name(): string {
+    return this._product.displayName();
   }
 
-  updateQuantity(newQuantity: Quantity): CartItem {
-    let value = newQuantity.toValue();
+  image(): string {
+    return this._product.displayImage();
+  }
 
-    if (value < CartItem.MIN_QUANTITY) {
-      value = CartItem.MIN_QUANTITY;
-    }
-
-    if (value > CartItem.MAX_QUANTITY) {
-      value = CartItem.MAX_QUANTITY;
-    }
-
-    const clampedQuantity = new Quantity(value);
-    return new CartItem(this.product, clampedQuantity);
+  quantity(): Quantity {
+    return this._quantity;
   }
 
   totalPrice(): Money {
-    const pricePerUnit = new Money(this.product.displayPrice().toAmount());
-    return pricePerUnit.multiply(this.quantity.toValue());
+    return this._product.displayPrice().multiply(this._quantity.toValue());
   }
 
-  getId(): string {
-    return this.product.displayId();
+  increaseQuantity(): CartItem {
+    if (this._quantity.isAtLeast(CartItem.MAX_QUANTITY)) {
+      return this;
+    }
+    return new CartItem(this._product, this._quantity.increment());
   }
 
-  getName(): string {
-    return this.product.displayName();
+  decreaseQuantity(): CartItem {
+    if (this._quantity.isAtMost(CartItem.MIN_QUANTITY)) {
+      return this;
+    }
+    return new CartItem(this._product, this._quantity.decrement());
   }
 
-  getImage(): string {
-    return this.product.displayImage();
-  }
-
-  getQuantity(): Quantity {
-    return this.quantity;
-  }
-
-  getPrice(): Money {
-    return this.product.displayPrice();
-  }
-
-  getProduct(): Product {
-    return this.product;
+  updateQuantity(newQuantity: Quantity): CartItem {
+    const clamped = newQuantity.clampBetween(
+      CartItem.MIN_QUANTITY,
+      CartItem.MAX_QUANTITY,
+    );
+    return new CartItem(this._product, clamped);
   }
 }

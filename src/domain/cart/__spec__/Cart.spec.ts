@@ -1,108 +1,13 @@
 import { describe, expect, it } from "vitest";
-import { Money } from "@/domain/cart/value-objects/Money";
-import {
-  ImageUrl,
-  KnowledgeContent,
-  Product,
-  ProductId,
-  ProductName,
-} from "@/domain/cart/value-objects/Product/Product";
-import {
-  Effect,
-  ExtraResources,
-  ProfileDetails,
-  Stats,
-} from "@/domain/cart/value-objects/Product/ProductDetails";
 import { Cart } from "../Cart";
+import { aProduct } from "./productFixtures";
 
-const PRODUCT_1 = new Product(
-  new ProductId("thunderfury"),
-  new ProductName("Thunderfury, Blessed Blade of the Windseeker"),
-  new Money(485),
-  new ImageUrl(
-    "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
-  ),
-  new KnowledgeContent(
-    new ProfileDetails(
-      "A legendary sword that channels the power of storms. Wield it to summon lightning upon your foes.",
-      new Stats(150, 50, 0),
-      [new Effect("Chance to strike enemies with lightning.")],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos",
-      ),
-    ),
-    new ProfileDetails(
-      "Thunderfury is forged with elemental fury. Great for battle, with bonus lightning damage and attack speed.",
-      new Stats(300, 100, 10),
-      [
-        new Effect("Increases attack speed by 15%"),
-        new Effect("Lightning damage with each hit"),
-        new Effect("Chance to slow enemies"),
-      ],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos",
-      ),
-    ),
-    new ProfileDetails(
-      "Thunderfury, Blessed Blade of the Windseeker, is a legendary weapon of immense power. It channels elemental air, unleashing lightning with each strike. Its artifact status is confirmed by its rarity and crafting requirements.",
-      new Stats(500, 150, 25),
-      [
-        new Effect("Attack speed +25%"),
-        new Effect("Unleashes chain lightning on critical strikes"),
-        new Effect("Chance to silence enemies"),
-        new Effect("Grants immunity to silence for 5 seconds"),
-      ],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-        "https://www.youtube.com/embed/2TGRpvb5Nos",
-      ),
-    ),
-  ),
-);
-
-const PRODUCT_2 = new Product(
-  new ProductId("ashbringer"),
-  new ProductName("Ashbringer"),
-  new Money(750),
-  new ImageUrl(
-    "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg",
-  ),
-  new KnowledgeContent(
-    new ProfileDetails(
-      "A holy sword blessed to purge the undead. Known for its radiant power.",
-      new Stats(200, 70, 0),
-      [new Effect("Bonus against undead enemies.")],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc",
-      ),
-    ),
-    new ProfileDetails(
-      "Ashbringer channels holy energy to smite foes, cleansing corruption and undead.",
-      new Stats(350, 140, 20),
-      [new Effect("Holy damage +25%"), new Effect("Undead vulnerability.")],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc",
-      ),
-    ),
-    new ProfileDetails(
-      "Ashbringer is the embodiment of righteousness. It delivers devastating holy strikes and vanquishes evil.",
-      new Stats(600, 220, 40),
-      [
-        new Effect("Holy damage +50%"),
-        new Effect("Instant kill chance on undead"),
-        new Effect("Grant blessing to allies"),
-      ],
-      new ExtraResources(
-        "https://wowpedia.fandom.com/wiki/Ashbringer",
-        "https://www.youtube.com/embed/lso8Ygk4rKc",
-      ),
-    ),
-  ),
-);
+const PRODUCT_1 = aProduct({
+  id: "thunderfury",
+  name: "Thunderfury, Blessed Blade of the Windseeker",
+  price: 485,
+});
+const PRODUCT_2 = aProduct({ id: "ashbringer", name: "Ashbringer", price: 750 });
 
 describe("Cart", () => {
   it("should be empty when initialized without items", () => {
@@ -115,11 +20,10 @@ describe("Cart", () => {
     const cartAfterAdd = cart.addItem(PRODUCT_1);
 
     expect(cartAfterAdd.isEmpty()).toBe(false);
-    expect(cartAfterAdd.getItemsCopy().length).toBe(1);
-    const [addedItem] = cartAfterAdd.getItemsCopy();
+    const [addedItem] = cartAfterAdd.listItems();
     expect(addedItem).toBeDefined();
-    expect(addedItem?.getId()).toBe("thunderfury");
-    expect(addedItem?.getQuantity().toValue()).toBe(1);
+    expect(addedItem?.id()).toBe("thunderfury");
+    expect(addedItem?.quantity().toValue()).toBe(1);
   });
 
   it("should increment quantity if product already exists", () => {
@@ -127,36 +31,52 @@ describe("Cart", () => {
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_1);
 
-    const [item] = cart.getItemsCopy();
-    expect(item?.getQuantity().toValue()).toBe(2);
+    const [item] = cart.listItems();
+    expect(item?.quantity().toValue()).toBe(2);
   });
 
-  it("should decrement item quantity", () => {
+  it("should increase quantity of an existing item by id", () => {
+    let cart = new Cart();
+    cart = cart.addItem(PRODUCT_1);
+    cart = cart.increaseQuantity("thunderfury");
+
+    const [item] = cart.listItems();
+    expect(item?.quantity().toValue()).toBe(2);
+  });
+
+  it("should decrease quantity of an existing item by id", () => {
     let cart = new Cart();
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_1);
 
-    const cartAfterDecrement = cart.decrementItem(PRODUCT_1);
-    const [item] = cartAfterDecrement.getItemsCopy();
-    expect(item?.getQuantity().toValue()).toBe(1);
+    const cartAfterDecrease = cart.decreaseQuantity("thunderfury");
+    const [item] = cartAfterDecrease.listItems();
+    expect(item?.quantity().toValue()).toBe(1);
   });
 
   it("should not decrement below MIN_QUANTITY", () => {
     const cart = new Cart().addItem(PRODUCT_1);
-    const cartAfterDecrement = cart.decrementItem(PRODUCT_1);
-    const [item] = cartAfterDecrement.getItemsCopy();
-    expect(item?.getQuantity().toValue()).toBe(1);
+    const cartAfterDecrease = cart.decreaseQuantity("thunderfury");
+    const [item] = cartAfterDecrease.listItems();
+    expect(item?.quantity().toValue()).toBe(1);
   });
 
-  it("should delete item from cart", () => {
+  it("should do nothing when decreasing or increasing an id that isn't in the cart", () => {
+    const cart = new Cart().addItem(PRODUCT_1);
+
+    expect(cart.decreaseQuantity("unknown").listItems()).toHaveLength(1);
+    expect(cart.increaseQuantity("unknown").listItems()).toHaveLength(1);
+  });
+
+  it("should remove an item from the cart by id", () => {
     let cart = new Cart();
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_2);
 
-    const cartAfterDelete = cart.deleteItem(PRODUCT_1);
-    const [remainingItem] = cartAfterDelete.getItemsCopy();
-    expect(cartAfterDelete.getItemsCopy().length).toBe(1);
-    expect(remainingItem?.getId()).toBe("ashbringer");
+    const cartAfterRemoval = cart.removeItem("thunderfury");
+    const [remainingItem] = cartAfterRemoval.listItems();
+    expect(cartAfterRemoval.listItems()).toHaveLength(1);
+    expect(remainingItem?.id()).toBe("ashbringer");
   });
 
   it("should calculate subtotal correctly", () => {
@@ -194,5 +114,17 @@ describe("Cart", () => {
     expect(shipping).toBe(0);
     expect(tax).toBeCloseTo(86.45);
     expect(total).toBeCloseTo(1321.45);
+  });
+
+  it("should report how much is left to reach free shipping", () => {
+    const cart = new Cart().addItem(aProduct({ id: "cheap", price: 100 }));
+
+    expect(cart.remainingForFreeShipping().toAmount()).toBe(200);
+  });
+
+  it("should report nothing left once the free shipping threshold is met", () => {
+    const cart = new Cart().addItem(aProduct({ id: "expensive", price: 500 }));
+
+    expect(cart.remainingForFreeShipping().toAmount()).toBe(0);
   });
 });

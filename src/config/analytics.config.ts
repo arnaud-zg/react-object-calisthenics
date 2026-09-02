@@ -13,6 +13,12 @@ export const ANALYTICS_CONFIG = {
     homeArticle: "home.article",
     homeGithub: "home.github",
     completePurchase: "shopping-cart.complete-purchase",
+    increaseQuantity: "shopping-cart.increase-quantity",
+    decreaseQuantity: "shopping-cart.decrease-quantity",
+    removeItem: "shopping-cart.remove-item",
     contactLinkClick: "contact.link-click",
+    addToCart: "product.add-to-cart",
+    watchVideo: "product.watch-video",
+    readLore: "product.read-lore",
   },
 } as const;

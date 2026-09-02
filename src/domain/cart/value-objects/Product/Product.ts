@@ -1,5 +1,6 @@
+import type { SkillValue } from "@/domain/welcomeSurvey/value-objects/Skill";
 import type { Money } from "../Money";
-import type { ProfileDetails } from "./ProductDetails";
+import type { NamedStat, ProfileDetails } from "./ProductDetails";
 
 export class ProductId {
   constructor(private readonly _value: string) {
@@ -31,40 +32,53 @@ export class ImageUrl {
   }
 }
 
-export type KnowledgeProfile = "beginner" | "adventurer" | "expert";
+/**
+ * A product's lore page and video, shared across every knowledge level: they describe
+ * the item itself, not a skill-specific rendering of it.
+ */
+export class ExtraResources {
+  constructor(
+    private readonly _loreLink: string,
+    private readonly _videoUrl: string,
+  ) {}
+
+  getLoreLink(): string {
+    return this._loreLink;
+  }
+
+  getVideoUrl(): string {
+    return this._videoUrl;
+  }
+}
+
+/**
+ * The same vocabulary as WelcomeSurvey's SkillValue: a shopper's stated skill and the
+ * knowledge tier a product's content is written for are the same concept.
+ */
+export type KnowledgeProfile = SkillValue;
 
 export class KnowledgeContent {
   constructor(
     private readonly _beginnerProfile: ProfileDetails,
-    private readonly _adventurerProfile: ProfileDetails,
+    private readonly _intermediateProfile: ProfileDetails,
     private readonly _expertProfile: ProfileDetails,
   ) {}
 
-  getProfileDescription(level: KnowledgeProfile): string {
+  describeProfile(level: KnowledgeProfile): string {
     return this.getProfile(level).describe();
   }
 
-  getProfileEffects(level: KnowledgeProfile): string[] {
+  listProfileEffects(level: KnowledgeProfile): string[] {
     return this.getProfile(level).listEffects();
   }
 
-  getProfileStats(
-    level: KnowledgeProfile,
-  ): Record<"power" | "durability" | "manaBoost", number> {
-    return this.getProfile(level).getStats();
-  }
-
-  getProfileLoreLink(level: KnowledgeProfile): string {
-    return this.getProfile(level).getLoreLink();
-  }
-
-  getProfileVideoUrl(level: KnowledgeProfile): string {
-    return this.getProfile(level).getVideoUrl();
+  listProfileStats(level: KnowledgeProfile): NamedStat[] {
+    return this.getProfile(level).listStats();
   }
 
   private getProfile(level: KnowledgeProfile): ProfileDetails {
     if (level === "beginner") return this._beginnerProfile;
-    if (level === "adventurer") return this._adventurerProfile;
+    if (level === "intermediate") return this._intermediateProfile;
     return this._expertProfile;
   }
 }
@@ -76,6 +90,7 @@ export class Product {
     private readonly _price: Money,
     private readonly _imageUrl: ImageUrl,
     private readonly _knowledge: KnowledgeContent,
+    private readonly _extraResources: ExtraResources,
   ) {}
 
   displayId(): string {
@@ -95,24 +110,22 @@ export class Product {
   }
 
   describeProfile(level: KnowledgeProfile): string {
-    return this._knowledge.getProfileDescription(level);
+    return this._knowledge.describeProfile(level);
   }
 
   listProfileEffects(level: KnowledgeProfile): string[] {
-    return this._knowledge.getProfileEffects(level);
+    return this._knowledge.listProfileEffects(level);
   }
 
-  getProfileStats(
-    level: KnowledgeProfile,
-  ): Record<"power" | "durability" | "manaBoost", number> {
-    return this._knowledge.getProfileStats(level);
+  listProfileStats(level: KnowledgeProfile): NamedStat[] {
+    return this._knowledge.listProfileStats(level);
   }
 
-  getLoreLink(level: KnowledgeProfile): string {
-    return this._knowledge.getProfileLoreLink(level);
+  getLoreLink(): string {
+    return this._extraResources.getLoreLink();
   }
 
-  getVideoUrl(level: KnowledgeProfile): string {
-    return this._knowledge.getProfileVideoUrl(level);
+  getVideoUrl(): string {
+    return this._extraResources.getVideoUrl();
   }
 }

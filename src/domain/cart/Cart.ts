@@ -1,33 +1,31 @@
+import { CartItems } from "@/domain/cart/CartItems";
+import { ShippingPolicy } from "@/domain/cart/policy/ShippingPolicy";
+import { TaxPolicy } from "@/domain/cart/policy/TaxPolicy";
 import { Money } from "@/domain/cart/value-objects/Money";
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
-import { Quantity } from "@/domain/cart/value-objects/Quantity";
-import { CartItem } from "./CartItem";
-import { ShippingPolicy } from "./policy/ShippingPolicy";
-import { TaxPolicy } from "./policy/TaxPolicy";
+import type { Quantity } from "@/domain/cart/value-objects/Quantity";
+import type { CartItem } from "./CartItem";
 
 /**
  * Immutable shopping cart that encapsulates its behavior and state.
  */
 export class Cart {
-  private items: CartItem[] = [];
-
-  constructor(items: CartItem[] = []) {
-    this.items = items;
-  }
+  constructor(private readonly items: CartItems = CartItems.empty()) {}
 
   isEmpty(): boolean {
-    return this.items.length === 0;
+    return this.items.isEmpty();
   }
 
   totalItems(): Quantity {
-    return this.items.reduce(
-      (total, item) => total.add(item.getQuantity()),
-      new Quantity(0),
-    );
+    return this.items.totalQuantity();
+  }
+
+  listItems(): readonly CartItem[] {
+    return this.items.toArray();
   }
 
   calculateSubtotal(): Money {
-    return this.items.reduce((total, item) => total.add(item.totalPrice()), new Money(0));
+    return this.items.totalPrice();
   }
 
   calculateShipping(): Money {
@@ -39,49 +37,33 @@ export class Cart {
   }
 
   calculateTotal(): Money {
-    const subtotal = this.calculateSubtotal();
-    const tax = TaxPolicy.calculate(subtotal);
-    const shipping = ShippingPolicy.calculate(subtotal);
-    return subtotal.add(tax).add(shipping);
+    return this.calculateSubtotal()
+      .add(this.calculateTax())
+      .add(this.calculateShipping());
   }
 
-  getItemsCopy(): readonly CartItem[] {
-    return [...this.items];
+  remainingForFreeShipping(): Money {
+    const subtotal = this.calculateSubtotal();
+
+    if (subtotal.isAtLeast(ShippingPolicy.SHIPPING_THRESHOLD)) {
+      return new Money(0);
+    }
+    return ShippingPolicy.SHIPPING_THRESHOLD.subtract(subtotal);
   }
 
   addItem(product: Product): Cart {
-    const existing = this.items.find((item) => item.getId() === product.displayId());
-
-    if (existing) {
-      const updatedItem = existing.increaseQuantity();
-      return new Cart(
-        this.items.map((item) =>
-          item.getId() === existing.getId() ? updatedItem : item,
-        ),
-      );
-    }
-
-    const newItem = new CartItem(product, new Quantity(1));
-    return new Cart([...this.items, newItem]);
+    return new Cart(this.items.addOrIncrement(product));
   }
 
-  decrementItem(product: Product): Cart {
-    const existing = this.items.find((item) => item.getId() === product.displayId());
-
-    if (!existing) return this;
-
-    const updatedItem = existing.decreaseQuantity();
-
-    return new Cart(
-      this.items.map((item) => (item.getId() === existing.getId() ? updatedItem : item)),
-    );
+  increaseQuantity(itemId: string): Cart {
+    return new Cart(this.items.increaseQuantity(itemId));
   }
 
-  deleteItem(product: Product): Cart {
-    const existing = this.items.find((item) => item.getId() === product.displayId());
+  decreaseQuantity(itemId: string): Cart {
+    return new Cart(this.items.decreaseQuantity(itemId));
+  }
 
-    if (!existing) return this;
-
-    return new Cart(this.items.filter((item) => item.getId() !== product.displayId()));
+  removeItem(itemId: string): Cart {
+    return new Cart(this.items.remove(itemId));
   }
 }
