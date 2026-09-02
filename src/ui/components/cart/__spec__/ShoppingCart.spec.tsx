@@ -4,6 +4,7 @@ import type { RefObject } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { welcomeSurveyStorage } from "@/config/storage.config";
 import { ProductCatalog } from "@/data/products";
+import { CourierPolicy } from "@/domain/cart/policy/CourierPolicy";
 import { ShoppingCart } from "@/ui/components/cart/ShoppingCart";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 
@@ -94,15 +95,21 @@ describe("ShoppingCart", () => {
     expect(screen.getByText("Your inventory is empty")).toBeInTheDocument();
   });
 
-  // Every real catalog product costs far more than COMMERCE_CONFIG.freeCourierThreshold
-  // (adding any single one already qualifies for free courier delivery), so the "add X more"
-  // banner can never actually appear against real data. That path is covered instead in
+  // Not every real catalog product clears COMMERCE_CONFIG.freeCourierThreshold on its own,
+  // only the priciest ones do. Adding one of those should still show the Free badge. The
+  // "add X more" banner path for a product that doesn't clear it is covered instead in
   // ShoppingCart.freeCourier.spec.tsx against a mocked, deliberately cheap catalog.
-  it("should show the Free badge, since every real product already clears the threshold", async () => {
+  it("should show the Free badge when a product alone clears the free courier threshold", async () => {
     const user = userEvent.setup();
     renderShoppingCart();
+    const catalog = ProductCatalog.forLocale("en").all();
+    const threshold = CourierPolicy.FREE_COURIER_THRESHOLD;
+    const expensiveIndex = catalog.findIndex((product) =>
+      product.displayPrice().isAtLeast(threshold),
+    );
+    expect(expensiveIndex).toBeGreaterThanOrEqual(0);
 
-    await user.click(addToCartButtons()[0] as HTMLElement);
+    await user.click(addToCartButtons()[expensiveIndex] as HTMLElement);
 
     expect(screen.getByText("Free")).toBeInTheDocument();
   });

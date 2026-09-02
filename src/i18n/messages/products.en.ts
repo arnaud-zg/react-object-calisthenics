@@ -276,4 +276,393 @@ export const productContentEn: ProductContent = {
       ],
     },
   },
+  rhokdelar: {
+    beginner: {
+      description:
+        "A living bow grown from ancient wood, said to bloom fresh flowers with every shot.",
+      effects: ["Bonus damage against demons."],
+    },
+    intermediate: {
+      description:
+        "Rhok'delar was grown by the Ancients of Felwood themselves, its living wood channeling nature's own strength into every arrow.",
+      effects: [
+        "Attack speed +15%",
+        "Poison damage on hit",
+        "Bonus damage against demons +20%",
+      ],
+    },
+    expert: {
+      description:
+        "Grown by the Ancients to arm a hunter who avenged them, Rhok'delar has since felled a black dragon and countless Legion agents. It never stops blooming.",
+      effects: [
+        "Attack speed +30%",
+        "Entangling roots on critical strike",
+        "Bonus damage against demons +40%",
+        "Regenerates health while drawn",
+      ],
+    },
+  },
+  aluneth: {
+    beginner: {
+      description:
+        "An ancient staff carved from enchanted wood, humming with contained arcane power.",
+      effects: ["Restores mana over time."],
+    },
+    intermediate: {
+      description:
+        "Aluneth channels centuries of arcane knowledge, letting its wielder bind and unleash raw magic with ease.",
+      effects: ["Mana regeneration +35%", "Spell damage +15%"],
+    },
+    expert: {
+      description:
+        "Once used by Aegwynn to imprison a malevolent entity within its wood, Aluneth now channels the full weight of the Guardians' arcane legacy.",
+      effects: [
+        "Mana regeneration +70%",
+        "Spell damage +30%",
+        "Chance to unleash a burst of pure arcane energy",
+        "Reduces the cost of the next spell to zero",
+      ],
+    },
+  },
+  felomelorn: {
+    beginner: {
+      description:
+        "An ancient elven blade wreathed in flame, said to have survived being shattered.",
+      effects: ["Fire damage on hit."],
+    },
+    intermediate: {
+      description:
+        "Felo'melorn was shattered against Frostmourne and reforged in vengeance, its blade now burning with the fire of its wielder's fury.",
+      effects: ["Fire damage +25%", "Attack speed +10%", "Chance to ignite enemies"],
+    },
+    expert: {
+      description:
+        "Forged anew by Kael'thas from the ashes of his father's sword, Felo'melorn burns with the combined rage of the Sunstrider line.",
+      effects: [
+        "Fire damage +45%",
+        "Attack speed +20%",
+        "Ignites the ground beneath struck enemies",
+        "Immune to fire damage while active",
+      ],
+    },
+  },
+  fangsofashamane: {
+    beginner: {
+      description: "A pair of feral fangs, said to carry the spirit of a great panther.",
+      effects: ["Bonus damage while shapeshifted."],
+    },
+    intermediate: {
+      description:
+        "The Fangs of Ashamane let their wielder move and strike with the speed and ferocity of the Wild God they're named for.",
+      effects: [
+        "Attack speed +20%",
+        "Bleed damage over time",
+        "Bonus damage while shapeshifted +20%",
+      ],
+    },
+    expert: {
+      description:
+        "Torn from Ashamane, one of the first Wild Gods to fall defending Azeroth, these fangs grant their wielder her untamed, primal fury.",
+      effects: [
+        "Attack speed +35%",
+        "Bleed damage +50%",
+        "Chance to shift into a supernatural cat form",
+        "Restores health on critical strike",
+      ],
+    },
+  },
+  scytheofelune: {
+    beginner: {
+      description:
+        "A curved staff blessed by the moon goddess, humming with balanced nature and arcane power.",
+      effects: ["Restores mana over time."],
+    },
+    intermediate: {
+      description:
+        "The Scythe of Elune channels both moonlight and starlight, letting its wielder balance devastating magic with steady control.",
+      effects: ["Spell power +20%", "Mana regeneration +25%"],
+    },
+    expert: {
+      description:
+        "Forged from Goldrinn's fang and Elune's own staff, and tied to the origin of the worgen curse, the Scythe of Elune now channels pure, purified balance magic.",
+      effects: [
+        "Spell power +40%",
+        "Mana regeneration +50%",
+        "Alternates between lunar and solar empowerment",
+        "Immune to silence while channeling",
+      ],
+    },
+  },
+  mawofthedamned: {
+    beginner: {
+      description: "An ancient axe that drains the life from those it strikes.",
+      effects: ["Drains a portion of enemy health on hit."],
+    },
+    intermediate: {
+      description:
+        "Maw of the Damned feeds on its victims' vital energy, channeling it back into its wielder.",
+      effects: ["Life drain +20%", "Attack speed +10%"],
+    },
+    expert: {
+      description:
+        "Forged by the Legion to corrupt whoever wielded it, this axe still carries the ravenous, trapped soul of its creator.",
+      effects: [
+        "Life drain +40%",
+        "Attack speed +20%",
+        "Chance to feast on an enemy's soul for bonus damage",
+        "Immune to fear while feeding",
+      ],
+    },
+  },
+  apocalypse: {
+    beginner: {
+      description: "A corrupted blade that spreads disease with every cut.",
+      effects: ["Chance to inflict a plague on hit."],
+    },
+    intermediate: {
+      description:
+        "Apocalypse was forged by dreadlords to corrupt its wielder, spreading undeath wherever it strikes.",
+      effects: ["Plague damage +25%", "Chance to raise a minor undead servant"],
+    },
+    expert: {
+      description:
+        "Sealed away by the Guardian Alodi after a dreadlord's corruption, Apocalypse now unleashes undeath and plague on a scale few can withstand.",
+      effects: [
+        "Plague damage +50%",
+        "Summons undead servants on kill",
+        "Spreads plague to nearby enemies",
+        "Immune to disease effects",
+      ],
+    },
+  },
+  clawsofursoc: {
+    beginner: {
+      description: "A pair of massive claws torn from a great bear demigod.",
+      effects: ["Bonus damage while in bear form."],
+    },
+    intermediate: {
+      description:
+        "The Claws of Ursoc channel the demigod's protective fury, rewarding those who stand their ground.",
+      effects: ["Damage reduction +15%", "Bonus damage while in bear form +20%"],
+    },
+    expert: {
+      description:
+        "Torn from Ursoc after his fall to the corrupted Emerald Nightmare, these claws let their wielder become a living avatar of his rage and protection.",
+      effects: [
+        "Damage reduction +30%",
+        "Bonus damage while in bear form +40%",
+        "Taunts all nearby enemies on activation",
+        "Reflects a portion of damage taken",
+      ],
+    },
+  },
+  ghanir: {
+    beginner: {
+      description: "A living branch that hums with restorative energy.",
+      effects: ["Heals the wielder over time."],
+    },
+    intermediate: {
+      description:
+        "G'Hanir channels the life-giving power of the Emerald Dream to knit wounds closed.",
+      effects: ["Healing done +20%", "Mana regeneration +15%"],
+    },
+    expert: {
+      description:
+        "Cut from the first tree ever gifted to druids, G'Hanir remains eternally tied to the Emerald Dream, its healing power nearly boundless.",
+      effects: [
+        "Healing done +40%",
+        "Mana regeneration +30%",
+        "Periodically blooms to heal all nearby allies",
+        "Immune to silence while channeling",
+      ],
+    },
+  },
+  stromkar: {
+    beginner: {
+      description: "A greatsword once carried by the first warlord to unite humanity.",
+      effects: ["Bonus damage against multiple enemies."],
+    },
+    intermediate: {
+      description:
+        "Strom'kar rewards a warrior's raw strength and resolve, breaking through armor and will alike.",
+      effects: ["Attack power +20%", "Armor penetration +15%"],
+    },
+    expert: {
+      description:
+        "Lost after King Thoradin used it to subdue a horror from beyond, Strom'kar now returns to break the enemies of humanity once more.",
+      effects: [
+        "Attack power +35%",
+        "Armor penetration +30%",
+        "Cleaves through all enemies in front of the wielder",
+        "Fear immunity while enraged",
+      ],
+    },
+  },
+  titanstrike: {
+    beginner: {
+      description: "A techno-magical rifle blending titan machinery with raw power.",
+      effects: ["Bonus damage against beasts."],
+    },
+    intermediate: {
+      description:
+        "Titanstrike channels titan-forged engineering into devastating, precise shots.",
+      effects: ["Ranged attack power +20%", "Chance to fire a piercing shot"],
+    },
+    expert: {
+      description:
+        "Engineered by Keeper Mimiron himself, Titanstrike protects Azeroth's wildlife with the same destructive precision the titans once used to shape worlds.",
+      effects: [
+        "Ranged attack power +35%",
+        "Piercing shots hit all enemies in a line",
+        "Calls a lightning strike on critical hits",
+        "Immune to knockback while firing",
+      ],
+    },
+  },
+  thasdorah: {
+    beginner: {
+      description: "A heirloom bow carved from an ancient elven tree.",
+      effects: ["Bonus damage at long range."],
+    },
+    intermediate: {
+      description:
+        "Thas'dorah channels the precision and legacy of generations of Windrunner rangers.",
+      effects: ["Ranged attack power +20%", "Critical strike chance +5%"],
+    },
+    expert: {
+      description:
+        "Once carried by Ranger Captain Alleria Windrunner before it vanished into Outland, Thas'dorah restores its wielder to the legacy of Quel'Thalas's greatest archers.",
+      effects: [
+        "Ranged attack power +35%",
+        "Critical strike chance +10%",
+        "Arrows split to strike additional enemies",
+        "Grants stealth after a killing shot",
+      ],
+    },
+  },
+  talonclaw: {
+    beginner: {
+      description: "A tribal spear blessed by an ancient wild spirit.",
+      effects: ["Bonus damage against beasts."],
+    },
+    intermediate: {
+      description:
+        "Talonclaw channels the wild's own fury, rewarding hunters who fight alongside nature.",
+      effects: ["Attack speed +15%", "Bonus damage against beasts +20%"],
+    },
+    expert: {
+      description:
+        "Blessed over millennia by Wild Gods including the eagle spirit Ohn'ahra, Talonclaw is both weapon and sacred covenant with the wild.",
+      effects: [
+        "Attack speed +25%",
+        "Bonus damage against beasts +35%",
+        "Summons a spectral eagle to aid the wielder",
+        "Grants brief flight on activation",
+      ],
+    },
+  },
+  truthguard: {
+    beginner: {
+      description: "An unbreakable shield forged by titanic watchers.",
+      effects: ["Reduces incoming damage."],
+    },
+    intermediate: {
+      description: "Truthguard exposes deception and shields the righteous from harm.",
+      effects: ["Block chance +15%", "Damage reduction +15%"],
+    },
+    expert: {
+      description:
+        "Forged by Tyr and Archaedas to expose a traitorous keeper's corruption, Truthguard remains an unbreakable symbol of justice against any lie.",
+      effects: [
+        "Block chance +30%",
+        "Damage reduction +30%",
+        "Reflects a portion of blocked damage",
+        "Removes one harmful effect on block",
+      ],
+    },
+  },
+  tuure: {
+    beginner: {
+      description: "A crystal mace holding a shard of naaru light.",
+      effects: ["Heals the wielder's allies over time."],
+    },
+    intermediate: {
+      description:
+        "T'uure channels naaru radiance to shelter and heal those under its light.",
+      effects: ["Healing done +20%", "Shields the wielder's target"],
+    },
+    expert: {
+      description:
+        "Once used to shield draenei refugees from annihilating demons, T'uure now channels naaru light to protect and heal on a much greater scale.",
+      effects: [
+        "Healing done +40%",
+        "Shields all nearby allies",
+        "Periodic burst of holy light heals the group",
+        "Immune to shadow damage while channeling",
+      ],
+    },
+  },
+  xalatath: {
+    beginner: {
+      description: "An ancient dagger that whispers unsettling secrets.",
+      effects: ["Bonus shadow damage on hit."],
+    },
+    intermediate: {
+      description:
+        "Xal'atath carries a fragment of an Old God's mind, murmuring forbidden knowledge to its wielder.",
+      effects: ["Shadow damage +25%", "Chance to fear an enemy on hit"],
+    },
+    expert: {
+      description:
+        "A living fragment of the Black Empire's consciousness, Xal'atath weaponizes the very madness it whispers into raw destructive power.",
+      effects: [
+        "Shadow damage +45%",
+        "Fears all nearby enemies on critical strike",
+        "Whispers grant bonus insight (increased critical chance)",
+        "Immune to fear effects",
+      ],
+    },
+  },
+  ulthalesh: {
+    beginner: {
+      description: "A scythe-staff forged in the fires of a shattered world.",
+      effects: ["Drains life from the target over time."],
+    },
+    intermediate: {
+      description:
+        "Ulthalesh slowly consumes the souls of those it strikes, feeding its wielder's power.",
+      effects: ["Damage over time +25%", "Life drain +15%"],
+    },
+    expert: {
+      description:
+        "Forged by Sargeras himself and named for the last soul it ever devoured, Ulthalesh consumes enemies' very essence, one agonizing moment at a time.",
+      effects: [
+        "Damage over time +45%",
+        "Life drain +30%",
+        "Spreads damage over time effects to nearby enemies",
+        "Summons a fragment of a devoured soul to fight alongside the wielder",
+      ],
+    },
+  },
+  thesilverhand: {
+    beginner: {
+      description: "A titan-forged mace carried by legendary paladins.",
+      effects: ["Heals the wielder's allies on hit."],
+    },
+    intermediate: {
+      description:
+        "The Silver Hand channels the sacred authority of the order it's named for, healing and inspiring allies.",
+      effects: ["Healing done +20%", "Mana regeneration +15%"],
+    },
+    expert: {
+      description:
+        "Once wielded by Keeper Tyr and later Uther the Lightbringer, the Silver Hand answers its wielder's call to justice with overwhelming holy power.",
+      effects: [
+        "Healing done +40%",
+        "Mana regeneration +30%",
+        "Periodically blesses all nearby allies",
+        "Grants immunity to fear for the wielder and allies",
+      ],
+    },
+  },
 };

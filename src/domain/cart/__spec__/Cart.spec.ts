@@ -1,6 +1,10 @@
 import { describe, expect, it } from "vitest";
 import { Cart } from "../Cart";
+import { CourierPolicy } from "../policy/CourierPolicy";
 import { aProduct } from "./productFixtures";
+
+const FREE_COURIER_THRESHOLD = CourierPolicy.FREE_COURIER_THRESHOLD.toAmount();
+const COURIER_FEE = CourierPolicy.COURIER_FEE.toAmount();
 
 const PRODUCT_1 = aProduct({
   id: "thunderfury",
@@ -99,7 +103,7 @@ describe("Cart", () => {
     expect(totalItems.toValue()).toBe(3);
   });
 
-  it("should calculate total with courier fee and tax", () => {
+  it("should calculate total with courier fee and tax when under the free threshold", () => {
     let cart = new Cart();
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_2);
@@ -111,19 +115,21 @@ describe("Cart", () => {
 
     // Check basic consistency
     expect(subtotal).toBe(1235);
-    expect(courierFee).toBe(0);
+    expect(courierFee).toBe(COURIER_FEE);
     expect(tax).toBeCloseTo(86.45);
-    expect(total).toBeCloseTo(1321.45);
+    expect(total).toBeCloseTo(1235 + COURIER_FEE + 86.45);
   });
 
   it("should report how much is left to reach free courier delivery", () => {
     const cart = new Cart().addItem(aProduct({ id: "cheap", price: 100 }));
 
-    expect(cart.remainingForFreeCourier().toAmount()).toBe(200);
+    expect(cart.remainingForFreeCourier().toAmount()).toBe(FREE_COURIER_THRESHOLD - 100);
   });
 
   it("should report nothing left once the free courier threshold is met", () => {
-    const cart = new Cart().addItem(aProduct({ id: "expensive", price: 500 }));
+    const cart = new Cart().addItem(
+      aProduct({ id: "expensive", price: FREE_COURIER_THRESHOLD }),
+    );
 
     expect(cart.remainingForFreeCourier().toAmount()).toBe(0);
   });

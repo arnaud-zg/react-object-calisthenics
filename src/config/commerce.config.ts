@@ -4,8 +4,8 @@
  */
 export const COMMERCE_CONFIG = {
   taxRate: 0.07,
-  freeCourierThreshold: 300,
-  courierFee: 25,
+  freeCourierThreshold: 500000,
+  courierFee: 15000,
   quantityPerItem: {
     min: 1,
     max: 10,
