@@ -1,0 +1,23 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml">
+  <url>
+    <loc>https://arnaud-zg.github.io/react-object-calisthenics/</loc>
+      <xhtml:link rel="alternate" hreflang="en" href="https://arnaud-zg.github.io/react-object-calisthenics/" />
+      <xhtml:link rel="alternate" hreflang="fr" href="https://arnaud-zg.github.io/react-object-calisthenics/fr/" />
+  </url>
+  <url>
+    <loc>https://arnaud-zg.github.io/react-object-calisthenics/shopping-cart/</loc>
+      <xhtml:link rel="alternate" hreflang="en" href="https://arnaud-zg.github.io/react-object-calisthenics/shopping-cart/" />
+      <xhtml:link rel="alternate" hreflang="fr" href="https://arnaud-zg.github.io/react-object-calisthenics/fr/shopping-cart/" />
+  </url>
+  <url>
+    <loc>https://arnaud-zg.github.io/react-object-calisthenics/fr/</loc>
+      <xhtml:link rel="alternate" hreflang="en" href="https://arnaud-zg.github.io/react-object-calisthenics/" />
+      <xhtml:link rel="alternate" hreflang="fr" href="https://arnaud-zg.github.io/react-object-calisthenics/fr/" />
+  </url>
+  <url>
+    <loc>https://arnaud-zg.github.io/react-object-calisthenics/fr/shopping-cart/</loc>
+      <xhtml:link rel="alternate" hreflang="en" href="https://arnaud-zg.github.io/react-object-calisthenics/shopping-cart/" />
+      <xhtml:link rel="alternate" hreflang="fr" href="https://arnaud-zg.github.io/react-object-calisthenics/fr/shopping-cart/" />
+  </url>
+</urlset>

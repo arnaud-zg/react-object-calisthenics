@@ -1,6 +1,7 @@
 {
-  "short_name": "TanStack App",
-  "name": "Create TanStack App Sample",
+  "short_name": "Azeroth's Finest Wares",
+  "name": "Azeroth's Finest Wares: Object Calisthenics Demo",
+  "description": "Interactive React demo showing how to apply Object Calisthenics rules for maintainable, well-structured front-end code.",
   "icons": [
     {
       "src": "favicon.ico",
@@ -20,6 +21,6 @@
   ],
   "start_url": ".",
   "display": "standalone",
-  "theme_color": "#000000",
+  "theme_color": "#ffffff",
   "background_color": "#ffffff"
 }

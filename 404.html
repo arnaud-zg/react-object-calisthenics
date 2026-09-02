@@ -1,10 +1,11 @@
 <!doctype html>
-<html>
+<html lang="en">
   <head>
     <meta charset="utf-8" />
     <title>Redirecting…</title>
     <script>
-      // Build the redirect URL
+      // This file is a static asset copied as-is by Vite, it cannot import
+      // src/config/site.config.ts. Keep repoBase in sync with SITE_CONFIG.basePath there.
       const repoBase = "/react-object-calisthenics";
       const redirectUrl =
         repoBase +
@@ -16,6 +17,11 @@
     </script>
   </head>
   <body>
-    Redirecting
+    <span id="message">Redirecting</span>
+    <script>
+      if (location.pathname.startsWith(`${repoBase}/fr`)) {
+        document.getElementById("message").textContent = "Redirection en cours";
+      }
+    </script>
   </body>
 </html>
