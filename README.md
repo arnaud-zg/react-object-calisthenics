@@ -45,7 +45,9 @@ flowchart LR
 | Small, single-responsibility classes | one reason to change, one file |
 
 Full write-up, with the TDD history behind two of these rules, in
-[CONTRIBUTING.md](./CONTRIBUTING.md#object-calisthenics).
+[CONTRIBUTING.md](./CONTRIBUTING.md#object-calisthenics). For how these rules actually reshape
+the code, and how an immutable domain class becomes React state, see
+[docs/architecture.md](./docs/architecture.md).
 
 ## Adding an item to the cart
 
