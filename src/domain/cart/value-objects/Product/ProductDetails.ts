@@ -6,8 +6,10 @@ export class Effect {
   }
 }
 
+export type StatKey = "power" | "durability" | "manaBoost";
+
 export interface NamedStat {
-  label: string;
+  key: StatKey;
   value: number;
 }
 
@@ -26,13 +28,17 @@ export class Stats {
     return new Stats(this._power + amount, this._durability, this._manaBoost);
   }
 
-  /** Only the stats worth showing: zero-value ones are omitted rather than rendered as 0. */
+  /**
+   * Only the stats worth showing: zero-value ones are omitted rather than rendered as 0.
+   * Returns keys, not display labels, translating them is the UI's job.
+   */
   list(): NamedStat[] {
-    return [
-      { label: "Power", value: this._power },
-      { label: "Durability", value: this._durability },
-      { label: "Mana Boost", value: this._manaBoost },
-    ].filter((stat) => stat.value > 0);
+    const stats: NamedStat[] = [
+      { key: "power", value: this._power },
+      { key: "durability", value: this._durability },
+      { key: "manaBoost", value: this._manaBoost },
+    ];
+    return stats.filter((stat) => stat.value > 0);
   }
 }
 

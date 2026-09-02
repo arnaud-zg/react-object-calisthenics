@@ -5,10 +5,10 @@ import { AnimatePresence, motion } from "motion/react";
 import { type FC, type RefObject, useState } from "react";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
-import { PRODUCT_CATALOG } from "@/data/products";
+import { ProductCatalog } from "@/data/products";
 import { Cart } from "@/domain/cart/Cart";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
-import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
+import { useLocale, useTranslations } from "@/i18n/LocaleContext";
 import { CartSummaryRow } from "@/ui/components/cart/CartSummaryRow";
 import { ShoppingCartItem } from "@/ui/components/cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
@@ -38,18 +38,21 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
   const cart = useImmutableInstance(new Cart());
   const { welcomeSurvey } = WelcomeModal.useWelcomeModalSurvey();
   const selectedProfile = welcomeSurvey?.skill ?? "beginner";
+  const locale = useLocale();
+  const t = useTranslations();
+  const catalog = ProductCatalog.forLocale(locale);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
       <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-bold text-foreground">Azeroth's Finest Wares</h1>
+        <h1 className="text-3xl font-bold text-foreground">{t.shop.title}</h1>
         <Button
           size="default"
           onClick={() => welcomeModalHandle.current.open()}
           className="self-start sm:self-auto"
           data-umami-event={ANALYTICS_CONFIG.events.openKnowledgeLevel}
         >
-          {new Skill(welcomeSurvey?.skill ?? "beginner").label()}
+          {t.skill.label[welcomeSurvey?.skill ?? "beginner"]}
         </Button>
       </div>
 
@@ -57,7 +60,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
         {/* Product List */}
         <div className="lg:col-span-2">
           <div className="mb-6 flex items-center justify-between gap-2">
-            <h2 className="text-2xl font-semibold text-foreground">Mystical Inventory</h2>
+            <h2 className="text-2xl font-semibold text-foreground">
+              {t.shop.inventoryHeading}
+            </h2>
 
             <Button
               onClick={() => {
@@ -76,12 +81,13 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               aria-controls="cart"
             >
               <ShoppingCartIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-              Cart <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
+              {t.shop.cartButtonLabel}{" "}
+              <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
             </Button>
           </div>
 
           <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
-            {PRODUCT_CATALOG.all().map((product, index) => (
+            {catalog.all().map((product, index) => (
               <li key={product.displayId()}>
                 <ProductCard
                   product={product}
@@ -107,18 +113,18 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                   id="cart-heading"
                   className="text-xl font-semibold text-card-foreground"
                 >
-                  Your Inventory
+                  {t.shop.yourInventory}
                 </h2>
                 <div className="flex justify-center">
                   <Badge variant="outline" className="font-normal">
-                    {cart.totalItems().toValue()} items
+                    {t.shop.itemCount(cart.totalItems().toValue())}
                   </Badge>
                   <Button
                     variant="ghost"
                     size="icon"
                     onClick={() => setShowCart(false)}
                     className="rounded-full lg:hidden"
-                    aria-label="Close cart"
+                    aria-label={t.shop.closeCart}
                   >
                     <X className="h-4 w-4" aria-hidden="true" />
                   </Button>
@@ -153,7 +159,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     animate={{ opacity: 0.8 }}
                     transition={{ duration: 0.9, ease: [0.4, 0.0, 0.2, 1] }}
                   >
-                    Your inventory is empty
+                    {t.shop.emptyInventory}
                   </motion.p>
                 </motion.div>
               ) : (
@@ -176,18 +182,18 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
 
                   <div className="space-y-2">
                     <CartSummaryRow
-                      label="Subtotal:"
+                      label={t.shop.subtotal}
                       value={goldSilverCopperFormatter.format(cart.calculateSubtotal())}
                     />
                     <CartSummaryRow
-                      label="Shipping:"
+                      label={t.shop.shipping}
                       value={
                         cart.calculateShipping().isZero() ? (
                           <Badge
                             variant="outline"
                             className="h-5 border-transparent bg-green-100 py-0 text-xs text-green-800 dark:bg-green-950 dark:text-green-300"
                           >
-                            Free
+                            {t.shop.free}
                           </Badge>
                         ) : (
                           goldSilverCopperFormatter.format(cart.calculateShipping())
@@ -195,7 +201,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                       }
                     />
                     <CartSummaryRow
-                      label="Tax:"
+                      label={t.shop.tax}
                       value={goldSilverCopperFormatter.format(cart.calculateTax())}
                     />
                   </div>
@@ -203,7 +209,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                   <Separator className="my-3" />
 
                   <CartSummaryRow
-                    label="Total:"
+                    label={t.shop.total}
                     value={goldSilverCopperFormatter.format(cart.calculateTotal())}
                     emphasized
                     live
@@ -235,11 +241,11 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         layout
                       >
                         <span>
-                          Add{" "}
-                          {goldSilverCopperFormatter.format(
-                            cart.remainingForFreeShipping(),
-                          )}{" "}
-                          more to earn free delivery by griffin!
+                          {t.shop.remainingForFreeShipping(
+                            goldSilverCopperFormatter.format(
+                              cart.remainingForFreeShipping(),
+                            ),
+                          )}
                         </span>
                       </motion.div>
                     )}
@@ -257,18 +263,19 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     size="default"
                     data-umami-event={ANALYTICS_CONFIG.events.completePurchase}
                   >
-                    Complete Purchase
+                    {t.shop.completePurchase}
                   </Button>
                 </ModalTrigger>
 
                 <ModalContent className="rounded-2xl shadow-lg">
                   <ModalHeader>
                     <ModalTitle className="text-center text-xl font-semibold">
-                      🎉 End of the Demo
+                      {t.shop.endOfDemoTitle}
                     </ModalTitle>
                     <ModalDescription className="mt-2 text-center text-base">
-                      Thanks for checking this out! Feel free to reach out if you'd like
-                      to <b>discuss</b> or <b>collaborate</b> with me.
+                      {t.shop.endOfDemoDescriptionBefore} <b>{t.shop.endOfDemoDiscuss}</b>{" "}
+                      {t.shop.endOfDemoOr} <b>{t.shop.endOfDemoCollaborate}</b>{" "}
+                      {t.shop.endOfDemoDescriptionAfter}
                     </ModalDescription>
                   </ModalHeader>
 
@@ -279,7 +286,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href={SITE_CONFIG.author.githubUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Arnaud's GitHub profile (opens in a new tab)"
+                        aria-label={t.shop.githubProfileLabel}
                         onClick={() => {
                           window.umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "github",
@@ -296,7 +303,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         href={SITE_CONFIG.author.linkedinUrl}
                         target="_blank"
                         rel="noopener noreferrer"
-                        aria-label="Arnaud's LinkedIn profile (opens in a new tab)"
+                        aria-label={t.shop.linkedinProfileLabel}
                         onClick={() => {
                           window.umami?.track(ANALYTICS_CONFIG.events.contactLinkClick, {
                             platform: "linkedin",

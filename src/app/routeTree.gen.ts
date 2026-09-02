@@ -10,11 +10,18 @@
 
 import { Route as rootRouteImport } from './routes/__root'
 import { Route as IndexRouteImport } from './routes/index'
+import { Route as FrIndexRouteImport } from './routes/fr/index'
 import { Route as ShoppingCartIndexRouteImport } from './routes/shopping-cart/index'
+import { Route as FrShoppingCartIndexRouteImport } from './routes/fr/shopping-cart/index'
 
 const IndexRoute = IndexRouteImport.update({
   id: '/',
   path: '/',
+  getParentRoute: () => rootRouteImport,
+} as any)
+const FrIndexRoute = FrIndexRouteImport.update({
+  id: '/fr/',
+  path: '/fr/',
   getParentRoute: () => rootRouteImport,
 } as any)
 const ShoppingCartIndexRoute = ShoppingCartIndexRouteImport.update({
@@ -22,31 +29,44 @@ const ShoppingCartIndexRoute = ShoppingCartIndexRouteImport.update({
   path: '/shopping-cart/',
   getParentRoute: () => rootRouteImport,
 } as any)
+const FrShoppingCartIndexRoute = FrShoppingCartIndexRouteImport.update({
+  id: '/fr/shopping-cart/',
+  path: '/fr/shopping-cart/',
+  getParentRoute: () => rootRouteImport,
+} as any)
 
 export interface FileRoutesByFullPath {
   '/': typeof IndexRoute
+  '/fr/': typeof FrIndexRoute
   '/shopping-cart/': typeof ShoppingCartIndexRoute
+  '/fr/shopping-cart/': typeof FrShoppingCartIndexRoute
 }
 export interface FileRoutesByTo {
   '/': typeof IndexRoute
+  '/fr': typeof FrIndexRoute
   '/shopping-cart': typeof ShoppingCartIndexRoute
+  '/fr/shopping-cart': typeof FrShoppingCartIndexRoute
 }
 export interface FileRoutesById {
   __root__: typeof rootRouteImport
   '/': typeof IndexRoute
+  '/fr/': typeof FrIndexRoute
   '/shopping-cart/': typeof ShoppingCartIndexRoute
+  '/fr/shopping-cart/': typeof FrShoppingCartIndexRoute
 }
 export interface FileRouteTypes {
   fileRoutesByFullPath: FileRoutesByFullPath
-  fullPaths: '/' | '/shopping-cart/'
+  fullPaths: '/' | '/fr/' | '/shopping-cart/' | '/fr/shopping-cart/'
   fileRoutesByTo: FileRoutesByTo
-  to: '/' | '/shopping-cart'
-  id: '__root__' | '/' | '/shopping-cart/'
+  to: '/' | '/fr' | '/shopping-cart' | '/fr/shopping-cart'
+  id: '__root__' | '/' | '/fr/' | '/shopping-cart/' | '/fr/shopping-cart/'
   fileRoutesById: FileRoutesById
 }
 export interface RootRouteChildren {
   IndexRoute: typeof IndexRoute
+  FrIndexRoute: typeof FrIndexRoute
   ShoppingCartIndexRoute: typeof ShoppingCartIndexRoute
+  FrShoppingCartIndexRoute: typeof FrShoppingCartIndexRoute
 }
 
 declare module '@tanstack/react-router' {
@@ -58,6 +78,13 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof IndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/': {
+      id: '/fr/'
+      path: '/fr'
+      fullPath: '/fr/'
+      preLoaderRoute: typeof FrIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
     '/shopping-cart/': {
       id: '/shopping-cart/'
       path: '/shopping-cart'
@@ -65,12 +92,21 @@ declare module '@tanstack/react-router' {
       preLoaderRoute: typeof ShoppingCartIndexRouteImport
       parentRoute: typeof rootRouteImport
     }
+    '/fr/shopping-cart/': {
+      id: '/fr/shopping-cart/'
+      path: '/fr/shopping-cart'
+      fullPath: '/fr/shopping-cart/'
+      preLoaderRoute: typeof FrShoppingCartIndexRouteImport
+      parentRoute: typeof rootRouteImport
+    }
   }
 }
 
 const rootRouteChildren: RootRouteChildren = {
   IndexRoute: IndexRoute,
+  FrIndexRoute: FrIndexRoute,
   ShoppingCartIndexRoute: ShoppingCartIndexRoute,
+  FrShoppingCartIndexRoute: FrShoppingCartIndexRoute,
 }
 export const routeTree = rootRouteImport
   ._addFileChildren(rootRouteChildren)

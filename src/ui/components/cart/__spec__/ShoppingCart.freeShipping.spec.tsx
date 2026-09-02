@@ -12,8 +12,10 @@ import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeMod
 // (see the note in ShoppingCart.spec.tsx). Mocking the catalog with a cheap product here
 // exercises the banner the real one can't reach.
 vi.mock("@/data/products", () => ({
-  PRODUCT_CATALOG: {
-    all: () => [aProduct({ id: "trinket", name: "Cheap Trinket", price: 100 })],
+  ProductCatalog: {
+    forLocale: () => ({
+      all: () => [aProduct({ id: "trinket", name: "Cheap Trinket", price: 100 })],
+    }),
   },
 }));
 

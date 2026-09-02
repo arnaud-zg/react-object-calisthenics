@@ -85,9 +85,9 @@ describe("KnowledgeContent and Product", () => {
       expect(product.describeProfile(level)).toBe(`${level} tale`);
       expect(product.listProfileEffects(level)).toEqual([`${level} effect`]);
       expect(product.listProfileStats(level)).toEqual([
-        { label: "Power", value: power },
-        { label: "Durability", value: durability },
-        { label: "Mana Boost", value: manaBoost },
+        { key: "power", value: power },
+        { key: "durability", value: durability },
+        { key: "manaBoost", value: manaBoost },
       ]);
     },
   );

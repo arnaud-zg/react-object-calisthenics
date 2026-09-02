@@ -11,6 +11,8 @@ import type {
   KnowledgeProfile,
   Product,
 } from "@/domain/cart/value-objects/Product/Product";
+import type { StatKey } from "@/domain/cart/value-objects/Product/ProductDetails";
+import { useTranslations } from "@/i18n/LocaleContext";
 import { CardContent } from "@/ui/primitives/card";
 
 interface ProductCardContentProps {
@@ -18,12 +20,14 @@ interface ProductCardContentProps {
   profile: KnowledgeProfile;
 }
 
-const STAT_ICONS: Record<string, typeof Swords> = {
-  Power: Swords,
-  Durability: Shield,
+const STAT_ICONS: Record<StatKey, typeof Swords> = {
+  power: Swords,
+  durability: Shield,
+  manaBoost: Wand2,
 };
 
 export function ProductCardContent({ product, profile }: ProductCardContentProps) {
+  const t = useTranslations();
   const description = product.describeProfile(profile);
   const effects = product.listProfileEffects(profile);
   const stats = product.listProfileStats(profile);
@@ -39,18 +43,18 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
         <div className="flex flex-col gap-1 mb-2">
           <h4 className="font-semibold flex items-center gap-1.5">
             <BarChart3 className="h-4 w-4" aria-hidden="true" />
-            Stats:
+            {t.product.statsHeading}
           </h4>
           <ul className="text-sm list-none flex flex-col gap-1">
-            {stats.map(({ label, value }) => {
-              const StatIcon = STAT_ICONS[label] ?? Wand2;
+            {stats.map(({ key, value }) => {
+              const StatIcon = STAT_ICONS[key];
               return (
-                <li key={label} className="flex items-center gap-1.5">
+                <li key={key} className="flex items-center gap-1.5">
                   <StatIcon
                     className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
                     aria-hidden="true"
                   />
-                  <strong>{label}:</strong> {value}
+                  <strong>{t.product.stat[key]}:</strong> {value}
                 </li>
               );
             })}
@@ -61,7 +65,7 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
       <div className="flex flex-col gap-1">
         <h4 className="font-semibold flex items-center gap-1.5">
           <Sparkles className="h-4 w-4" aria-hidden="true" />
-          Effects:
+          {t.product.effectsHeading}
         </h4>
         <ul className="text-sm list-none flex flex-col gap-1">
           {effects.map((effect) => (

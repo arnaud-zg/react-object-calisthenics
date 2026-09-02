@@ -17,7 +17,7 @@ export default defineConfig({
         test: {
           name: "unit",
           environment: "node",
-          include: ["src/domain/**/*.spec.ts"],
+          include: ["src/domain/**/*.spec.ts", "src/i18n/**/*.spec.ts"],
         },
       },
       {
@@ -26,14 +26,22 @@ export default defineConfig({
           name: "integration",
           environment: "jsdom",
           setupFiles: ["./vitest.setup.ts"],
-          include: ["src/ui/**/*.spec.{ts,tsx}", "src/app/**/*.spec.{ts,tsx}"],
+          include: [
+            "src/ui/**/*.spec.{ts,tsx}",
+            "src/app/**/*.spec.{ts,tsx}",
+            "src/i18n/**/*.spec.tsx",
+          ],
         },
       },
     ],
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
-      include: ["src/domain/**/*.{ts,tsx}", "src/ui/**/*.{ts,tsx}"],
+      include: [
+        "src/domain/**/*.{ts,tsx}",
+        "src/ui/**/*.{ts,tsx}",
+        "src/i18n/**/*.{ts,tsx}",
+      ],
       exclude: ["src/**/__spec__/**", "src/**/*.spec.{ts,tsx}", "src/ui/primitives/**"],
       thresholds: {
         "src/domain/**": {

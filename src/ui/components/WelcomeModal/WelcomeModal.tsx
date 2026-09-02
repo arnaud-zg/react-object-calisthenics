@@ -1,8 +1,8 @@
 import { useForm } from "@tanstack/react-form";
 import { forwardRef, type Ref, useImperativeHandle, useState } from "react";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
-import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
 import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
+import { useTranslations } from "@/i18n/LocaleContext";
 import { Button } from "@/ui/primitives/button";
 import {
   Modal,
@@ -23,9 +23,10 @@ import type {
 export type { WelcomeModalHandle } from "./WelcomeModal.types";
 
 const WelcomeModalComponent = (
-  { title, description, actionLabel = "Continue" }: WelcomeModalProps,
+  { title, description, actionLabel }: WelcomeModalProps,
   ref: Ref<WelcomeModalHandle>,
 ) => {
+  const t = useTranslations();
   const [isOpen, setIsOpen] = useState(false);
   const { welcomeSurvey, saveSurvey } = WelcomeModal.useWelcomeModalSurvey();
 
@@ -67,7 +68,7 @@ const WelcomeModalComponent = (
                     WelcomeSurveyDataSchema.shape.skill.safeParse(value);
 
                   if (success) return;
-                  return "Please select a valid skill level.";
+                  return t.welcomeModal.invalidSkill;
                 },
               }}
             >
@@ -77,7 +78,7 @@ const WelcomeModalComponent = (
                     htmlFor={field.name}
                     className="mb-2 block text-sm font-medium text-foreground"
                   >
-                    Your knowledge level:
+                    {t.welcomeModal.fieldLabel}
                   </label>
                   <select
                     aria-invalid={!!field.state.meta.errors?.length}
@@ -97,12 +98,10 @@ const WelcomeModalComponent = (
                     }}
                     className="w-full cursor-pointer rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/50"
                   >
-                    <option value="">-- Select knowledge level --</option>
-                    <option value="beginner">{new Skill("beginner").label()}</option>
-                    <option value="intermediate">
-                      {new Skill("intermediate").label()}
-                    </option>
-                    <option value="expert">{new Skill("expert").label()}</option>
+                    <option value="">{t.welcomeModal.placeholderOption}</option>
+                    <option value="beginner">{t.skill.label.beginner}</option>
+                    <option value="intermediate">{t.skill.label.intermediate}</option>
+                    <option value="expert">{t.skill.label.expert}</option>
                   </select>
                   {field.state.meta.isTouched && field.state.meta.errors?.[0] && (
                     <p
@@ -126,7 +125,7 @@ const WelcomeModalComponent = (
                   className="w-full"
                   size="default"
                 >
-                  {actionLabel}
+                  {actionLabel ?? t.welcomeModal.continue}
                 </Button>
               )}
             </form.Subscribe>

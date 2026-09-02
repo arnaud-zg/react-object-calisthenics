@@ -3,7 +3,7 @@ import userEvent from "@testing-library/user-event";
 import type { RefObject } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
 import { welcomeSurveyStorage } from "@/config/storage.config";
-import { PRODUCT_CATALOG } from "@/data/products";
+import { ProductCatalog } from "@/data/products";
 import { ShoppingCart } from "@/ui/components/cart/ShoppingCart";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 
@@ -28,7 +28,7 @@ describe("ShoppingCart", () => {
   it("should list every product in the catalog", () => {
     renderShoppingCart();
 
-    for (const product of PRODUCT_CATALOG.all()) {
+    for (const product of ProductCatalog.forLocale("en").all()) {
       expect(screen.getByText(product.displayName())).toBeInTheDocument();
     }
   });
@@ -42,7 +42,7 @@ describe("ShoppingCart", () => {
   it("should add a product to the cart and update the subtotal", async () => {
     const user = userEvent.setup();
     renderShoppingCart();
-    const [firstProduct] = PRODUCT_CATALOG.all();
+    const [firstProduct] = ProductCatalog.forLocale("en").all();
 
     await user.click(addToCartButtons()[0] as HTMLElement);
 
@@ -59,7 +59,7 @@ describe("ShoppingCart", () => {
   it("should increase and decrease the quantity of a cart item", async () => {
     const user = userEvent.setup();
     renderShoppingCart();
-    const [firstProduct] = PRODUCT_CATALOG.all();
+    const [firstProduct] = ProductCatalog.forLocale("en").all();
     const productName = firstProduct?.displayName() ?? "";
 
     await user.click(addToCartButtons()[0] as HTMLElement);
@@ -81,7 +81,7 @@ describe("ShoppingCart", () => {
   it("should remove a cart item", async () => {
     const user = userEvent.setup();
     renderShoppingCart();
-    const [firstProduct] = PRODUCT_CATALOG.all();
+    const [firstProduct] = ProductCatalog.forLocale("en").all();
     const productName = firstProduct?.displayName() ?? "";
 
     await user.click(addToCartButtons()[0] as HTMLElement);

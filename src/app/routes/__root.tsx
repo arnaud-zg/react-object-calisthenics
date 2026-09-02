@@ -1,7 +1,8 @@
-import { createRootRoute, Outlet } from "@tanstack/react-router";
+import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { MotionConfig } from "motion/react";
 import { lazy, Suspense } from "react";
 import { SITE_CONFIG } from "@/config/site.config";
+import { LocaleProvider, useTranslations } from "@/i18n/LocaleContext";
 import Header from "@/ui/components/Header";
 
 const TanStackRouterDevtools = import.meta.env.DEV
@@ -12,15 +13,17 @@ const TanStackRouterDevtools = import.meta.env.DEV
     )
   : () => null;
 
-export const Route = createRootRoute({
-  component: () => (
+function RootLayout() {
+  const t = useTranslations();
+
+  return (
     <MotionConfig reducedMotion="user">
       <div className="flex min-h-screen flex-col bg-background text-foreground">
         <a
           href="#main-content"
           className="sr-only focus:not-sr-only focus:fixed focus:left-4 focus:top-4 focus:z-[100] focus:rounded-md focus:bg-primary focus:px-4 focus:py-2 focus:text-primary-foreground focus:shadow-lg"
         >
-          Skip to main content
+          {t.common.skipToMainContent}
         </a>
         <Header />
         <div className="flex flex-1 flex-col">
@@ -28,7 +31,7 @@ export const Route = createRootRoute({
         </div>
         <footer className="border-t bg-muted/30 px-4 py-6 text-center text-sm text-muted-foreground sm:px-10">
           <p>
-            A demo by{" "}
+            {t.common.footerBefore}{" "}
             <a
               href={SITE_CONFIG.author.githubUrl}
               target="_blank"
@@ -37,7 +40,7 @@ export const Route = createRootRoute({
             >
               {SITE_CONFIG.author.name}
             </a>
-            , illustrating Object Calisthenics in a React front end.
+            {t.common.footerAfter}
           </p>
         </footer>
         {import.meta.env.DEV && (
@@ -47,5 +50,18 @@ export const Route = createRootRoute({
         )}
       </div>
     </MotionConfig>
-  ),
+  );
+}
+
+export const Route = createRootRoute({
+  component: () => {
+    const { pathname } = useLocation();
+    const locale = pathname === "/fr" || pathname.startsWith("/fr/") ? "fr" : "en";
+
+    return (
+      <LocaleProvider locale={locale}>
+        <RootLayout />
+      </LocaleProvider>
+    );
+  },
 });
