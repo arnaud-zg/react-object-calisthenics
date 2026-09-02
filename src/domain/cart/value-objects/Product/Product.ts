@@ -89,6 +89,7 @@ export class Product {
     private readonly _name: ProductName,
     private readonly _price: Money,
     private readonly _imageUrl: ImageUrl,
+    private readonly _iconUrl: ImageUrl,
     private readonly _knowledge: KnowledgeContent,
     private readonly _extraResources: ExtraResources,
   ) {}
@@ -107,6 +108,10 @@ export class Product {
 
   displayImage(): string {
     return this._imageUrl.toValue();
+  }
+
+  displayIcon(): string {
+    return this._iconUrl.toValue();
   }
 
   describeProfile(level: KnowledgeProfile): string {

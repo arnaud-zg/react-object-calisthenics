@@ -61,6 +61,7 @@ describe("KnowledgeContent and Product", () => {
     new ProductName("Excalibur"),
     new Money(500),
     new ImageUrl("http://image.link"),
+    new ImageUrl("http://icon.link"),
     knowledge,
     new ExtraResources("https://lore.link/excalibur", "https://video.link/excalibur"),
   );
@@ -70,6 +71,7 @@ describe("KnowledgeContent and Product", () => {
     expect(product.displayName()).toBe("Excalibur");
     expect(product.displayPrice().toAmount()).toBe(500);
     expect(product.displayImage()).toBe("http://image.link");
+    expect(product.displayIcon()).toBe("http://icon.link");
   });
 
   it("should return the same lore link and video URL regardless of knowledge level", () => {
