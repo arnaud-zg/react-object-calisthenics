@@ -61,7 +61,7 @@ function ModalContent({
         {showCloseButton && (
           <DialogPrimitive.Close
             data-slot="modal-close"
-            className="absolute right-4 top-4 rounded-xs opacity-70 transition-opacity cursor-pointer hover:opacity-100 focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
+            className="absolute right-2 top-2 flex h-11 w-11 items-center justify-center rounded-full opacity-70 transition-opacity cursor-pointer hover:opacity-100 hover:bg-accent focus:outline-hidden focus:ring-2 focus:ring-ring focus:ring-offset-2 focus:ring-offset-background disabled:pointer-events-none [&_svg]:pointer-events-none [&_svg]:shrink-0 [&_svg:not([class*='size-'])]:size-4"
           >
             <XIcon />
             <span className="sr-only">Close</span>

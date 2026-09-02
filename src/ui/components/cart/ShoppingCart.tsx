@@ -9,6 +9,7 @@ import { PRODUCT_CATALOG } from "@/data/products";
 import { Cart } from "@/domain/cart/Cart";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
+import { CartSummaryRow } from "@/ui/components/cart/CartSummaryRow";
 import { ShoppingCartItem } from "@/ui/components/cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
@@ -30,6 +31,8 @@ interface ShoppingCartProps {
   welcomeModalHandle: RefObject<WelcomeModalHandle>;
 }
 
+const EAGER_IMAGE_COUNT = 3;
+
 export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
   const [showCart, setShowCart] = useState(false);
   const cart = useImmutableInstance(new Cart());
@@ -38,8 +41,8 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
 
   return (
     <div className="mx-auto w-full max-w-7xl">
-      <div className="flex flex-col gap-4 mb-8 sm:flex-row sm:items-center sm:justify-between">
-        <h1 className="text-3xl font-bold text-gray-900">Azeroth's Finest Wares</h1>
+      <div className="mb-8 flex flex-col gap-4 sm:flex-row sm:items-center sm:justify-between">
+        <h1 className="text-3xl font-bold text-foreground">Azeroth's Finest Wares</h1>
         <Button
           size="default"
           onClick={() => welcomeModalHandle.current.open()}
@@ -50,11 +53,11 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
         </Button>
       </div>
 
-      <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+      <div className="grid grid-cols-1 gap-8 lg:grid-cols-3">
         {/* Product List */}
         <div className="lg:col-span-2">
-          <div className="flex justify-between items-center mb-6 gap-2">
-            <h2 className="text-2xl font-semibold text-gray-900">Mystical Inventory</h2>
+          <div className="mb-6 flex items-center justify-between gap-2">
+            <h2 className="text-2xl font-semibold text-foreground">Mystical Inventory</h2>
 
             <Button
               onClick={() => {
@@ -67,35 +70,43 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                   behavior: prefersReducedMotion ? "auto" : "smooth",
                 });
               }}
-              className="lg:hidden relative"
+              className="relative lg:hidden"
               variant="outline"
+              aria-expanded={showCart}
+              aria-controls="cart"
             >
-              <ShoppingCartIcon className="h-4 w-4 mr-2" aria-hidden="true" />
+              <ShoppingCartIcon className="mr-2 h-4 w-4" aria-hidden="true" />
               Cart <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
             </Button>
           </div>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-            {PRODUCT_CATALOG.all().map((product) => (
-              <ProductCard
-                key={product.displayId()}
-                product={product}
-                onAddToCart={cart.addItem}
-                profile={selectedProfile}
-              />
+          <ul className="grid grid-cols-1 gap-4 sm:grid-cols-2 xl:grid-cols-3">
+            {PRODUCT_CATALOG.all().map((product, index) => (
+              <li key={product.displayId()}>
+                <ProductCard
+                  product={product}
+                  onAddToCart={cart.addItem}
+                  profile={selectedProfile}
+                  priorityImage={index < EAGER_IMAGE_COUNT}
+                />
+              </li>
             ))}
-          </div>
+          </ul>
         </div>
 
         {/* Cart */}
-        <div
-          className={`lg:col-span-1 mt-14 ${showCart ? "block" : "hidden lg:block"}`}
+        <aside
+          className={`lg:col-span-1 lg:self-start ${showCart ? "block" : "hidden lg:block"}`}
           id="cart"
+          aria-labelledby="cart-heading"
         >
-          <Card className="bg-card border-0 shadow-sm sticky top-20">
-            <CardHeader className="pb-0 pt-4 px-4">
-              <div className="flex justify-between items-center">
-                <h2 className="text-xl font-semibold text-card-foreground">
+          <Card className="sticky top-20 flex max-h-[calc(100vh-6rem)] flex-col border-0 bg-card shadow-sm">
+            <CardHeader className="shrink-0 px-4 pb-0 pt-4">
+              <div className="flex items-center justify-between">
+                <h2
+                  id="cart-heading"
+                  className="text-xl font-semibold text-card-foreground"
+                >
                   Your Inventory
                 </h2>
                 <div className="flex justify-center">
@@ -115,10 +126,10 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               </div>
             </CardHeader>
 
-            <CardContent className="pt-4 px-4">
+            <CardContent className="overflow-y-auto px-4 pt-4">
               {cart.isEmpty() ? (
                 <motion.div
-                  className="text-center py-12"
+                  className="py-12 text-center"
                   initial={{ opacity: 0 }}
                   animate={{ opacity: 1 }}
                   transition={{ duration: 0.7, ease: [0.4, 0.0, 0.2, 1] }}
@@ -132,7 +143,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                     }}
                   >
                     <ShoppingCartIcon
-                      className="h-12 w-12 mx-auto text-muted-foreground mb-4"
+                      className="mx-auto mb-4 h-12 w-12 text-muted-foreground"
                       aria-hidden="true"
                     />
                   </motion.div>
@@ -147,148 +158,62 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                 </motion.div>
               ) : (
                 <>
-                  <div className="relative">
+                  <motion.ul className="space-y-3" layout>
                     <AnimatePresence initial={false}>
-                      <motion.div
-                        className="space-y-3"
-                        layout="size"
-                        key="cart-items-container"
-                        transition={{
-                          layout: { duration: 0.5, ease: [0.4, 0.0, 0.2, 1] },
-                          height: { duration: 0.5, ease: [0.4, 0.0, 0.2, 1] },
-                        }}
-                      >
-                        {cart.listItems().map((item) => (
-                          <ShoppingCartItem
-                            key={item.id()}
-                            item={item}
-                            onIncreaseQuantity={() => cart.increaseQuantity(item.id())}
-                            onDecreaseQuantity={() => cart.decreaseQuantity(item.id())}
-                            onRemoveItem={() => cart.removeItem(item.id())}
-                          />
-                        ))}
-                      </motion.div>
+                      {cart.listItems().map((item) => (
+                        <ShoppingCartItem
+                          key={item.id()}
+                          item={item}
+                          onIncreaseQuantity={() => cart.increaseQuantity(item.id())}
+                          onDecreaseQuantity={() => cart.decreaseQuantity(item.id())}
+                          onRemoveItem={() => cart.removeItem(item.id())}
+                        />
+                      ))}
                     </AnimatePresence>
-                  </div>
+                  </motion.ul>
 
                   <Separator className="my-4" />
 
-                  <motion.div
-                    className="space-y-2"
-                    layout={false}
-                    transition={{
-                      duration: 0.5,
-                      ease: [0.4, 0.0, 0.2, 1],
-                    }}
-                  >
-                    <motion.div
-                      className="flex justify-between items-center"
-                      layout={false}
-                      key="subtotal"
-                    >
-                      <span className="text-muted-foreground text-sm">Subtotal:</span>
-                      <div className="relative h-6 flex items-center justify-end min-w-[80px] whitespace-nowrap">
-                        <motion.span
-                          className="font-medium absolute right-0 text-sm"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.4, 0.0, 0.2, 1],
-                          }}
-                        >
-                          {goldSilverCopperFormatter.format(cart.calculateSubtotal())}
-                        </motion.span>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex justify-between items-center"
-                      layout={false}
-                      key="shipping"
-                    >
-                      <span className="text-muted-foreground text-sm">Shipping:</span>
-                      <div className="relative h-6 flex items-center justify-end min-w-[80px]">
-                        <motion.span
-                          className="absolute right-0 flex items-center"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.4, 0.0, 0.2, 1],
-                          }}
-                        >
-                          {cart.calculateShipping().isZero() ? (
-                            <Badge
-                              variant="outline"
-                              className="text-green-600 bg-green-50 text-xs py-0 h-5"
-                            >
-                              Free
-                            </Badge>
-                          ) : (
-                            <span className="font-medium text-sm whitespace-nowrap">
-                              {goldSilverCopperFormatter.format(cart.calculateShipping())}
-                            </span>
-                          )}
-                        </motion.span>
-                      </div>
-                    </motion.div>
-
-                    <motion.div
-                      className="flex justify-between items-center"
-                      layout={false}
-                      key="tax"
-                    >
-                      <span className="text-muted-foreground text-sm">Tax:</span>
-                      <div className="relative h-6 flex items-center justify-end min-w-[80px] whitespace-nowrap">
-                        <motion.span
-                          className="font-medium absolute right-0 text-sm"
-                          initial={{ opacity: 0 }}
-                          animate={{ opacity: 1 }}
-                          transition={{
-                            duration: 0.3,
-                            ease: [0.4, 0.0, 0.2, 1],
-                          }}
-                        >
-                          {goldSilverCopperFormatter.format(cart.calculateTax())}
-                        </motion.span>
-                      </div>
-                    </motion.div>
-                  </motion.div>
+                  <div className="space-y-2">
+                    <CartSummaryRow
+                      label="Subtotal:"
+                      value={goldSilverCopperFormatter.format(cart.calculateSubtotal())}
+                    />
+                    <CartSummaryRow
+                      label="Shipping:"
+                      value={
+                        cart.calculateShipping().isZero() ? (
+                          <Badge
+                            variant="outline"
+                            className="h-5 border-transparent bg-green-100 py-0 text-xs text-green-800 dark:bg-green-950 dark:text-green-300"
+                          >
+                            Free
+                          </Badge>
+                        ) : (
+                          goldSilverCopperFormatter.format(cart.calculateShipping())
+                        )
+                      }
+                    />
+                    <CartSummaryRow
+                      label="Tax:"
+                      value={goldSilverCopperFormatter.format(cart.calculateTax())}
+                    />
+                  </div>
 
                   <Separator className="my-3" />
 
-                  <motion.div
-                    className="flex justify-between items-center py-1"
-                    layout={false}
-                    key="total"
-                  >
-                    <span className="font-semibold">Total:</span>
-                    <div className="flex-1 relative h-6 flex items-center justify-end">
-                      <motion.span
-                        className="font-bold absolute right-0"
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{
-                          duration: 0.3,
-                          ease: [0.4, 0.0, 0.2, 1],
-                        }}
-                      >
-                        {goldSilverCopperFormatter.format(cart.calculateTotal())}
-                      </motion.span>
-                    </div>
-                  </motion.div>
+                  <CartSummaryRow
+                    label="Total:"
+                    value={goldSilverCopperFormatter.format(cart.calculateTotal())}
+                    emphasized
+                    live
+                  />
 
                   <AnimatePresence>
                     {!cart.remainingForFreeShipping().isZero() && (
                       <motion.div
-                        className="bg-gray-50 border border-gray-200 rounded-md p-2 text-xs text-gray-700 mt-3"
-                        initial={{
-                          opacity: 0,
-                          height: 0,
-                          padding: 0,
-                          margin: 0,
-                        }}
+                        className="mt-3 rounded-md border border-border bg-muted p-2 text-xs text-muted-foreground"
+                        initial={{ opacity: 0, height: 0, padding: 0, margin: 0 }}
                         animate={{
                           opacity: 1,
                           height: "auto",
@@ -307,20 +232,15 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                           opacity: { duration: 0.4 },
                           height: { duration: 0.5, ease: [0.4, 0.0, 0.2, 1] },
                         }}
-                        key="shipping-notification"
                         layout
                       >
-                        <motion.span
-                          initial={{ opacity: 0.8 }}
-                          animate={{ opacity: 1 }}
-                          transition={{ duration: 0.3 }}
-                        >
+                        <span>
                           Add{" "}
                           {goldSilverCopperFormatter.format(
                             cart.remainingForFreeShipping(),
                           )}{" "}
                           more to earn free delivery by griffin!
-                        </motion.span>
+                        </span>
                       </motion.div>
                     )}
                   </AnimatePresence>
@@ -328,7 +248,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               )}
             </CardContent>
 
-            <CardFooter className="pt-2 pb-4 px-4">
+            <CardFooter className="shrink-0 px-4 pb-4 pt-2">
               <Modal>
                 <ModalTrigger className="flex-1" asChild>
                   <Button
@@ -391,7 +311,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               </Modal>
             </CardFooter>
           </Card>
-        </div>
+        </aside>
       </div>
     </div>
   );

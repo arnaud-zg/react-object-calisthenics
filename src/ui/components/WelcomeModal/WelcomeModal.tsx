@@ -75,7 +75,7 @@ const WelcomeModalComponent = (
                 <>
                   <label
                     htmlFor={field.name}
-                    className="mb-2 block text-sm font-medium text-gray-700"
+                    className="mb-2 block text-sm font-medium text-foreground"
                   >
                     Your knowledge level:
                   </label>
@@ -83,7 +83,7 @@ const WelcomeModalComponent = (
                     aria-invalid={!!field.state.meta.errors?.length}
                     aria-describedby={`${field.name}-error`}
                     id={field.name}
-                    value={field.state.value}
+                    value={field.state.value ?? ""}
                     onChange={(e) => {
                       const { data: safeValue } =
                         WelcomeSurveyDataSchema.shape.skill.safeParse(e.target.value);
@@ -105,7 +105,10 @@ const WelcomeModalComponent = (
                     <option value="expert">{new Skill("expert").label()}</option>
                   </select>
                   {field.state.meta.isTouched && field.state.meta.errors?.[0] && (
-                    <p id={`${field.name}-error`} className="mt-1 text-sm text-red-500">
+                    <p
+                      id={`${field.name}-error`}
+                      className="mt-1 text-sm text-destructive"
+                    >
                       {field.state.meta.errors[0]}
                     </p>
                   )}

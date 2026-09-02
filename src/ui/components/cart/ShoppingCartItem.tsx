@@ -21,7 +21,7 @@ export function ShoppingCartItem({
   onRemoveItem,
 }: ShoppingCartItemProps) {
   return (
-    <motion.div
+    <motion.li
       layout
       initial={{ opacity: 0, height: 0 }}
       animate={{ opacity: 1, height: "auto" }}
@@ -41,20 +41,22 @@ export function ShoppingCartItem({
     >
       <Card className="bg-card text-card-foreground border rounded-md p-4 shadow-sm hover:shadow-md transition-shadow">
         <div className="flex gap-4">
-          <div className="relative w-16 h-16 rounded-md bg-gray-100 overflow-hidden flex-shrink-0">
+          <div className="relative w-16 h-16 rounded-md bg-muted overflow-hidden flex-shrink-0">
             <img
               src={item.image()}
-              alt={item.name()}
+              // Decorative: the item name right next to it already conveys the same
+              // information.
+              alt=""
               className="absolute inset-0 w-full h-full object-cover"
             />
           </div>
 
           <div className="flex flex-1 flex-col gap-2 min-w-0">
-            <h4 className="font-medium text-gray-900 truncate">{item.name()}</h4>
+            <h3 className="font-medium text-foreground truncate">{item.name()}</h3>
 
             <div className="flex flex-row self-end">
               <div className="flex flex-col items-end gap-1">
-                <div className="text-xs text-gray-500 font-medium mr-2">
+                <div className="text-xs text-muted-foreground font-medium mr-2">
                   {goldSilverCopperFormatter.format(item.totalPrice())}
                 </div>
 
@@ -63,7 +65,7 @@ export function ShoppingCartItem({
                     onClick={onDecreaseQuantity}
                     variant="ghost"
                     size="icon"
-                    className="h-9 w-9 p-0 rounded-r-none hover:bg-gray-100"
+                    className="h-9 w-9 p-0 rounded-r-none hover:bg-accent"
                     aria-label={`Decrease quantity of ${item.name()}`}
                     disabled={item.quantity().isAtMost(CartItem.MIN_QUANTITY)}
                     data-umami-event={ANALYTICS_CONFIG.events.decreaseQuantity}
@@ -86,7 +88,7 @@ export function ShoppingCartItem({
                     onClick={onIncreaseQuantity}
                     variant="ghost"
                     size="icon"
-                    className="h-9 w-9 p-0 rounded-l-none hover:bg-gray-100"
+                    className="h-9 w-9 p-0 rounded-l-none hover:bg-accent"
                     aria-label={`Increase quantity of ${item.name()}`}
                     disabled={item.quantity().isAtLeast(CartItem.MAX_QUANTITY)}
                     data-umami-event={ANALYTICS_CONFIG.events.increaseQuantity}
@@ -100,7 +102,7 @@ export function ShoppingCartItem({
                     onClick={onRemoveItem}
                     variant="ghost"
                     size="icon"
-                    className="h-9 w-9 text-gray-400 hover:text-red-600 hover:bg-red-50 transition-colors"
+                    className="h-9 w-9 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
                     aria-label={`Remove ${item.name()} from cart`}
                     data-umami-event={ANALYTICS_CONFIG.events.removeItem}
                   >
@@ -112,6 +114,6 @@ export function ShoppingCartItem({
           </div>
         </div>
       </Card>
-    </motion.div>
+    </motion.li>
   );
 }

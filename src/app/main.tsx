@@ -1,6 +1,7 @@
 import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen.ts";
@@ -45,7 +46,12 @@ if (rootElement && !rootElement.innerHTML) {
   );
 }
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+// Forward Core Web Vitals to Umami. window.umami is undefined until the analytics
+// script has loaded, so this is a safe no-op if it never does.
+reportWebVitals((metric) => {
+  window.umami?.track(ANALYTICS_CONFIG.events.webVital, {
+    name: metric.name,
+    value: Math.round(metric.name === "CLS" ? metric.value * 1000 : metric.value),
+    rating: metric.rating,
+  });
+});

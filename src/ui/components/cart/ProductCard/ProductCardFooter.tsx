@@ -28,6 +28,7 @@ export function ProductCardFooter({
 }: ProductCardFooterProps) {
   const loreLink = product.getLoreLink();
   const videoUrl = product.getVideoUrl();
+  const productName = product.displayName();
 
   return (
     <CardFooter className="p-4 pt-0 flex flex-col gap-2">
@@ -59,37 +60,47 @@ export function ProductCardFooter({
           </Button>
         </ModalTrigger>
 
-        <ModalContent className="rounded-2xl shadow-lg">
+        <ModalContent className="rounded-2xl shadow-lg sm:max-w-2xl">
           <ModalHeader>
             <ModalTitle className="text-center text-xl font-semibold">
-              {product.displayName()}
+              {productName}
             </ModalTitle>
-            <ModalDescription className="mt-2 text-center text-base">
-              <iframe
-                className="w-full min-h-[315px]"
-                src={`${videoUrl}?autoplay=1`}
-                title={product.displayName()}
-                allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
-                referrerPolicy="strict-origin-when-cross-origin"
-                allowFullScreen
-              />
+            <ModalDescription className="text-center">
+              Lore video for {productName}.
             </ModalDescription>
           </ModalHeader>
+          <div className="aspect-video w-full overflow-hidden rounded-lg">
+            <iframe
+              className="h-full w-full"
+              src={videoUrl}
+              title={`${productName} lore video`}
+              allow="accelerometer; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share"
+              referrerPolicy="strict-origin-when-cross-origin"
+              allowFullScreen
+            />
+          </div>
         </ModalContent>
       </Modal>
 
       {profile !== "beginner" && (
         <Button
-          onClick={() => {
-            window.open(loreLink, "_blank");
-            window.umami?.track(ANALYTICS_CONFIG.events.readLore, {
-              productId: product.displayId(),
-            });
-          }}
+          asChild
           className="w-full flex items-center justify-center gap-2"
           variant="link"
         >
-          <BookOpenText className="h-4 w-4" /> Read Lore
+          <a
+            href={loreLink}
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label={`Read the lore of ${productName} (opens in a new tab)`}
+            onClick={() => {
+              window.umami?.track(ANALYTICS_CONFIG.events.readLore, {
+                productId: product.displayId(),
+              });
+            }}
+          >
+            <BookOpenText className="h-4 w-4" /> Read Lore
+          </a>
         </Button>
       )}
     </CardFooter>

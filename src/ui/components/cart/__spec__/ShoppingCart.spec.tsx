@@ -1,4 +1,4 @@
-import { render, screen } from "@testing-library/react";
+import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import type { RefObject } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
@@ -47,8 +47,12 @@ describe("ShoppingCart", () => {
     await user.click(addToCartButtons()[0] as HTMLElement);
 
     expect(screen.queryByText("Your inventory is empty")).not.toBeInTheDocument();
+    const cartPanel = screen.getByRole("complementary");
     expect(
-      screen.getByRole("heading", { level: 4, name: firstProduct?.displayName() }),
+      within(cartPanel).getByRole("heading", {
+        level: 3,
+        name: firstProduct?.displayName(),
+      }),
     ).toBeInTheDocument();
   });
 
