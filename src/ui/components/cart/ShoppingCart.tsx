@@ -186,9 +186,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                       value={goldSilverCopperFormatter.format(cart.calculateSubtotal())}
                     />
                     <CartSummaryRow
-                      label={t.shop.shipping}
+                      label={t.shop.courierFee}
                       value={
-                        cart.calculateShipping().isZero() ? (
+                        cart.calculateCourierFee().isZero() ? (
                           <Badge
                             variant="outline"
                             className="h-5 border-transparent bg-green-100 py-0 text-xs text-green-800 dark:bg-green-950 dark:text-green-300"
@@ -196,7 +196,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                             {t.shop.free}
                           </Badge>
                         ) : (
-                          goldSilverCopperFormatter.format(cart.calculateShipping())
+                          goldSilverCopperFormatter.format(cart.calculateCourierFee())
                         )
                       }
                     />
@@ -216,7 +216,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                   />
 
                   <AnimatePresence>
-                    {!cart.remainingForFreeShipping().isZero() && (
+                    {!cart.remainingForFreeCourier().isZero() && (
                       <motion.div
                         className="mt-3 rounded-md border border-border bg-muted p-2 text-xs text-muted-foreground"
                         initial={{ opacity: 0, height: 0, padding: 0, margin: 0 }}
@@ -241,9 +241,9 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                         layout
                       >
                         <span>
-                          {t.shop.remainingForFreeShipping(
+                          {t.shop.remainingForFreeCourier(
                             goldSilverCopperFormatter.format(
-                              cart.remainingForFreeShipping(),
+                              cart.remainingForFreeCourier(),
                             ),
                           )}
                         </span>

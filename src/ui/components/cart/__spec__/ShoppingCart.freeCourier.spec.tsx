@@ -7,7 +7,7 @@ import { aProduct } from "@/domain/cart/__spec__/productFixtures";
 import { ShoppingCart } from "@/ui/components/cart/ShoppingCart";
 import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 
-// COMMERCE_CONFIG.freeShippingThreshold is 300, and every real catalog product costs far
+// COMMERCE_CONFIG.freeCourierThreshold is 300, and every real catalog product costs far
 // more than that, so the "how much is left" banner can never appear against real data
 // (see the note in ShoppingCart.spec.tsx). Mocking the catalog with a cheap product here
 // exercises the banner the real one can't reach.
@@ -26,12 +26,12 @@ function renderShoppingCart() {
   return render(<ShoppingCart welcomeModalHandle={welcomeModalHandle} />);
 }
 
-describe("ShoppingCart free shipping banner", () => {
+describe("ShoppingCart free courier banner", () => {
   beforeEach(() => {
     welcomeSurveyStorage.saveSurvey({ skill: "beginner" });
   });
 
-  it("should show how much is left to reach free shipping while under the threshold", async () => {
+  it("should show how much is left to reach free courier delivery while under the threshold", async () => {
     const user = userEvent.setup();
     renderShoppingCart();
 

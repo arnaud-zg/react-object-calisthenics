@@ -43,7 +43,7 @@ flowchart TD
   `@testing-library/react` and exercises real user flows: add to cart, change quantity,
   the welcome survey save/restore. Framework wiring (React, Radix) is real; only the
   storage boundary gets mocked when a scenario the real data can't reach needs it (see
-  `ShoppingCart.freeShipping.spec.tsx`).
+  `ShoppingCart.freeCourier.spec.tsx`).
 - **End-to-end** (`pnpm test:e2e`, Playwright against a built `vite preview`): two smoke
   tests, home to shop and add-to-cart to checkout. Enough to catch a broken build, not a
   replacement for the layers below.
@@ -64,16 +64,16 @@ flowchart TD
 
 The rules this repo tries to hold itself to, and where to see them:
 
-1. One level of indentation per method — early returns throughout `src/domain`
-2. Max ~50 lines per class — `Cart`, `CartItem`, `CartItems`
-3. Wrap primitives — `Money`, `Quantity`, `ProductId`, `ProductName`
-4. First-class collections — `CartItems` wraps the cart's `CartItem[]`
-5. One dot per line (Law of Demeter) — `Cart.increaseQuantity(itemId)` instead of pulling
+1. One level of indentation per method: early returns throughout `src/domain`
+2. Max ~50 lines per class: `Cart`, `CartItem`, `CartItems`
+3. Wrap primitives: `Money`, `Quantity`, `ProductId`, `ProductName`
+4. First-class collections: `CartItems` wraps the cart's `CartItem[]`
+5. One dot per line (Law of Demeter): `Cart.increaseQuantity(itemId)` instead of pulling
    a `Product` back out of a `CartItem` to hand it to `Cart`
-6. No getters/setters unless necessary — `CartItem.id()`/`name()`/`quantity()` are
+6. No getters/setters unless necessary: `CartItem.id()`/`name()`/`quantity()` are
    necessary, `getProduct()` wasn't and is gone
-7. No else — grep the repo, there isn't one
-8. Descriptive names, single responsibility, one thing per method — the rest of it
+7. No else: grep the repo, there isn't one
+8. Descriptive names, single responsibility, one thing per method: the rest of it
 
 None of this is free: it costs more classes and more indirection than the equivalent
 procedural code. The trade is code whose pieces can be understood, tested, and changed

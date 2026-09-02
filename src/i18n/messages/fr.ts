@@ -49,11 +49,11 @@ export const fr: Messages = {
     closeCart: "Fermer le panier",
     emptyInventory: "Votre inventaire est vide",
     subtotal: "Sous-total :",
-    shipping: "Livraison :",
+    courierFee: "Frais de coursier :",
     tax: "Taxe :",
     total: "Total :",
     free: "Gratuite",
-    remainingForFreeShipping: (amount: string) =>
+    remainingForFreeCourier: (amount: string) =>
       `Ajoutez ${amount} de plus pour obtenir la livraison gratuite par griffon !`,
     completePurchase: "Finaliser l'achat",
     endOfDemoTitle: "🎉 Fin de la démo",

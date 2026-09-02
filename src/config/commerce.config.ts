@@ -1,11 +1,11 @@
 /**
- * The shop's business rules, in one place. ShippingPolicy, TaxPolicy, CartItem, and
+ * The shop's business rules, in one place. CourierPolicy, TaxPolicy, CartItem, and
  * GoldSilverCopperFormatter all read their numbers from here instead of hardcoding them.
  */
 export const COMMERCE_CONFIG = {
   taxRate: 0.07,
-  freeShippingThreshold: 300,
-  shippingCost: 25,
+  freeCourierThreshold: 300,
+  courierFee: 25,
   quantityPerItem: {
     min: 1,
     max: 10,

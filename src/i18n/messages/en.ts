@@ -44,11 +44,11 @@ export interface Messages {
     closeCart: string;
     emptyInventory: string;
     subtotal: string;
-    shipping: string;
+    courierFee: string;
     tax: string;
     total: string;
     free: string;
-    remainingForFreeShipping: (amount: string) => string;
+    remainingForFreeCourier: (amount: string) => string;
     completePurchase: string;
     endOfDemoTitle: string;
     endOfDemoDescriptionBefore: string;
@@ -138,11 +138,11 @@ export const en: Messages = {
     closeCart: "Close cart",
     emptyInventory: "Your inventory is empty",
     subtotal: "Subtotal:",
-    shipping: "Shipping:",
+    courierFee: "Courier Fee:",
     tax: "Tax:",
     total: "Total:",
     free: "Free",
-    remainingForFreeShipping: (amount: string) =>
+    remainingForFreeCourier: (amount: string) =>
       `Add ${amount} more to earn free delivery by griffin!`,
     completePurchase: "Complete Purchase",
     endOfDemoTitle: "🎉 End of the Demo",

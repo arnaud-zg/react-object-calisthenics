@@ -106,7 +106,7 @@ Supports [TanStack Store](https://tanstack.com/store/latest) for reactive state.
 
 ## Notes
 
-- Immutable **Cart** with **Value Objects** (`Money`, `Quantity`, `Product`, `ShippingPolicy`, `TaxPolicy`, `GoldSilverCopperFormatter`)
+- Immutable **Cart** with **Value Objects** (`Money`, `Quantity`, `Product`, `CourierPolicy`, `TaxPolicy`, `GoldSilverCopperFormatter`)
 - Immutable **Welcome Survey** with **Value Objects** (`Skill`)
 - Object Calisthenics applied: no getters/setters, wrap primitives, first-class collections, single-level methods
 - Reactive UI with Framer Motion for cart animations

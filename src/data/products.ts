@@ -108,6 +108,104 @@ const PRODUCT_STRUCTURES: ProductStructure[] = [
       expert: { power: 610, durability: 300, manaBoost: 40 },
     },
   },
+  {
+    id: "frostmourne",
+    name: "Frostmourne",
+    priceInCopper: 340000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/f/fd/Inv_sword_92.png/revision/latest?cb=20070528023922",
+    loreLink: "https://wowpedia.fandom.com/wiki/Frostmourne",
+    videoUrl: "https://www.youtube.com/embed/1NtqX6MBdwI",
+    stats: {
+      beginner: { power: 210, durability: 90, manaBoost: 0 },
+      intermediate: { power: 380, durability: 170, manaBoost: 10 },
+      expert: { power: 650, durability: 280, manaBoost: 20 },
+    },
+  },
+  {
+    id: "shadowmourne",
+    name: "Shadowmourne",
+    priceInCopper: 355000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/6/67/Inv_axe_113.png/revision/latest?cb=20091028204515",
+    loreLink: "https://wowpedia.fandom.com/wiki/Shadowmourne",
+    videoUrl: "https://www.youtube.com/embed/IUPHwjj1trc",
+    stats: {
+      beginner: { power: 230, durability: 75, manaBoost: 0 },
+      intermediate: { power: 410, durability: 150, manaBoost: 0 },
+      expert: { power: 720, durability: 260, manaBoost: 10 },
+    },
+  },
+  {
+    id: "atiesh",
+    name: "Atiesh, Greatstaff of the Guardian",
+    priceInCopper: 250000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/a/a3/Inv_staff_medivh.png/revision/latest?cb=20060923023240",
+    loreLink: "https://wowpedia.fandom.com/wiki/Atiesh,_Greatstaff_of_the_Guardian",
+    videoUrl: "https://www.youtube.com/embed/tQYnMpuqiz0",
+    stats: {
+      beginner: { power: 60, durability: 40, manaBoost: 200 },
+      intermediate: { power: 120, durability: 80, manaBoost: 380 },
+      expert: { power: 200, durability: 130, manaBoost: 620 },
+    },
+  },
+  {
+    id: "warglaivesofazzinoth",
+    name: "Warglaives of Azzinoth",
+    priceInCopper: 300000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/e/eb/Inv_weapon_glave_01.png/revision/latest?cb=20070528024112",
+    loreLink: "https://wowpedia.fandom.com/wiki/Warglaives_of_Azzinoth",
+    videoUrl: "https://www.youtube.com/embed/WO10S7cvAMI",
+    stats: {
+      beginner: { power: 200, durability: 60, manaBoost: 10 },
+      intermediate: { power: 370, durability: 120, manaBoost: 30 },
+      expert: { power: 640, durability: 200, manaBoost: 55 },
+    },
+  },
+  {
+    id: "dragonwrath",
+    name: "Dragonwrath, Tarecgosa's Rest",
+    priceInCopper: 275000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/4/4e/Stave_2h_tarecgosa_e_01stagefinal.png/revision/latest?cb=20110505115852",
+    loreLink: "https://wowpedia.fandom.com/wiki/Dragonwrath,_Tarecgosa%27s_Rest",
+    videoUrl: "https://www.youtube.com/embed/nv21cO_1LNc",
+    stats: {
+      beginner: { power: 80, durability: 40, manaBoost: 180 },
+      intermediate: { power: 150, durability: 80, manaBoost: 340 },
+      expert: { power: 260, durability: 130, manaBoost: 560 },
+    },
+  },
+  {
+    id: "fangsofthefather",
+    name: "Fangs of the Father",
+    priceInCopper: 180000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/b/bb/Inv_knife_1h_deathwingraid_e_03.png/revision/latest?cb=20110928094409",
+    loreLink: "https://wowpedia.fandom.com/wiki/Fangs_of_the_Father",
+    videoUrl: "https://www.youtube.com/embed/hh_9X3zhEOA",
+    stats: {
+      beginner: { power: 190, durability: 40, manaBoost: 0 },
+      intermediate: { power: 350, durability: 90, manaBoost: 10 },
+      expert: { power: 610, durability: 150, manaBoost: 20 },
+    },
+  },
+  {
+    id: "queldelar",
+    name: "Quel'Delar",
+    priceInCopper: 150000,
+    imageUrl:
+      "https://static.wikia.nocookie.net/wowpedia/images/2/23/Inv_sword_155.png/revision/latest?cb=20091028204852",
+    loreLink: "https://wowpedia.fandom.com/wiki/Quel%27Delar",
+    videoUrl: "https://www.youtube.com/embed/_F87LtO0CJQ",
+    stats: {
+      beginner: { power: 150, durability: 90, manaBoost: 10 },
+      intermediate: { power: 290, durability: 170, manaBoost: 30 },
+      expert: { power: 500, durability: 280, manaBoost: 55 },
+    },
+  },
 ];
 
 const PRODUCT_CONTENT_BY_LOCALE: Record<Locale, typeof productContentEn> = {
