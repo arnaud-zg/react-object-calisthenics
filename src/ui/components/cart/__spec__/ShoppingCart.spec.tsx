@@ -94,10 +94,10 @@ describe("ShoppingCart", () => {
     expect(screen.getByText("Your inventory is empty")).toBeInTheDocument();
   });
 
-  // Every real catalog product costs far more than COMMERCE_CONFIG.freeShippingThreshold
-  // (adding any single one already qualifies for free shipping), so the "add X more"
+  // Every real catalog product costs far more than COMMERCE_CONFIG.freeCourierThreshold
+  // (adding any single one already qualifies for free courier delivery), so the "add X more"
   // banner can never actually appear against real data. That path is covered instead in
-  // ShoppingCart.freeShipping.spec.tsx against a mocked, deliberately cheap catalog.
+  // ShoppingCart.freeCourier.spec.tsx against a mocked, deliberately cheap catalog.
   it("should show the Free badge, since every real product already clears the threshold", async () => {
     const user = userEvent.setup();
     renderShoppingCart();

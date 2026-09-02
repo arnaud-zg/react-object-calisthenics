@@ -1,5 +1,5 @@
 import { CartItems } from "@/domain/cart/CartItems";
-import { ShippingPolicy } from "@/domain/cart/policy/ShippingPolicy";
+import { CourierPolicy } from "@/domain/cart/policy/CourierPolicy";
 import { TaxPolicy } from "@/domain/cart/policy/TaxPolicy";
 import { Money } from "@/domain/cart/value-objects/Money";
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
@@ -28,8 +28,8 @@ export class Cart {
     return this.items.totalPrice();
   }
 
-  calculateShipping(): Money {
-    return ShippingPolicy.calculate(this.calculateSubtotal());
+  calculateCourierFee(): Money {
+    return CourierPolicy.calculate(this.calculateSubtotal());
   }
 
   calculateTax(): Money {
@@ -39,16 +39,16 @@ export class Cart {
   calculateTotal(): Money {
     return this.calculateSubtotal()
       .add(this.calculateTax())
-      .add(this.calculateShipping());
+      .add(this.calculateCourierFee());
   }
 
-  remainingForFreeShipping(): Money {
+  remainingForFreeCourier(): Money {
     const subtotal = this.calculateSubtotal();
 
-    if (subtotal.isAtLeast(ShippingPolicy.SHIPPING_THRESHOLD)) {
+    if (subtotal.isAtLeast(CourierPolicy.FREE_COURIER_THRESHOLD)) {
       return new Money(0);
     }
-    return ShippingPolicy.SHIPPING_THRESHOLD.subtract(subtotal);
+    return CourierPolicy.FREE_COURIER_THRESHOLD.subtract(subtotal);
   }
 
   addItem(product: Product): Cart {

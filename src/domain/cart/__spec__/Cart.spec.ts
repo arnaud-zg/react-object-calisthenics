@@ -99,32 +99,32 @@ describe("Cart", () => {
     expect(totalItems.toValue()).toBe(3);
   });
 
-  it("should calculate total with shipping and tax", () => {
+  it("should calculate total with courier fee and tax", () => {
     let cart = new Cart();
     cart = cart.addItem(PRODUCT_1);
     cart = cart.addItem(PRODUCT_2);
 
     const subtotal = cart.calculateSubtotal().toAmount();
-    const shipping = cart.calculateShipping().toAmount();
+    const courierFee = cart.calculateCourierFee().toAmount();
     const tax = cart.calculateTax().toAmount();
     const total = cart.calculateTotal().toAmount();
 
     // Check basic consistency
     expect(subtotal).toBe(1235);
-    expect(shipping).toBe(0);
+    expect(courierFee).toBe(0);
     expect(tax).toBeCloseTo(86.45);
     expect(total).toBeCloseTo(1321.45);
   });
 
-  it("should report how much is left to reach free shipping", () => {
+  it("should report how much is left to reach free courier delivery", () => {
     const cart = new Cart().addItem(aProduct({ id: "cheap", price: 100 }));
 
-    expect(cart.remainingForFreeShipping().toAmount()).toBe(200);
+    expect(cart.remainingForFreeCourier().toAmount()).toBe(200);
   });
 
-  it("should report nothing left once the free shipping threshold is met", () => {
+  it("should report nothing left once the free courier threshold is met", () => {
     const cart = new Cart().addItem(aProduct({ id: "expensive", price: 500 }));
 
-    expect(cart.remainingForFreeShipping().toAmount()).toBe(0);
+    expect(cart.remainingForFreeCourier().toAmount()).toBe(0);
   });
 });
