@@ -3,11 +3,21 @@ import { expect, request, test } from "@playwright/test";
 const PAGES = ["./", "shopping-cart/", "fr/", "fr/shopping-cart/"];
 
 for (const path of PAGES) {
-  test(`${path} hydrates without console or page errors`, async ({ page }) => {
+  test(`${path} hydrates without console or page errors`, async ({ page, baseURL }) => {
+    const origin = new URL(baseURL ?? "http://localhost").origin;
     const errors: string[] = [];
+
     page.on("pageerror", (error) => errors.push(error.message));
     page.on("console", (message) => {
-      if (message.type() === "error") errors.push(message.text());
+      if (message.type() !== "error") return;
+
+      // Product images are hotlinked from Wowpedia; CI's shared runner IPs can get
+      // rate-limited by that CDN independently of anything this app does. A same-origin
+      // console error still fails the test, a cross-origin resource-load failure doesn't.
+      const resourceUrl = message.location().url;
+      if (resourceUrl && !resourceUrl.startsWith(origin)) return;
+
+      errors.push(message.text());
     });
 
     await page.goto(path, { waitUntil: "networkidle" });
