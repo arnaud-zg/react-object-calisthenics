@@ -44,7 +44,7 @@ export function HomePage() {
         <Link
           to={shoppingCartPath}
           className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 font-semibold text-primary-foreground shadow-xs transition-colors duration-200 hover:bg-primary/90 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
-          data-umami-event={ANALYTICS_CONFIG.events.homeShoppingCart}
+          onClick={() => window.umami?.track(ANALYTICS_CONFIG.events.homeShoppingCart)}
         >
           <ShoppingCart className="h-5 w-5" aria-hidden="true" />
           {t.home.tryShoppingCart}

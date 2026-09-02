@@ -36,7 +36,7 @@ export default function Header() {
             className: "underline underline-offset-4",
           }}
           activeOptions={{ exact: true }}
-          data-umami-event="header.home"
+          onClick={() => window.umami?.track("header.home")}
         >
           {t.nav.home}
         </Link>
@@ -47,7 +47,7 @@ export default function Header() {
             "aria-current": "page",
             className: "underline underline-offset-4",
           }}
-          data-umami-event="header.shopping-cart"
+          onClick={() => window.umami?.track("header.shopping-cart")}
         >
           {t.nav.shoppingCart}
         </Link>

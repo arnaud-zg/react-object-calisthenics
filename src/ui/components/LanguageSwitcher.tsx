@@ -25,7 +25,7 @@ export function LanguageSwitcher() {
         aria-current={locale === "en" ? "page" : undefined}
         aria-label={t.languageSwitcher.en}
         className={pillClassName(locale === "en")}
-        data-umami-event="header.language-en"
+        onClick={() => window.umami?.track("header.language-en")}
       >
         EN
       </Link>
@@ -34,7 +34,7 @@ export function LanguageSwitcher() {
         aria-current={locale === "fr" ? "page" : undefined}
         aria-label={t.languageSwitcher.fr}
         className={pillClassName(locale === "fr")}
-        data-umami-event="header.language-fr"
+        onClick={() => window.umami?.track("header.language-fr")}
       >
         FR
       </Link>

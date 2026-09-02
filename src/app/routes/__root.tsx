@@ -3,6 +3,7 @@ import { MotionConfig } from "motion/react";
 import { lazy, Suspense } from "react";
 import { SITE_CONFIG } from "@/config/site.config";
 import { LocaleProvider, useTranslations } from "@/i18n/LocaleContext";
+import { CartProvider } from "@/ui/components/cart/CartContext";
 import Header from "@/ui/components/Header";
 import { DevSettingsProvider } from "@/ui/devSettings/DevSettingsContext";
 
@@ -62,7 +63,9 @@ export const Route = createRootRoute({
     return (
       <LocaleProvider locale={locale}>
         <DevSettingsProvider>
-          <RootLayout />
+          <CartProvider>
+            <RootLayout />
+          </CartProvider>
         </DevSettingsProvider>
       </LocaleProvider>
     );
