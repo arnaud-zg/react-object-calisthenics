@@ -22,6 +22,13 @@ export const ProductCardImage = ({
         decoding="async"
         className="object-cover w-full h-full transition-transform hover:scale-105 motion-reduce:transition-none motion-reduce:hover:scale-100"
       />
+      <img
+        src={product.displayIcon()}
+        alt=""
+        loading={priority ? "eager" : "lazy"}
+        decoding="async"
+        className="absolute bottom-2 left-2 h-10 w-10 rounded-md border-2 border-background bg-background object-cover shadow-md sm:h-12 sm:w-12"
+      />
     </div>
   );
 };
