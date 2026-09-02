@@ -4,6 +4,7 @@ import type {
   KnowledgeProfile,
   Product,
 } from "@/domain/cart/value-objects/Product/Product";
+import { useTranslations } from "@/i18n/LocaleContext";
 import { Button } from "@/ui/primitives/button";
 import { CardFooter } from "@/ui/primitives/card";
 import {
@@ -29,6 +30,7 @@ export function ProductCardFooter({
   const loreLink = product.getLoreLink();
   const videoUrl = product.getVideoUrl();
   const productName = product.displayName();
+  const t = useTranslations();
 
   return (
     <CardFooter className="p-4 pt-0 flex flex-col gap-2">
@@ -42,7 +44,7 @@ export function ProductCardFooter({
         className="w-full flex items-center justify-center gap-2"
         variant="default"
       >
-        <ShoppingCart className="h-4 w-4" /> Add to Cart
+        <ShoppingCart className="h-4 w-4" /> {t.product.addToCart}
       </Button>
 
       <Modal>
@@ -56,7 +58,7 @@ export function ProductCardFooter({
               });
             }}
           >
-            <Clapperboard className="h-4 w-4" /> Watch Video
+            <Clapperboard className="h-4 w-4" /> {t.product.watchVideo}
           </Button>
         </ModalTrigger>
 
@@ -66,7 +68,7 @@ export function ProductCardFooter({
               {productName}
             </ModalTitle>
             <ModalDescription className="text-center">
-              Lore video for {productName}.
+              {t.product.loreVideoFor(productName)}
             </ModalDescription>
           </ModalHeader>
           <div className="aspect-video w-full overflow-hidden rounded-lg">
@@ -92,14 +94,14 @@ export function ProductCardFooter({
             href={loreLink}
             target="_blank"
             rel="noopener noreferrer"
-            aria-label={`Read the lore of ${productName} (opens in a new tab)`}
+            aria-label={t.product.readLoreOf(productName)}
             onClick={() => {
               window.umami?.track(ANALYTICS_CONFIG.events.readLore, {
                 productId: product.displayId(),
               });
             }}
           >
-            <BookOpenText className="h-4 w-4" /> Read Lore
+            <BookOpenText className="h-4 w-4" /> {t.product.readLore}
           </a>
         </Button>
       )}

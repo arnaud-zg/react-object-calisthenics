@@ -8,6 +8,10 @@ export const SkillValueSchema = z.union([
 
 export type SkillValue = z.infer<typeof SkillValueSchema>;
 
+/**
+ * Display labels live in the i18n message catalogs (t.skill.label), not here: a skill
+ * level is a domain concept, its translated presentation isn't.
+ */
 export class Skill {
   constructor(private skillValue: SkillValue) {}
 
@@ -19,25 +23,5 @@ export class Skill {
     SkillValueSchema.parse(skillValue);
 
     return new Skill(skillValue);
-  }
-
-  label(): string {
-    return Skill.selectLabelFor(this.skillValue);
-  }
-
-  private static selectLabelFor(skill: SkillValue): string {
-    switch (skill) {
-      case "beginner":
-        return "✨ Beginner Explorer";
-      case "intermediate":
-        return "🧙‍♂️ Adept Seeker";
-      case "expert":
-        return "🌌 Master Mystic";
-
-      default:
-        throw new Error(
-          `selectLabelFor: Unknown skill "${skill}". Expected "beginner", "intermediate", or "expert".`,
-        );
-    }
   }
 }

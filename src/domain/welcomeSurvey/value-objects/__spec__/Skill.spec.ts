@@ -21,16 +21,6 @@ describe("Skill", () => {
     expect(updatedSkill).not.toBe(skill);
   });
 
-  it("should return correct label for each skill", () => {
-    const beginner = new Skill("beginner");
-    const intermediate = new Skill("intermediate");
-    const expert = new Skill("expert");
-
-    expect(beginner.label()).toBe("✨ Beginner Explorer");
-    expect(intermediate.label()).toBe("🧙‍♂️ Adept Seeker");
-    expect(expert.label()).toBe("🌌 Master Mystic");
-  });
-
   it("should throw a ZodError when updating with an invalid skill", () => {
     const skill = new Skill("beginner");
 

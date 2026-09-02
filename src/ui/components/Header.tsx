@@ -1,19 +1,26 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
+import { useLocale, useTranslations } from "@/i18n/LocaleContext";
+import { LanguageSwitcher } from "@/ui/components/LanguageSwitcher";
 import { ThemeToggle } from "@/ui/components/ThemeToggle";
 
 const navLinkClassName =
   "rounded-sm px-1 py-1 text-foreground outline-none transition-colors duration-200 hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
 
 export default function Header() {
+  const locale = useLocale();
+  const t = useTranslations();
+  const homePath = locale === "fr" ? "/fr" : "/";
+  const shoppingCartPath = locale === "fr" ? "/fr/shopping-cart" : "/shopping-cart";
+
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b bg-background/95 px-4 shadow-sm backdrop-blur-sm sm:px-10">
       <nav
-        aria-label="Main navigation"
+        aria-label={t.nav.mainNavigation}
         className="flex flex-row gap-4 font-semibold sm:gap-6"
       >
         <Link
-          to="/"
+          to={homePath}
           className={navLinkClassName}
           activeProps={{
             "aria-current": "page",
@@ -22,10 +29,10 @@ export default function Header() {
           activeOptions={{ exact: true }}
           data-umami-event="header.home"
         >
-          Home
+          {t.nav.home}
         </Link>
         <Link
-          to="/shopping-cart"
+          to={shoppingCartPath}
           className={navLinkClassName}
           activeProps={{
             "aria-current": "page",
@@ -33,17 +40,18 @@ export default function Header() {
           }}
           data-umami-event="header.shopping-cart"
         >
-          Shopping Cart
+          {t.nav.shoppingCart}
         </Link>
       </nav>
 
       <div className="flex items-center gap-1">
+        <LanguageSwitcher />
         <ThemeToggle />
         <a
           href="https://github.com/arnaud-zg/react-object-calisthenics"
           target="_blank"
           rel="noopener noreferrer"
-          aria-label="View source on GitHub (opens in a new tab)"
+          aria-label={t.nav.viewSourceOnGithub}
           className="flex h-11 w-11 items-center justify-center rounded-full text-foreground outline-none transition-colors duration-200 hover:bg-accent focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2"
           data-umami-event="header.github"
         >

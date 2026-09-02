@@ -12,9 +12,9 @@ describe("ProfileDetails", () => {
 
   it("should return the non-zero stats", () => {
     expect(profile.listStats()).toEqual([
-      { label: "Power", value: 10 },
-      { label: "Durability", value: 20 },
-      { label: "Mana Boost", value: 5 },
+      { key: "power", value: 10 },
+      { key: "durability", value: 20 },
+      { key: "manaBoost", value: 5 },
     ]);
   });
 
@@ -32,24 +32,24 @@ describe("Stats", () => {
     const originalStats = new Stats(5, 10, 15);
     const newStats = originalStats.increasePower(7);
     expect(newStats.list()).toEqual([
-      { label: "Power", value: 12 },
-      { label: "Durability", value: 10 },
-      { label: "Mana Boost", value: 15 },
+      { key: "power", value: 12 },
+      { key: "durability", value: 10 },
+      { key: "manaBoost", value: 15 },
     ]);
   });
 
   it("should list every stat that is greater than zero", () => {
     const stats = new Stats(3, 6, 9);
     expect(stats.list()).toEqual([
-      { label: "Power", value: 3 },
-      { label: "Durability", value: 6 },
-      { label: "Mana Boost", value: 9 },
+      { key: "power", value: 3 },
+      { key: "durability", value: 6 },
+      { key: "manaBoost", value: 9 },
     ]);
   });
 
   it("should omit stats that are zero", () => {
     const stats = new Stats(3, 0, 0);
-    expect(stats.list()).toEqual([{ label: "Power", value: 3 }]);
+    expect(stats.list()).toEqual([{ key: "power", value: 3 }]);
   });
 });
 

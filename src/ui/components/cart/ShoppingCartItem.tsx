@@ -3,6 +3,7 @@ import { motion } from "motion/react";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { CartItem } from "@/domain/cart/CartItem";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
+import { useTranslations } from "@/i18n/LocaleContext";
 import { Button } from "@/ui/primitives/button";
 import { Card } from "@/ui/primitives/card";
 import { Separator } from "@/ui/primitives/separator";
@@ -20,6 +21,8 @@ export function ShoppingCartItem({
   onDecreaseQuantity,
   onRemoveItem,
 }: ShoppingCartItemProps) {
+  const t = useTranslations();
+
   return (
     <motion.li
       layout
@@ -66,7 +69,7 @@ export function ShoppingCartItem({
                     variant="ghost"
                     size="icon"
                     className="h-9 w-9 p-0 rounded-r-none hover:bg-accent"
-                    aria-label={`Decrease quantity of ${item.name()}`}
+                    aria-label={t.cartItem.decreaseQuantityOf(item.name())}
                     disabled={item.quantity().isAtMost(CartItem.MIN_QUANTITY)}
                     data-umami-event={ANALYTICS_CONFIG.events.decreaseQuantity}
                   >
@@ -89,7 +92,7 @@ export function ShoppingCartItem({
                     variant="ghost"
                     size="icon"
                     className="h-9 w-9 p-0 rounded-l-none hover:bg-accent"
-                    aria-label={`Increase quantity of ${item.name()}`}
+                    aria-label={t.cartItem.increaseQuantityOf(item.name())}
                     disabled={item.quantity().isAtLeast(CartItem.MAX_QUANTITY)}
                     data-umami-event={ANALYTICS_CONFIG.events.increaseQuantity}
                   >
@@ -103,7 +106,7 @@ export function ShoppingCartItem({
                     variant="ghost"
                     size="icon"
                     className="h-9 w-9 text-muted-foreground hover:text-destructive hover:bg-destructive/10 transition-colors"
-                    aria-label={`Remove ${item.name()} from cart`}
+                    aria-label={t.cartItem.removeFromCart(item.name())}
                     data-umami-event={ANALYTICS_CONFIG.events.removeItem}
                   >
                     <Trash2 className="h-4 w-4" aria-hidden="true" />
