@@ -40,7 +40,7 @@ export function HomePage() {
         </p>
       </div>
 
-      <div className="flex flex-col items-center gap-3 sm:flex-row sm:flex-wrap sm:justify-center">
+      <div className="flex flex-col items-center gap-4">
         <Link
           to={shoppingCartPath}
           className="inline-flex items-center gap-2 rounded-md bg-primary px-5 py-3 font-semibold text-primary-foreground shadow-xs transition-colors duration-200 hover:bg-primary/90 outline-none focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2 focus-visible:ring-offset-background"
@@ -51,27 +51,29 @@ export function HomePage() {
           <ArrowRight className="h-4 w-4" aria-hidden="true" />
         </Link>
 
-        <a
-          href={SITE_CONFIG.articleUrl}
-          target="_blank"
-          rel="noreferrer"
-          className={secondaryLinkClassName}
-          data-umami-event={ANALYTICS_CONFIG.events.homeArticle}
-        >
-          <BookOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
-          {t.home.readArticle}
-        </a>
+        <div className="flex flex-col items-center gap-3 sm:flex-row sm:gap-x-6">
+          <a
+            href={SITE_CONFIG.articleUrl}
+            target="_blank"
+            rel="noreferrer"
+            className={secondaryLinkClassName}
+            data-umami-event={ANALYTICS_CONFIG.events.homeArticle}
+          >
+            <BookOpen className="h-4 w-4 shrink-0" aria-hidden="true" />
+            {t.home.readArticle}
+          </a>
 
-        <a
-          href={SITE_CONFIG.repositoryUrl}
-          target="_blank"
-          rel="noopener noreferrer"
-          className={secondaryLinkClassName}
-          data-umami-event={ANALYTICS_CONFIG.events.homeGithub}
-        >
-          <GitHubLogoIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
-          {t.home.viewGithubProject}
-        </a>
+          <a
+            href={SITE_CONFIG.repositoryUrl}
+            target="_blank"
+            rel="noopener noreferrer"
+            className={secondaryLinkClassName}
+            data-umami-event={ANALYTICS_CONFIG.events.homeGithub}
+          >
+            <GitHubLogoIcon className="h-4 w-4 shrink-0" aria-hidden="true" />
+            {t.home.viewGithubProject}
+          </a>
+        </div>
       </div>
     </main>
   );
