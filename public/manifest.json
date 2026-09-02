@@ -1,6 +1,6 @@
 {
   "short_name": "Azeroth's Finest Wares",
-  "name": "Azeroth's Finest Wares — Object Calisthenics Demo",
+  "name": "Azeroth's Finest Wares: Object Calisthenics Demo",
   "description": "Interactive React demo showing how to apply Object Calisthenics rules for maintainable, well-structured front-end code.",
   "icons": [
     {

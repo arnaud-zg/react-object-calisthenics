@@ -7,6 +7,7 @@ export const useWelcomeModalSurvey = () => {
   const welcomeSurvey = useSyncExternalStore(
     welcomeSurveyStorage.subscribe,
     welcomeSurveyStorage.getSurvey,
+    welcomeSurveyStorage.getSurvey,
   );
   const welcomeSurveyApi = useImmutableInstance(new WelcomeSurvey(welcomeSurveyStorage));
 

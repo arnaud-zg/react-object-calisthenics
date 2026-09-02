@@ -1,53 +1,41 @@
-import { createRouter, RouterProvider } from "@tanstack/react-router";
+import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
-// Import the generated route tree
-import { routeTree } from "./routeTree.gen.ts";
+import { createAppRouter } from "./router.ts";
 import "@/styles/styles.css";
 import reportWebVitals from "../reportWebVitals.ts";
 
-// Create a new router instance
-const router = createRouter({
-  routeTree,
-  context: {},
-  basepath: SITE_CONFIG.basePath,
-  defaultPreload: "intent",
-  scrollRestoration: true,
-  defaultStructuralSharing: true,
-  defaultPreloadStaleTime: 0,
-});
-
-// Register the router instance for type safety
-declare module "@tanstack/react-router" {
-  interface Register {
-    router: typeof router;
-  }
-}
-
-// Recover original route if redirected from 404.html
 const params = new URLSearchParams(window.location.search);
 const p = params.get("p");
-
 if (p) {
-  // Replace the current history entry with the original path
   window.history.replaceState({}, "", p);
 }
 
-// Render the app
 const rootElement = document.getElementById("app");
-if (rootElement && !rootElement.innerHTML) {
-  const root = ReactDOM.createRoot(rootElement);
-  root.render(
+if (rootElement) {
+  const wasPrerendered = Boolean(rootElement.innerHTML);
+  const router = createAppRouter({
+    basepath: SITE_CONFIG.basePath,
+    hydratingPrerenderedContent: wasPrerendered,
+  });
+  const app = (
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>,
+    </StrictMode>
   );
+
+  // A prerendered page's matched route must be resolved before hydrating, otherwise the
+  // client's first pass renders a pending state that doesn't match the markup already sent.
+  if (wasPrerendered) {
+    await router.load();
+    ReactDOM.hydrateRoot(rootElement, app);
+  } else {
+    ReactDOM.createRoot(rootElement).render(app);
+  }
 }
 
-// Forward Core Web Vitals to Umami. window.umami is undefined until the analytics
-// script has loaded, so this is a safe no-op if it never does.
 reportWebVitals((metric) => {
   window.umami?.track(ANALYTICS_CONFIG.events.webVital, {
     name: metric.name,

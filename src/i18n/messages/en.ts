@@ -83,6 +83,10 @@ export interface Messages {
     en: string;
     fr: string;
   };
+  seo: {
+    homeDescription: string;
+    shopDescription: string;
+  };
 }
 
 export const en: Messages = {
@@ -174,5 +178,11 @@ export const en: Messages = {
     label: "Language",
     en: "English",
     fr: "Français",
+  },
+  seo: {
+    homeDescription:
+      "Interactive React demo showing how to apply Object Calisthenics rules for maintainable, well-structured front-end code.",
+    shopDescription:
+      "A fantasy shop demo of Object Calisthenics: immutable domain classes, a first-class cart collection, and clean, testable React components.",
   },
 };
