@@ -1,14 +1,13 @@
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
-import { useImmutableInstance } from "immutable-instance";
 import { ShoppingCart as ShoppingCartIcon, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { type FC, type RefObject, useState } from "react";
+import { type FC, type RefObject, useEffect, useRef, useState } from "react";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
 import { ProductCatalog } from "@/data/products";
-import { Cart } from "@/domain/cart/Cart";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { useLocale, useTranslations } from "@/i18n/LocaleContext";
+import { useCart } from "@/ui/components/cart/CartContext";
 import { CartSummaryRow } from "@/ui/components/cart/CartSummaryRow";
 import { ShoppingCartItem } from "@/ui/components/cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
@@ -35,12 +34,24 @@ const EAGER_IMAGE_COUNT = 3;
 
 export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
   const [showCart, setShowCart] = useState(false);
-  const cart = useImmutableInstance(new Cart());
+  const cartRef = useRef<HTMLElement>(null);
+  const cart = useCart();
   const { welcomeSurvey } = WelcomeModal.useWelcomeModalSurvey();
   const selectedProfile = welcomeSurvey?.skill ?? "beginner";
   const locale = useLocale();
   const t = useTranslations();
   const catalog = ProductCatalog.forLocale(locale);
+
+  useEffect(() => {
+    if (!showCart) return;
+
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+    cartRef.current?.scrollIntoView({
+      behavior: prefersReducedMotion ? "auto" : "smooth",
+    });
+  }, [showCart]);
 
   return (
     <div className="mx-auto w-full max-w-7xl">
@@ -65,16 +76,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
             </h2>
 
             <Button
-              onClick={() => {
-                setShowCart(true);
-                const element = document.querySelector("#cart");
-                const prefersReducedMotion = window.matchMedia(
-                  "(prefers-reduced-motion: reduce)",
-                ).matches;
-                element?.scrollIntoView({
-                  behavior: prefersReducedMotion ? "auto" : "smooth",
-                });
-              }}
+              onClick={() => setShowCart(true)}
               className="relative lg:hidden"
               variant="outline"
               aria-expanded={showCart}
@@ -102,6 +104,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
 
         {/* Cart */}
         <aside
+          ref={cartRef}
           className={`lg:col-span-1 lg:self-start ${showCart ? "block" : "hidden lg:block"}`}
           id="cart"
           aria-labelledby="cart-heading"
