@@ -1,8 +1,3 @@
-import type {
-  KnowledgeProfile,
-  Product,
-} from "@/domain/cart/value-objects/Product/Product";
-import { CardContent } from "@/ui/primitives/card";
 import {
   BarChart3,
   Scroll,
@@ -12,6 +7,11 @@ import {
   Swords,
   Wand2,
 } from "lucide-react";
+import type {
+  KnowledgeProfile,
+  Product,
+} from "@/domain/cart/value-objects/Product/Product";
+import { CardContent } from "@/ui/primitives/card";
 
 interface ProductCardContentProps {
   product: Product;
@@ -23,10 +23,7 @@ const STAT_ICONS: Record<string, typeof Swords> = {
   durability: Shield,
 };
 
-export function ProductCardContent({
-  product,
-  profile,
-}: ProductCardContentProps) {
+export function ProductCardContent({ product, profile }: ProductCardContentProps) {
   const description = product.describeProfile(profile);
   const effects = product.listProfileEffects(profile);
   const stats = product.getProfileStats(profile);
@@ -53,10 +50,7 @@ export function ProductCardContent({
                     className="h-3.5 w-3.5 shrink-0 text-gray-500"
                     aria-hidden="true"
                   />
-                  <strong>
-                    {key.charAt(0).toUpperCase() + key.slice(1)}:
-                  </strong>{" "}
-                  {value}
+                  <strong>{key.charAt(0).toUpperCase() + key.slice(1)}:</strong> {value}
                 </li>
               );
             })}
@@ -70,8 +64,8 @@ export function ProductCardContent({
           Effects:
         </h4>
         <ul className="text-sm list-none flex flex-col gap-1">
-          {effects.map((effect, idx) => (
-            <li key={`${idx}-${effect}`} className="flex items-center gap-1.5">
+          {effects.map((effect) => (
+            <li key={effect} className="flex items-center gap-1.5">
               <Sparkle
                 className="h-3.5 w-3.5 shrink-0 text-gray-500"
                 aria-hidden="true"

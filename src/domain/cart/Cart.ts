@@ -22,15 +22,12 @@ export class Cart {
   totalItems(): Quantity {
     return this.items.reduce(
       (total, item) => total.add(item.getQuantity()),
-      new Quantity(0)
+      new Quantity(0),
     );
   }
 
   calculateSubtotal(): Money {
-    return this.items.reduce(
-      (total, item) => total.add(item.totalPrice()),
-      new Money(0)
-    );
+    return this.items.reduce((total, item) => total.add(item.totalPrice()), new Money(0));
   }
 
   calculateShipping(): Money {
@@ -53,16 +50,14 @@ export class Cart {
   }
 
   addItem(product: Product): Cart {
-    const existing = this.items.find(
-      (item) => item.getId() === product.displayId()
-    );
+    const existing = this.items.find((item) => item.getId() === product.displayId());
 
     if (existing) {
       const updatedItem = existing.increaseQuantity();
       return new Cart(
         this.items.map((item) =>
-          item.getId() === existing.getId() ? updatedItem : item
-        )
+          item.getId() === existing.getId() ? updatedItem : item,
+        ),
       );
     }
 
@@ -71,30 +66,22 @@ export class Cart {
   }
 
   decrementItem(product: Product): Cart {
-    const existing = this.items.find(
-      (item) => item.getId() === product.displayId()
-    );
+    const existing = this.items.find((item) => item.getId() === product.displayId());
 
     if (!existing) return this;
 
     const updatedItem = existing.decreaseQuantity();
 
     return new Cart(
-      this.items.map((item) =>
-        item.getId() === existing.getId() ? updatedItem : item
-      )
+      this.items.map((item) => (item.getId() === existing.getId() ? updatedItem : item)),
     );
   }
 
   deleteItem(product: Product): Cart {
-    const existing = this.items.find(
-      (item) => item.getId() === product.displayId()
-    );
+    const existing = this.items.find((item) => item.getId() === product.displayId());
 
     if (!existing) return this;
 
-    return new Cart(
-      this.items.filter((item) => item.getId() !== product.displayId())
-    );
+    return new Cart(this.items.filter((item) => item.getId() !== product.displayId()));
   }
 }

@@ -1,13 +1,8 @@
 import { useForm } from "@tanstack/react-form";
-import { type Ref, useImperativeHandle, useState } from "react";
-
-import type {
-  WelcomeModalHandle,
-  WelcomeModalProps,
-} from "./WelcomeModal.types";
-
-import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
+import { forwardRef, type Ref, useImperativeHandle, useState } from "react";
+import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { Skill } from "@/domain/welcomeSurvey/value-objects/Skill";
+import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
 import { Button } from "@/ui/primitives/button";
 import {
   Modal,
@@ -17,16 +12,19 @@ import {
   ModalHeader,
   ModalTitle,
 } from "@/ui/primitives/modal";
-import { forwardRef } from "react";
 import { useWelcomeModalHandle } from "./WelcomeModal.logic";
 import { useWelcomeModalSurvey } from "./WelcomeModal.survey";
-import type { WelcomeModalComponentType } from "./WelcomeModal.types";
+import type {
+  WelcomeModalComponentType,
+  WelcomeModalHandle,
+  WelcomeModalProps,
+} from "./WelcomeModal.types";
 
 export type { WelcomeModalHandle } from "./WelcomeModal.types";
 
 const WelcomeModalComponent = (
   { title, description, actionLabel = "Continue" }: WelcomeModalProps,
-  ref: Ref<WelcomeModalHandle>
+  ref: Ref<WelcomeModalHandle>,
 ) => {
   const [isOpen, setIsOpen] = useState(false);
   const { welcomeSurvey, saveSurvey } = WelcomeModal.useWelcomeModalSurvey();
@@ -88,48 +86,36 @@ const WelcomeModalComponent = (
                     value={field.state.value}
                     onChange={(e) => {
                       const { data: safeValue } =
-                        WelcomeSurveyDataSchema.shape.skill.safeParse(
-                          e.target.value
-                        );
+                        WelcomeSurveyDataSchema.shape.skill.safeParse(e.target.value);
 
                       if (!safeValue) return;
                       field.handleChange(safeValue);
 
-                      umami?.track("knowledge-level.select", {
+                      umami?.track(ANALYTICS_CONFIG.events.selectKnowledgeLevel, {
                         level: safeValue,
                       });
                     }}
                     className="w-full cursor-pointer rounded-md border border-input bg-background px-3 py-2.5 text-sm text-foreground outline-none focus:border-ring focus:ring-2 focus:ring-ring/50"
                   >
                     <option value="">-- Select knowledge level --</option>
-                    <option value="beginner">
-                      {new Skill("beginner").label()}
-                    </option>
+                    <option value="beginner">{new Skill("beginner").label()}</option>
                     <option value="intermediate">
                       {new Skill("intermediate").label()}
                     </option>
-                    <option value="expert">
-                      {new Skill("expert").label()}
-                    </option>
+                    <option value="expert">{new Skill("expert").label()}</option>
                   </select>
-                  {field.state.meta.isTouched &&
-                    field.state.meta.errors?.[0] && (
-                      <p
-                        id={`${field.name}-error`}
-                        className="mt-1 text-sm text-red-500"
-                      >
-                        {field.state.meta.errors[0]}
-                      </p>
-                    )}
+                  {field.state.meta.isTouched && field.state.meta.errors?.[0] && (
+                    <p id={`${field.name}-error`} className="mt-1 text-sm text-red-500">
+                      {field.state.meta.errors[0]}
+                    </p>
+                  )}
                 </>
               )}
             </form.Field>
           </div>
 
           <ModalFooter>
-            <form.Subscribe
-              selector={(state) => state.isValid && !state.isPristine}
-            >
+            <form.Subscribe selector={(state) => state.isValid && !state.isPristine}>
               {(canSubmit) => (
                 <Button
                   type="submit"

@@ -36,7 +36,7 @@ export class Skill {
 
       default:
         throw new Error(
-          `selectLabelFor: Unknown skill "${skill}". Expected "beginner", "intermediate", or "expert".`
+          `selectLabelFor: Unknown skill "${skill}". Expected "beginner", "intermediate", or "expert".`,
         );
     }
   }

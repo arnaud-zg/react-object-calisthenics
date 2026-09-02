@@ -1,10 +1,9 @@
-import { RouterProvider, createRouter } from "@tanstack/react-router";
+import { createRouter, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
 import ReactDOM from "react-dom/client";
-
+import { SITE_CONFIG } from "@/config/site.config";
 // Import the generated route tree
 import { routeTree } from "./routeTree.gen.ts";
-
 import "@/styles/styles.css";
 import reportWebVitals from "../reportWebVitals.ts";
 
@@ -12,7 +11,7 @@ import reportWebVitals from "../reportWebVitals.ts";
 const router = createRouter({
   routeTree,
   context: {},
-  basepath: "/react-object-calisthenics/",
+  basepath: SITE_CONFIG.basePath,
   defaultPreload: "intent",
   scrollRestoration: true,
   defaultStructuralSharing: true,
@@ -42,7 +41,7 @@ if (rootElement && !rootElement.innerHTML) {
   root.render(
     <StrictMode>
       <RouterProvider router={router} />
-    </StrictMode>
+    </StrictMode>,
   );
 }
 

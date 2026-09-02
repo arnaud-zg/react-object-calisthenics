@@ -1,14 +1,15 @@
+import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import { Money } from "@/domain/cart/value-objects/Money";
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
 
 export class CartItem {
-  static MAX_QUANTITY = 10;
-  static MIN_QUANTITY = 1;
+  static readonly MAX_QUANTITY = COMMERCE_CONFIG.quantityPerItem.max;
+  static readonly MIN_QUANTITY = COMMERCE_CONFIG.quantityPerItem.min;
 
   constructor(
     private readonly product: Product,
-    private readonly quantity: Quantity
+    private readonly quantity: Quantity,
   ) {}
 
   increaseQuantity(): CartItem {

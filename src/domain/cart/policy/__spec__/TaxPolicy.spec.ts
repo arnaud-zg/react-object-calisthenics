@@ -1,5 +1,5 @@
-import { Money } from "@/domain/cart/value-objects/Money";
 import { describe, expect, it } from "vitest";
+import { Money } from "@/domain/cart/value-objects/Money";
 import { TaxPolicy } from "../TaxPolicy";
 
 describe("TaxPolicy", () => {

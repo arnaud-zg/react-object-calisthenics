@@ -1,8 +1,4 @@
-import type {
-  ForwardRefExoticComponent,
-  RefAttributes,
-  RefObject,
-} from "react";
+import type { ForwardRefExoticComponent, RefAttributes, RefObject } from "react";
 
 // Reference
 

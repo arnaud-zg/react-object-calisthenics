@@ -19,7 +19,7 @@ export const PRODUCTS: Product[] = [
     new ProductName("Thunderfury, Blessed Blade of the Windseeker"),
     new Money(115105),
     new ImageUrl(
-      "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG"
+      "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
     ),
     new KnowledgeContent(
       new ProfileDetails(
@@ -28,8 +28,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Chance to strike enemies with lightning.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-          "https://www.youtube.com/embed/2TGRpvb5Nos"
-        )
+          "https://www.youtube.com/embed/2TGRpvb5Nos",
+        ),
       ),
       new ProfileDetails(
         "Thunderfury is forged with elemental fury. Great for battle, with bonus lightning damage and attack speed.",
@@ -41,8 +41,8 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-          "https://www.youtube.com/embed/2TGRpvb5Nos"
-        )
+          "https://www.youtube.com/embed/2TGRpvb5Nos",
+        ),
       ),
       new ProfileDetails(
         "Thunderfury, Blessed Blade of the Windseeker, is a legendary weapon of immense power. It channels elemental air, unleashing lightning with each strike. Its artifact status is confirmed by its rarity and crafting requirements.",
@@ -55,17 +55,17 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
-          "https://www.youtube.com/embed/2TGRpvb5Nos"
-        )
-      )
-    )
+          "https://www.youtube.com/embed/2TGRpvb5Nos",
+        ),
+      ),
+    ),
   ),
   new Product(
     new ProductId("ashbringer"),
     new ProductName("Ashbringer"),
     new Money(288527),
     new ImageUrl(
-      "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg"
+      "https://static.wikia.nocookie.net/wowpedia/images/a/a6/Ashbringer_TCG.jpg",
     ),
     new KnowledgeContent(
       new ProfileDetails(
@@ -74,8 +74,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Bonus against undead enemies.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Ashbringer",
-          "https://www.youtube.com/embed/lso8Ygk4rKc"
-        )
+          "https://www.youtube.com/embed/lso8Ygk4rKc",
+        ),
       ),
       new ProfileDetails(
         "Ashbringer channels holy energy to smite foes, cleansing corruption and undead.",
@@ -83,8 +83,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Holy damage +25%"), new Effect("Undead vulnerability.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Ashbringer",
-          "https://www.youtube.com/embed/lso8Ygk4rKc"
-        )
+          "https://www.youtube.com/embed/lso8Ygk4rKc",
+        ),
       ),
       new ProfileDetails(
         "Ashbringer is the embodiment of righteousness. It delivers devastating holy strikes and vanquishes evil.",
@@ -96,17 +96,17 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Ashbringer",
-          "https://www.youtube.com/embed/lso8Ygk4rKc"
-        )
-      )
-    )
+          "https://www.youtube.com/embed/lso8Ygk4rKc",
+        ),
+      ),
+    ),
   ),
   new Product(
     new ProductId("sulfuras"),
     new ProductName("Sulfuras, Hand of Ragnaros"),
     new Money(31244),
     new ImageUrl(
-      "https://static.wikia.nocookie.net/wowpedia/images/6/6e/Sulfuras_Hand_of_Ragnaros_TCG.jpg"
+      "https://static.wikia.nocookie.net/wowpedia/images/6/6e/Sulfuras_Hand_of_Ragnaros_TCG.jpg",
     ),
     new KnowledgeContent(
       new ProfileDetails(
@@ -115,8 +115,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Fire damage over time.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Sulfuras,_Hand_of_Ragnaros",
-          "https://www.youtube.com/embed/crNEJBci-Es"
-        )
+          "https://www.youtube.com/embed/crNEJBci-Es",
+        ),
       ),
       new ProfileDetails(
         "Sulfuras channels molten fire into devastating blows that incinerate enemies.",
@@ -124,8 +124,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Fire blast chance"), new Effect("Burn enemies for 10s")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Sulfuras,_Hand_of_Ragnaros",
-          "https://www.youtube.com/embed/crNEJBci-Es"
-        )
+          "https://www.youtube.com/embed/crNEJBci-Es",
+        ),
       ),
       new ProfileDetails(
         "Sulfuras is a weapon of pure elemental fury, capable of burning armies with a single strike.",
@@ -137,17 +137,17 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Sulfuras,_Hand_of_Ragnaros",
-          "https://www.youtube.com/embed/crNEJBci-Es"
-        )
-      )
-    )
+          "https://www.youtube.com/embed/crNEJBci-Es",
+        ),
+      ),
+    ),
   ),
   new Product(
     new ProductId("valanyr"),
     new ProductName("Val'anyr, Hammer of Ancient Kings"),
     new Money(363651),
     new ImageUrl(
-      "https://static.wikia.nocookie.net/wowpedia/images/7/76/Val%27anyr%2C_Hammer_of_Ancient_Kings_TCG.jpg"
+      "https://static.wikia.nocookie.net/wowpedia/images/7/76/Val%27anyr%2C_Hammer_of_Ancient_Kings_TCG.jpg",
     ),
     new KnowledgeContent(
       new ProfileDetails(
@@ -156,8 +156,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Heals allies on hit.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Val'anyr,_Hammer_of_Ancient_Kings",
-          "https://www.youtube.com/embed/u5GX0RHW6KM"
-        )
+          "https://www.youtube.com/embed/u5GX0RHW6KM",
+        ),
       ),
       new ProfileDetails(
         "Val'anyr channels holy energy to protect allies in battle.",
@@ -165,8 +165,8 @@ export const PRODUCTS: Product[] = [
         [new Effect("Heal over time for allies."), new Effect("Shield chance")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Val'anyr,_Hammer_of_Ancient_Kings",
-          "https://www.youtube.com/embed/u5GX0RHW6KM"
-        )
+          "https://www.youtube.com/embed/u5GX0RHW6KM",
+        ),
       ),
       new ProfileDetails(
         "Val'anyr is a divine relic that grants immense healing and protection to allies.",
@@ -178,17 +178,17 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Val'anyr,_Hammer_of_Ancient_Kings",
-          "https://www.youtube.com/embed/u5GX0RHW6KM"
-        )
-      )
-    )
+          "https://www.youtube.com/embed/u5GX0RHW6KM",
+        ),
+      ),
+    ),
   ),
   new Product(
     new ProductId("doomhammer"),
     new ProductName("Doomhammer"),
     new Money(363651),
     new ImageUrl(
-      "https://static.wikia.nocookie.net/wowpedia/images/a/a2/Doomhammer_TCG.jpg"
+      "https://static.wikia.nocookie.net/wowpedia/images/a/a2/Doomhammer_TCG.jpg",
     ),
     new KnowledgeContent(
       new ProfileDetails(
@@ -197,20 +197,17 @@ export const PRODUCTS: Product[] = [
         [new Effect("Shockwave on impact.")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Doomhammer",
-          "https://www.youtube.com/embed/htTWpEk_XDk"
-        )
+          "https://www.youtube.com/embed/htTWpEk_XDk",
+        ),
       ),
       new ProfileDetails(
         "Doomhammer enhances the wielder’s strength and earth-based magic.",
         new Stats(340, 160, 20),
-        [
-          new Effect("Shockwave radius +15%"),
-          new Effect("Stun chance on heavy attacks"),
-        ],
+        [new Effect("Shockwave radius +15%"), new Effect("Stun chance on heavy attacks")],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Doomhammer",
-          "https://www.youtube.com/embed/htTWpEk_XDk"
-        )
+          "https://www.youtube.com/embed/htTWpEk_XDk",
+        ),
       ),
       new ProfileDetails(
         "Doomhammer is the ultimate weapon of war, capable of shaking the very earth.",
@@ -222,9 +219,9 @@ export const PRODUCTS: Product[] = [
         ],
         new ExtraResources(
           "https://wowpedia.fandom.com/wiki/Doomhammer",
-          "https://www.youtube.com/embed/htTWpEk_XDk"
-        )
-      )
-    )
+          "https://www.youtube.com/embed/htTWpEk_XDk",
+        ),
+      ),
+    ),
   ),
 ];

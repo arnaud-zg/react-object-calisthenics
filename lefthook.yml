@@ -1,0 +1,24 @@
+# Hand-written rather than extending @arnaud-zg/configs/lefthook/lefthook.yml: that base's
+# pre-commit format command hardcodes `pnpm exec prettier`, and this repo uses Biome for both
+# linting and formatting. `protect-main` and the commitlint wiring are copied from it verbatim.
+pre-commit:
+  parallel: true
+  commands:
+    protect-main:
+      run: |
+        branch=$(git symbolic-ref --short HEAD)
+        if [ "$branch" = "main" ]; then
+          echo "Direct commits to main are not allowed. Create a branch first."
+          exit 1
+        fi
+    check:
+      glob: "*.{js,jsx,ts,tsx,json,jsonc,css}"
+      run: pnpm exec biome check --write --no-errors-on-unmatched {staged_files}
+      stage_fixed: true
+      skip: [merge, rebase]
+
+commit-msg:
+  commands:
+    check-format:
+      run: pnpm exec commitlint --edit {1}
+      skip: [rebase]

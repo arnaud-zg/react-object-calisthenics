@@ -1,10 +1,10 @@
+import { Minus, Plus, Trash2 } from "lucide-react";
+import { motion } from "motion/react";
 import { CartItem } from "@/domain/cart/CartItem";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Button } from "@/ui/primitives/button";
 import { Card } from "@/ui/primitives/card";
 import { Separator } from "@/ui/primitives/separator";
-import { motion } from "framer-motion";
-import { Minus, Plus, Trash2 } from "lucide-react";
 
 interface ShoppingCartItemProps {
   item: CartItem;
@@ -49,9 +49,7 @@ export function ShoppingCartItem({
           </div>
 
           <div className="flex flex-1 flex-col gap-2 min-w-0">
-            <h4 className="font-medium text-gray-900 truncate">
-              {item.getName()}
-            </h4>
+            <h4 className="font-medium text-gray-900 truncate">{item.getName()}</h4>
 
             <div className="flex flex-row self-end">
               <div className="flex flex-col items-end gap-1">
@@ -89,9 +87,7 @@ export function ShoppingCartItem({
                     size="icon"
                     className="h-9 w-9 p-0 rounded-l-none hover:bg-gray-100"
                     aria-label={`Increase quantity of ${item.getName()}`}
-                    disabled={
-                      item.getQuantity().toValue() >= CartItem.MAX_QUANTITY
-                    }
+                    disabled={item.getQuantity().toValue() >= CartItem.MAX_QUANTITY}
                     data-umami-event="shopping-cart.increase-quantity"
                   >
                     <Plus className="h-4 w-4" aria-hidden="true" />

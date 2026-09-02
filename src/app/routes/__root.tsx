@@ -1,7 +1,7 @@
-import Header from "@/ui/components/Header";
-import { Outlet, createRootRoute } from "@tanstack/react-router";
+import { createRootRoute, Outlet } from "@tanstack/react-router";
 import { TanStackRouterDevtools } from "@tanstack/react-router-devtools";
-import { MotionConfig } from "framer-motion";
+import { MotionConfig } from "motion/react";
+import Header from "@/ui/components/Header";
 
 export const Route = createRootRoute({
   component: () => (

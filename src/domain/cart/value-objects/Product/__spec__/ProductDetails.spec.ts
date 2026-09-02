@@ -1,24 +1,11 @@
 import { describe, expect, it } from "vitest";
-import {
-  Effect,
-  ExtraResources,
-  ProfileDetails,
-  Stats,
-} from "../ProductDetails";
+import { Effect, ExtraResources, ProfileDetails, Stats } from "../ProductDetails";
 
 describe("ProfileDetails", () => {
   const stats = new Stats(10, 20, 5);
   const effects = [new Effect("Fire damage"), new Effect("Stun enemies")];
-  const extraResources = new ExtraResources(
-    "https://lore.link",
-    "https://video.link"
-  );
-  const profile = new ProfileDetails(
-    "Test description",
-    stats,
-    effects,
-    extraResources
-  );
+  const extraResources = new ExtraResources("https://lore.link", "https://video.link");
+  const profile = new ProfileDetails("Test description", stats, effects, extraResources);
 
   it("should return the correct description", () => {
     expect(profile.describe()).toBe("Test description");
@@ -75,10 +62,7 @@ describe("Effect", () => {
 
 describe("ExtraResources", () => {
   it("should return the lore link and video URL", () => {
-    const resources = new ExtraResources(
-      "https://lore.link",
-      "https://video.link"
-    );
+    const resources = new ExtraResources("https://lore.link", "https://video.link");
     expect(resources.getLoreLink()).toBe("https://lore.link");
     expect(resources.getVideoUrl()).toBe("https://video.link");
   });
