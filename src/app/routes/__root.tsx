@@ -4,6 +4,7 @@ import { lazy, Suspense } from "react";
 import { SITE_CONFIG } from "@/config/site.config";
 import { LocaleProvider, useTranslations } from "@/i18n/LocaleContext";
 import Header from "@/ui/components/Header";
+import { DevSettingsProvider } from "@/ui/devSettings/DevSettingsContext";
 
 const TanStackRouterDevtools = import.meta.env.DEV
   ? lazy(() =>
@@ -60,7 +61,9 @@ export const Route = createRootRoute({
 
     return (
       <LocaleProvider locale={locale}>
-        <RootLayout />
+        <DevSettingsProvider>
+          <RootLayout />
+        </DevSettingsProvider>
       </LocaleProvider>
     );
   },

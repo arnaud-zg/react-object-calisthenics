@@ -87,6 +87,17 @@ export interface Messages {
     homeDescription: string;
     shopDescription: string;
   };
+  devSettings: {
+    buttonLabel: string;
+    title: string;
+    description: string;
+    welcomeSurveyStorageLegend: string;
+    implementations: {
+      localStorage: string;
+      tanstackStore: string;
+      zustand: string;
+    };
+  };
 }
 
 export const en: Messages = {
@@ -184,5 +195,17 @@ export const en: Messages = {
       "Interactive React demo showing how to apply Object Calisthenics rules for maintainable, well-structured front-end code.",
     shopDescription:
       "A fantasy shop demo of Object Calisthenics: immutable domain classes, a first-class cart collection, and clean, testable React components.",
+  },
+  devSettings: {
+    buttonLabel: "Developer settings",
+    title: "Developer Settings",
+    description:
+      "Swap the storage behind the welcome survey to see the same domain code work unchanged against a different implementation.",
+    welcomeSurveyStorageLegend: "Welcome survey storage",
+    implementations: {
+      localStorage: "Local Storage",
+      tanstackStore: "TanStack Store",
+      zustand: "Zustand",
+    },
   },
 };

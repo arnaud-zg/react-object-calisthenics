@@ -97,4 +97,16 @@ export const fr: Messages = {
     shopDescription:
       "Une boutique fantastique illustrant la calisthénie des objets : classes immuables, panier en collection de première classe, composants React testables.",
   },
+  devSettings: {
+    buttonLabel: "Paramètres développeur",
+    title: "Paramètres développeur",
+    description:
+      "Changez le stockage utilisé par le questionnaire de bienvenue pour voir le même code métier fonctionner sans modification avec une autre implémentation.",
+    welcomeSurveyStorageLegend: "Stockage du questionnaire de bienvenue",
+    implementations: {
+      localStorage: "Stockage local",
+      tanstackStore: "TanStack Store",
+      zustand: "Zustand",
+    },
+  },
 };

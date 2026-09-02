@@ -1,8 +1,17 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
+import { lazy, Suspense } from "react";
 import { useLocale, useTranslations } from "@/i18n/LocaleContext";
 import { LanguageSwitcher } from "@/ui/components/LanguageSwitcher";
 import { ThemeToggle } from "@/ui/components/ThemeToggle";
+
+// Header renders on every route, including the home page, which otherwise never needs
+// Radix Dialog. Lazy-loading keeps that dependency out of the home page's own bundle.
+const DevSettingsModal = lazy(() =>
+  import("@/ui/components/DevSettingsModal").then((module) => ({
+    default: module.DevSettingsModal,
+  })),
+);
 
 const navLinkClassName =
   "rounded-sm px-1 py-1 text-foreground outline-none transition-colors duration-200 hover:text-muted-foreground focus-visible:ring-2 focus-visible:ring-ring focus-visible:ring-offset-2";
@@ -47,6 +56,9 @@ export default function Header() {
       <div className="flex items-center gap-1">
         <LanguageSwitcher />
         <ThemeToggle />
+        <Suspense fallback={null}>
+          <DevSettingsModal />
+        </Suspense>
         <a
           href="https://github.com/arnaud-zg/react-object-calisthenics"
           target="_blank"
