@@ -55,7 +55,7 @@ export function ShoppingCartItem({
           </div>
 
           <div className="flex flex-1 flex-col gap-2 min-w-0">
-            <h3 className="font-medium text-foreground truncate">{item.name()}</h3>
+            <h3 className="line-clamp-2 font-medium text-foreground">{item.name()}</h3>
 
             <div className="flex flex-row self-end">
               <div className="flex flex-col items-end gap-1">
