@@ -21,5 +21,7 @@ export const ANALYTICS_CONFIG = {
     watchVideo: "product.watch-video",
     readLore: "product.read-lore",
     webVital: "web-vitals.report",
+    openDevSettings: "dev-settings.open",
+    switchWelcomeSurveyStorage: "dev-settings.switch-welcome-survey-storage",
   },
 } as const;
