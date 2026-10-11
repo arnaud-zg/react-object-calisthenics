@@ -131,9 +131,10 @@ More on the testing trophy, TDD, and commit conventions in
 ## Deployment
 
 CI (`.github/workflows/ci.yml`) runs typecheck, Biome, markdown lint, tests with
-coverage, and the build on every push. `.github/workflows/deploy.yml` builds and
-publishes `dist/` to the `gh-pages` branch on pushes to `main`, which GitHub Pages
-serves from.
+coverage, and the build. `.github/workflows/deploy.yml` builds and publishes `dist/` to the
+`gh-pages` branch, which GitHub Pages serves from. Both run only when started by hand from the
+Actions tab (`gh workflow run ci.yml --ref <branch>`, `gh workflow run deploy.yml`), never on push
+or pull request.
 
 ## License
 
