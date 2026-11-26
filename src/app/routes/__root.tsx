@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { MotionConfig } from "motion/react";
-import { lazy, Suspense } from "react";
+
 import { SITE_CONFIG } from "@/config/site.config";
 import { LocaleProvider, useTranslations } from "@/i18n/LocaleContext";
 import { CartProvider } from "@/ui/components/cart/CartContext";

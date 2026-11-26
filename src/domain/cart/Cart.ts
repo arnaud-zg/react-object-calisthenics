@@ -1,9 +1,11 @@
+import type { Product } from "@/domain/cart/value-objects/Product/Product";
+import type { Quantity } from "@/domain/cart/value-objects/Quantity";
+
 import { CartItems } from "@/domain/cart/CartItems";
 import { CourierPolicy } from "@/domain/cart/policy/CourierPolicy";
 import { TaxPolicy } from "@/domain/cart/policy/TaxPolicy";
 import { Money } from "@/domain/cart/value-objects/Money";
-import type { Product } from "@/domain/cart/value-objects/Product/Product";
-import type { Quantity } from "@/domain/cart/value-objects/Quantity";
+
 import type { CartItem } from "./CartItem";
 
 /**
@@ -37,9 +39,7 @@ export class Cart {
   }
 
   calculateTotal(): Money {
-    return this.calculateSubtotal()
-      .add(this.calculateTax())
-      .add(this.calculateCourierFee());
+    return this.calculateSubtotal().add(this.calculateTax()).add(this.calculateCourierFee());
   }
 
   remainingForFreeCourier(): Money {

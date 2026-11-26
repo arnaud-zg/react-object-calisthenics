@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Money } from "../Money";
 
 describe("Money", () => {
@@ -72,10 +73,7 @@ describe("Money", () => {
 
   it("should support chained operations", () => {
     const startingMoney = new Money(50);
-    const resultMoney = startingMoney
-      .add(new Money(25))
-      .subtract(new Money(30))
-      .multiply(2);
+    const resultMoney = startingMoney.add(new Money(25)).subtract(new Money(30)).multiply(2);
 
     // Calculation: ((50 + 25) - 30) * 2 = (75 - 30) * 2 = 45 * 2 = 90
     expect(resultMoney.toAmount()).toBe(90);

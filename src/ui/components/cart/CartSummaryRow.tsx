@@ -1,5 +1,5 @@
-import { motion } from "motion/react";
 import type { ReactNode } from "react";
+import { motion } from "motion/react";
 
 interface CartSummaryRowProps {
   label: string;

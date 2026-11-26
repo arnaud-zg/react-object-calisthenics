@@ -1,5 +1,6 @@
-import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import type { Money } from "@/domain/cart/value-objects/Money";
+
+import { COMMERCE_CONFIG } from "@/config/commerce.config";
 
 const { copperPerSilver, silverPerGold } = COMMERCE_CONFIG.currency;
 const copperPerGold = copperPerSilver * silverPerGold;

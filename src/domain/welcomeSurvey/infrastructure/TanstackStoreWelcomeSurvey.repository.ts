@@ -1,10 +1,8 @@
+import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
+import type { WelcomeSurveyStoreState } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 import { Store } from "@tanstack/store";
 
-import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
-import {
-  WELCOME_SURVEY_KEY,
-  type WelcomeSurveyStoreState,
-} from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
+import { WELCOME_SURVEY_KEY } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 
 // This module runs at import time both in the browser and, once the app is prerendered
 // (see the SEO PR later in the stack), under Node during a server-side render. Node has

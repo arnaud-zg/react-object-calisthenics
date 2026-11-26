@@ -1,12 +1,13 @@
+import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
+import type { RefObject } from "react";
 import { render, screen, within } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { RefObject } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { welcomeSurveyStorage } from "@/config/storage.config";
 import { ProductCatalog } from "@/data/products";
 import { CourierPolicy } from "@/domain/cart/policy/CourierPolicy";
 import { ShoppingCart } from "@/ui/components/cart/ShoppingCart";
-import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 
 // A pre-saved survey keeps the WelcomeModal from auto-opening: these tests are about
 // the cart, not the modal, and a beginner skill is the default profile anyway.

@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
-import { WelcomeModal } from "./WelcomeModal";
+
 import type { WelcomeModalHandle } from "./WelcomeModal.types";
+import { WelcomeModal } from "./WelcomeModal";
 
 export const useWelcomeModalHandle = () => {
   const ref = useRef<WelcomeModalHandle>({

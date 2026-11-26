@@ -1,5 +1,7 @@
+import type { ReactNode } from "react";
+import { createContext, useContext } from "react";
 import { useImmutableInstance } from "immutable-instance";
-import { createContext, type ReactNode, useContext } from "react";
+
 import { Cart } from "@/domain/cart/Cart";
 
 const CartContext = createContext<Cart | null>(null);

@@ -1,4 +1,5 @@
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
+
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";
 import { Badge } from "@/ui/primitives/badge";
 import { CardHeader } from "@/ui/primitives/card";

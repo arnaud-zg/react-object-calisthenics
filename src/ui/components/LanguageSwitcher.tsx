@@ -1,4 +1,5 @@
 import { Link, useLocation } from "@tanstack/react-router";
+
 import { useLocale, useTranslations } from "@/i18n/LocaleContext";
 
 const pillClassName = (isActive: boolean) =>

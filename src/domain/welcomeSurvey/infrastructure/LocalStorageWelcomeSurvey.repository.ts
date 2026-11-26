@@ -2,9 +2,10 @@ import type {
   Listener,
   WelcomeStorageRepository,
 } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
+import type { WelcomeSurveyStoreState } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
+
 import {
   WELCOME_SURVEY_KEY,
-  type WelcomeSurveyStoreState,
   WelcomeSurveyStoreStateSchema,
 } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 

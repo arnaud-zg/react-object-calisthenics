@@ -1,19 +1,16 @@
+import type { KnowledgeProfile } from "@/domain/cart/value-objects/Product/Product";
+import type { Locale } from "@/i18n/Locale";
+
 import { Money } from "@/domain/cart/value-objects/Money";
 import {
   ExtraResources,
   ImageUrl,
   KnowledgeContent,
-  type KnowledgeProfile,
   Product,
   ProductId,
   ProductName,
 } from "@/domain/cart/value-objects/Product/Product";
-import {
-  Effect,
-  ProfileDetails,
-  Stats,
-} from "@/domain/cart/value-objects/Product/ProductDetails";
-import type { Locale } from "@/i18n/Locale";
+import { Effect, ProfileDetails, Stats } from "@/domain/cart/value-objects/Product/ProductDetails";
 import { productContentEn } from "@/i18n/messages/products.en";
 import { productContentFr } from "@/i18n/messages/products.fr";
 
@@ -48,8 +45,7 @@ const PRODUCT_STRUCTURES: ProductStructure[] = [
       "https://static.wikia.nocookie.net/wowpedia/images/c/c9/Thunderfury%2C_Blessed_Blade_of_the_Windseeker.JPG",
     iconUrl:
       "https://static.wikia.nocookie.net/wowpedia/images/3/36/Inv_sword_39.png/revision/latest?cb=20061228065536",
-    loreLink:
-      "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
+    loreLink: "https://wowpedia.fandom.com/wiki/Thunderfury,_Blessed_Blade_of_the_Windseeker",
     videoUrl: "https://www.youtube.com/embed/2TGRpvb5Nos",
     stats: {
       beginner: { power: 150, durability: 50, manaBoost: 0 },
@@ -239,8 +235,7 @@ const PRODUCT_STRUCTURES: ProductStructure[] = [
       "https://static.wikia.nocookie.net/wowpedia/images/c/c3/Inv_weapon_bow_01.png/revision/latest?cb=20070113180135",
     iconUrl:
       "https://static.wikia.nocookie.net/wowpedia/images/c/c3/Inv_weapon_bow_01.png/revision/latest?cb=20070113180135",
-    loreLink:
-      "https://wowpedia.fandom.com/wiki/Rhok%27delar,_Longbow_of_the_Ancient_Keepers",
+    loreLink: "https://wowpedia.fandom.com/wiki/Rhok%27delar,_Longbow_of_the_Ancient_Keepers",
     videoUrl: "https://www.youtube.com/embed/E2l7SMWpNCM",
     stats: {
       beginner: { power: 180, durability: 90, manaBoost: 0 },
@@ -527,11 +522,7 @@ const PRODUCT_CONTENT_BY_LOCALE: Record<Locale, typeof productContentEn> = {
   fr: productContentFr,
 };
 
-function buildProfile(
-  stats: StatBlock,
-  description: string,
-  effects: string[],
-): ProfileDetails {
+function buildProfile(stats: StatBlock, description: string, effects: string[]): ProfileDetails {
   return new ProfileDetails(
     description,
     new Stats(stats.power, stats.durability, stats.manaBoost),
@@ -547,21 +538,13 @@ function buildProduct(structure: ProductStructure, locale: Locale): Product {
   }
 
   const knowledge = new KnowledgeContent(
-    buildProfile(
-      structure.stats.beginner,
-      content.beginner.description,
-      content.beginner.effects,
-    ),
+    buildProfile(structure.stats.beginner, content.beginner.description, content.beginner.effects),
     buildProfile(
       structure.stats.intermediate,
       content.intermediate.description,
       content.intermediate.effects,
     ),
-    buildProfile(
-      structure.stats.expert,
-      content.expert.description,
-      content.expert.effects,
-    ),
+    buildProfile(structure.stats.expert, content.expert.description, content.expert.effects),
   );
 
   return new Product(

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Effect, ProfileDetails, Stats } from "../ProductDetails";
 
 describe("ProfileDetails", () => {

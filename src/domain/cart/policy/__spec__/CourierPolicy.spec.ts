@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+
 import { Money } from "@/domain/cart/value-objects/Money";
+
 import { CourierPolicy } from "../CourierPolicy";
 
 const threshold = CourierPolicy.FREE_COURIER_THRESHOLD.toAmount();

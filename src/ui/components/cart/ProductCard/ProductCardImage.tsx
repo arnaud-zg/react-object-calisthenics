@@ -6,10 +6,7 @@ interface ProductCardImageProps {
   priority?: boolean;
 }
 
-export const ProductCardImage = ({
-  product,
-  priority = false,
-}: ProductCardImageProps) => {
+export const ProductCardImage = ({ product, priority = false }: ProductCardImageProps) => {
   return (
     <div className="aspect-[4/3] relative overflow-hidden bg-muted">
       <img

@@ -1,7 +1,10 @@
+import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
+import type { FC, RefObject } from "react";
+import { useEffect, useRef, useState } from "react";
 import { GitHubLogoIcon, LinkedInLogoIcon } from "@radix-ui/react-icons";
 import { ShoppingCart as ShoppingCartIcon, X } from "lucide-react";
 import { AnimatePresence, motion } from "motion/react";
-import { type FC, type RefObject, useEffect, useRef, useState } from "react";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
 import { ProductCatalog } from "@/data/products";
@@ -11,7 +14,6 @@ import { useCart } from "@/ui/components/cart/CartContext";
 import { CartSummaryRow } from "@/ui/components/cart/CartSummaryRow";
 import { ShoppingCartItem } from "@/ui/components/cart/ShoppingCartItem";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
-import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 import { Badge } from "@/ui/primitives/badge";
 import { Button } from "@/ui/primitives/button";
 import { Card, CardContent, CardFooter, CardHeader } from "@/ui/primitives/card";
@@ -24,6 +26,7 @@ import {
   ModalTrigger,
 } from "@/ui/primitives/modal";
 import { Separator } from "@/ui/primitives/separator";
+
 import { ProductCard } from "./ProductCard/ProductCard";
 
 interface ShoppingCartProps {
@@ -45,9 +48,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
   useEffect(() => {
     if (!showCart) return;
 
-    const prefersReducedMotion = window.matchMedia(
-      "(prefers-reduced-motion: reduce)",
-    ).matches;
+    const prefersReducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
     cartRef.current?.scrollIntoView({
       behavior: prefersReducedMotion ? "auto" : "smooth",
     });
@@ -71,9 +72,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
         {/* Product List */}
         <div className="lg:col-span-2">
           <div className="mb-6 flex items-center justify-between gap-2">
-            <h2 className="text-2xl font-semibold text-foreground">
-              {t.shop.inventoryHeading}
-            </h2>
+            <h2 className="text-2xl font-semibold text-foreground">{t.shop.inventoryHeading}</h2>
 
             <Button
               onClick={() => setShowCart(true)}
@@ -83,8 +82,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               aria-controls="cart"
             >
               <ShoppingCartIcon className="mr-2 h-4 w-4" aria-hidden="true" />
-              {t.shop.cartButtonLabel}{" "}
-              <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
+              {t.shop.cartButtonLabel} <Badge className="ml-2">{cart.totalItems().toValue()}</Badge>
             </Button>
           </div>
 
@@ -112,10 +110,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
           <Card className="sticky top-20 flex max-h-[calc(100vh-6rem)] flex-col border-0 bg-card shadow-sm">
             <CardHeader className="shrink-0 px-4 pb-0 pt-4">
               <div className="flex items-center justify-between">
-                <h2
-                  id="cart-heading"
-                  className="text-xl font-semibold text-card-foreground"
-                >
+                <h2 id="cart-heading" className="text-xl font-semibold text-card-foreground">
                   {t.shop.yourInventory}
                 </h2>
                 <div className="flex justify-center">
@@ -245,9 +240,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
                       >
                         <span>
                           {t.shop.remainingForFreeCourier(
-                            goldSilverCopperFormatter.format(
-                              cart.remainingForFreeCourier(),
-                            ),
+                            goldSilverCopperFormatter.format(cart.remainingForFreeCourier()),
                           )}
                         </span>
                       </motion.div>

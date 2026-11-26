@@ -7,11 +7,7 @@ import {
   ProductId,
   ProductName,
 } from "@/domain/cart/value-objects/Product/Product";
-import {
-  Effect,
-  ProfileDetails,
-  Stats,
-} from "@/domain/cart/value-objects/Product/ProductDetails";
+import { Effect, ProfileDetails, Stats } from "@/domain/cart/value-objects/Product/ProductDetails";
 
 /**
  * A minimal, valid Product for domain tests that don't care about its knowledge content,

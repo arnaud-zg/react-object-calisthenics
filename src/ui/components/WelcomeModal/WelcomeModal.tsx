@@ -1,5 +1,7 @@
+import type { Ref } from "react";
+import { forwardRef, useImperativeHandle, useState } from "react";
 import { useForm } from "@tanstack/react-form";
-import { forwardRef, type Ref, useImperativeHandle, useState } from "react";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
 import { useTranslations } from "@/i18n/LocaleContext";
@@ -12,13 +14,14 @@ import {
   ModalHeader,
   ModalTitle,
 } from "@/ui/primitives/modal";
-import { useWelcomeModalHandle } from "./WelcomeModal.logic";
-import { useWelcomeModalSurvey } from "./WelcomeModal.survey";
+
 import type {
   WelcomeModalComponentType,
   WelcomeModalHandle,
   WelcomeModalProps,
 } from "./WelcomeModal.types";
+import { useWelcomeModalHandle } from "./WelcomeModal.logic";
+import { useWelcomeModalSurvey } from "./WelcomeModal.survey";
 
 export type { WelcomeModalHandle } from "./WelcomeModal.types";
 
@@ -64,8 +67,7 @@ const WelcomeModalComponent = (
               name="skill"
               validators={{
                 onChange: ({ value }) => {
-                  const { success } =
-                    WelcomeSurveyDataSchema.shape.skill.safeParse(value);
+                  const { success } = WelcomeSurveyDataSchema.shape.skill.safeParse(value);
 
                   if (success) return;
                   return t.welcomeModal.invalidSkill;
@@ -86,8 +88,9 @@ const WelcomeModalComponent = (
                     id={field.name}
                     value={field.state.value ?? ""}
                     onChange={(e) => {
-                      const { data: safeValue } =
-                        WelcomeSurveyDataSchema.shape.skill.safeParse(e.target.value);
+                      const { data: safeValue } = WelcomeSurveyDataSchema.shape.skill.safeParse(
+                        e.target.value,
+                      );
 
                       if (!safeValue) return;
                       field.handleChange(safeValue);
@@ -104,10 +107,7 @@ const WelcomeModalComponent = (
                     <option value="expert">{t.skill.label.expert}</option>
                   </select>
                   {field.state.meta.isTouched && field.state.meta.errors?.[0] && (
-                    <p
-                      id={`${field.name}-error`}
-                      className="mt-1 text-sm text-destructive"
-                    >
+                    <p id={`${field.name}-error`} className="mt-1 text-sm text-destructive">
                       {field.state.meta.errors[0]}
                     </p>
                   )}
@@ -119,12 +119,7 @@ const WelcomeModalComponent = (
           <ModalFooter>
             <form.Subscribe selector={(state) => state.isValid && !state.isPristine}>
               {(canSubmit) => (
-                <Button
-                  type="submit"
-                  disabled={!canSubmit}
-                  className="w-full"
-                  size="default"
-                >
+                <Button type="submit" disabled={!canSubmit} className="w-full" size="default">
                   {actionLabel ?? t.welcomeModal.continue}
                 </Button>
               )}

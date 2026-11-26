@@ -1,4 +1,5 @@
 import type { Money } from "@/domain/cart/value-objects/Money";
+
 import { GoldSilverCopperAmount } from "@/domain/currency/GoldSilverCopperAmount";
 
 /**
@@ -11,8 +12,7 @@ class GoldSilverCopperFormatter {
     const parts: string[] = [];
 
     if (converted.hasGold()) parts.push(`${converted.gold()} 🟡`);
-    if (converted.hasSilver() || converted.hasGold())
-      parts.push(`${converted.silver()} ⚪`);
+    if (converted.hasSilver() || converted.hasGold()) parts.push(`${converted.silver()} ⚪`);
     parts.push(`${converted.copper()} 🟤`);
 
     return parts.join(" ");

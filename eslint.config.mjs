@@ -3,12 +3,7 @@ import { defineConfig } from "eslint/config";
 
 export default defineConfig(
   {
-    ignores: [
-      "src/app/routeTree.gen.ts",
-      "public/**",
-      "playwright-report/**",
-      "test-results/**",
-    ],
+    ignores: ["src/app/routeTree.gen.ts", "public/**", "playwright-report/**", "test-results/**"],
   },
   ...base,
   { settings: { react: { version: "detect" } } },

@@ -1,4 +1,5 @@
 import type { SkillValue } from "@/domain/welcomeSurvey/value-objects/Skill";
+
 import type { Money } from "../Money";
 import type { NamedStat, ProfileDetails } from "./ProductDetails";
 

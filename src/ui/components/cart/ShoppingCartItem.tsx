@@ -1,5 +1,6 @@
 import { Minus, Plus, Trash2 } from "lucide-react";
 import { motion } from "motion/react";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { CartItem } from "@/domain/cart/CartItem";
 import { goldSilverCopperFormatter } from "@/domain/currency/GoldSilverCopperFormatter";

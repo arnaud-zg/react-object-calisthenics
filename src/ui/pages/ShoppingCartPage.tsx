@@ -7,10 +7,7 @@ export function ShoppingCartPage() {
   const t = useTranslations();
 
   return (
-    <main
-      id="main-content"
-      className="relative flex-1 bg-muted/30 py-8 px-4 sm:px-6 lg:px-8"
-    >
+    <main id="main-content" className="relative flex-1 bg-muted/30 py-8 px-4 sm:px-6 lg:px-8">
       <ShoppingCart welcomeModalHandle={ref} />
       <WelcomeModal
         title={t.welcomeModal.title}

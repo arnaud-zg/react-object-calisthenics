@@ -1,6 +1,6 @@
+import type * as React from "react";
 import * as DialogPrimitive from "@radix-ui/react-dialog";
 import { XIcon } from "lucide-react";
-import type * as React from "react";
 
 import { cn } from "@/lib/utils";
 
@@ -8,9 +8,7 @@ function Modal({ ...props }: React.ComponentProps<typeof DialogPrimitive.Root>) 
   return <DialogPrimitive.Root data-slot="modal" {...props} />;
 }
 
-function ModalTrigger({
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
+function ModalTrigger({ ...props }: React.ComponentProps<typeof DialogPrimitive.Trigger>) {
   return <DialogPrimitive.Trigger data-slot="modal-trigger" {...props} />;
 }
 
@@ -76,10 +74,7 @@ function ModalHeader({ className, ...props }: React.ComponentProps<"div">) {
   return (
     <div
       data-slot="modal-header"
-      className={cn(
-        "flex flex-col gap-2 pr-8 text-center sm:pr-0 sm:text-left",
-        className,
-      )}
+      className={cn("flex flex-col gap-2 pr-8 text-center sm:pr-0 sm:text-left", className)}
       {...props}
     />
   );
@@ -95,10 +90,7 @@ function ModalFooter({ className, ...props }: React.ComponentProps<"div">) {
   );
 }
 
-function ModalTitle({
-  className,
-  ...props
-}: React.ComponentProps<typeof DialogPrimitive.Title>) {
+function ModalTitle({ className, ...props }: React.ComponentProps<typeof DialogPrimitive.Title>) {
   return (
     <DialogPrimitive.Title
       data-slot="modal-title"

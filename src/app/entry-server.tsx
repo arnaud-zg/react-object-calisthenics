@@ -1,7 +1,9 @@
-import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
+import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { prerenderToNodeStream } from "react-dom/static";
+
 import { SITE_CONFIG } from "@/config/site.config.ts";
+
 import { createAppRouter } from "./router.ts";
 
 export { getHomeSeoMeta, getShopSeoMeta, listProductsForSeo } from "./seo-data.ts";

@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
+
 import { DevSettingsModal } from "@/ui/components/DevSettingsModal";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
 import { DevSettingsProvider } from "@/ui/devSettings/DevSettingsContext";

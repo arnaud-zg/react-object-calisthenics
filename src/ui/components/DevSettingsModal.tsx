@@ -1,9 +1,8 @@
+import type { WelcomeSurveyStorageKey } from "@/config/storage.config";
 import { Settings } from "lucide-react";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
-import {
-  WELCOME_SURVEY_STORAGE_IMPLEMENTATIONS,
-  type WelcomeSurveyStorageKey,
-} from "@/config/storage.config";
+import { WELCOME_SURVEY_STORAGE_IMPLEMENTATIONS } from "@/config/storage.config";
 import { useTranslations } from "@/i18n/LocaleContext";
 import { useDevSettings } from "@/ui/devSettings/DevSettingsContext";
 import {
@@ -59,10 +58,9 @@ export function DevSettingsModal() {
                   checked={welcomeSurveyStorageKey === key}
                   onChange={() => {
                     setWelcomeSurveyStorageKey(key);
-                    window.umami?.track(
-                      ANALYTICS_CONFIG.events.switchWelcomeSurveyStorage,
-                      { implementation: key },
-                    );
+                    window.umami?.track(ANALYTICS_CONFIG.events.switchWelcomeSurveyStorage, {
+                      implementation: key,
+                    });
                   }}
                   className="h-4 w-4 cursor-pointer accent-primary"
                 />

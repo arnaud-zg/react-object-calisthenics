@@ -1,6 +1,7 @@
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
 import { ArrowRight, BookOpen, ShoppingCart } from "lucide-react";
+
 import logo from "@/assets/logo.svg";
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
@@ -19,12 +20,7 @@ export function HomePage() {
       id="main-content"
       className="flex flex-1 flex-col items-center justify-center gap-8 bg-gradient-to-b from-muted/40 to-background px-6 py-16 text-base text-foreground sm:text-lg md:text-xl lg:text-[1.375rem]"
     >
-      <img
-        src={logo}
-        className="h-[20vmin] pointer-events-none"
-        alt=""
-        aria-hidden="true"
-      />
+      <img src={logo} className="h-[20vmin] pointer-events-none" alt="" aria-hidden="true" />
 
       <div className="flex flex-col items-center gap-6">
         <h1 className="max-w-3xl text-center text-3xl font-extrabold leading-tight sm:text-4xl">

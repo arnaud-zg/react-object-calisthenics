@@ -1,6 +1,7 @@
-import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import type { Money } from "@/domain/cart/value-objects/Money";
 import type { Product } from "@/domain/cart/value-objects/Product/Product";
+
+import { COMMERCE_CONFIG } from "@/config/commerce.config";
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
 
 export class CartItem {
@@ -47,10 +48,7 @@ export class CartItem {
   }
 
   updateQuantity(newQuantity: Quantity): CartItem {
-    const clamped = newQuantity.clampBetween(
-      CartItem.MIN_QUANTITY,
-      CartItem.MAX_QUANTITY,
-    );
+    const clamped = newQuantity.clampBetween(CartItem.MIN_QUANTITY, CartItem.MAX_QUANTITY);
     return new CartItem(this._product, clamped);
   }
 }

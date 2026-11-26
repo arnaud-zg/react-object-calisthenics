@@ -1,6 +1,7 @@
+import type { Product } from "@/domain/cart/value-objects/Product/Product";
+
 import { CartItem } from "@/domain/cart/CartItem";
 import { Money } from "@/domain/cart/value-objects/Money";
-import type { Product } from "@/domain/cart/value-objects/Product/Product";
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
 
 /**
@@ -23,10 +24,7 @@ export class CartItems {
   }
 
   totalQuantity(): Quantity {
-    return this.items.reduce(
-      (total, item) => total.add(item.quantity()),
-      new Quantity(0),
-    );
+    return this.items.reduce((total, item) => total.add(item.quantity()), new Quantity(0));
   }
 
   totalPrice(): Money {

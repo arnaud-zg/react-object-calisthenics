@@ -1,9 +1,7 @@
+import type { KnowledgeProfile, Product } from "@/domain/cart/value-objects/Product/Product";
 import { BookOpenText, Clapperboard, ShoppingCart } from "lucide-react";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
-import type {
-  KnowledgeProfile,
-  Product,
-} from "@/domain/cart/value-objects/Product/Product";
 import { useTranslations } from "@/i18n/LocaleContext";
 import { Button } from "@/ui/primitives/button";
 import { CardFooter } from "@/ui/primitives/card";
@@ -22,11 +20,7 @@ interface ProductCardFooterProps {
   onAddToCart: (product: Product) => void;
 }
 
-export function ProductCardFooter({
-  product,
-  profile,
-  onAddToCart,
-}: ProductCardFooterProps) {
+export function ProductCardFooter({ product, profile, onAddToCart }: ProductCardFooterProps) {
   const loreLink = product.getLoreLink();
   const videoUrl = product.getVideoUrl();
   const productName = product.displayName();
@@ -64,9 +58,7 @@ export function ProductCardFooter({
 
         <ModalContent className="rounded-2xl shadow-lg sm:max-w-2xl">
           <ModalHeader>
-            <ModalTitle className="text-center text-xl font-semibold">
-              {productName}
-            </ModalTitle>
+            <ModalTitle className="text-center text-xl font-semibold">{productName}</ModalTitle>
             <ModalDescription className="text-center">
               {t.product.loreVideoFor(productName)}
             </ModalDescription>
@@ -85,11 +77,7 @@ export function ProductCardFooter({
       </Modal>
 
       {profile !== "beginner" && (
-        <Button
-          asChild
-          className="w-full flex items-center justify-center gap-2"
-          variant="link"
-        >
+        <Button asChild className="w-full flex items-center justify-center gap-2" variant="link">
           <a
             href={loreLink}
             target="_blank"

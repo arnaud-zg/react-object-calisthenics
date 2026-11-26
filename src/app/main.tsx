@@ -1,10 +1,14 @@
-import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
+import { RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
 import { SITE_CONFIG } from "@/config/site.config";
+
 import { createAppRouter } from "./router.ts";
+
 import "@/styles/styles.css";
+
 import reportWebVitals from "../reportWebVitals.ts";
 
 const params = new URLSearchParams(window.location.search);

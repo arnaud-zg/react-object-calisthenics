@@ -59,9 +59,7 @@ function resolveUrl(canonicalPath) {
 }
 
 function findCanonicalPath(kind, locale) {
-  const page = PAGES.find(
-    (candidate) => candidate.kind === kind && candidate.locale === locale,
-  );
+  const page = PAGES.find((candidate) => candidate.kind === kind && candidate.locale === locale);
   return page.canonicalPath;
 }
 

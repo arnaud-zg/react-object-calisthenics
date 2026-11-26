@@ -5,19 +5,12 @@
  * storage.config.ts directly, keeping pages that never open the settings modal (the home
  * page, for instance) from paying for zustand, TanStack Store, and zod in their bundle.
  */
-export const WELCOME_SURVEY_STORAGE_KEYS = [
-  "localStorage",
-  "tanstackStore",
-  "zustand",
-] as const;
+export const WELCOME_SURVEY_STORAGE_KEYS = ["localStorage", "tanstackStore", "zustand"] as const;
 
 export type WelcomeSurveyStorageKey = (typeof WELCOME_SURVEY_STORAGE_KEYS)[number];
 
-export const DEFAULT_WELCOME_SURVEY_STORAGE_KEY: WelcomeSurveyStorageKey =
-  "tanstackStore";
+export const DEFAULT_WELCOME_SURVEY_STORAGE_KEY: WelcomeSurveyStorageKey = "tanstackStore";
 
-export function isWelcomeSurveyStorageKey(
-  value: string,
-): value is WelcomeSurveyStorageKey {
+export function isWelcomeSurveyStorageKey(value: string): value is WelcomeSurveyStorageKey {
   return (WELCOME_SURVEY_STORAGE_KEYS as readonly string[]).includes(value);
 }

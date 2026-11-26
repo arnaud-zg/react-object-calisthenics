@@ -6,9 +6,7 @@ import { Money } from "@/domain/cart/value-objects/Money";
  * domain speaks of a courier fee rather than shipping.
  */
 export class CourierPolicy {
-  static readonly FREE_COURIER_THRESHOLD = new Money(
-    COMMERCE_CONFIG.freeCourierThreshold,
-  );
+  static readonly FREE_COURIER_THRESHOLD = new Money(COMMERCE_CONFIG.freeCourierThreshold);
   static readonly COURIER_FEE = new Money(COMMERCE_CONFIG.courierFee);
 
   static calculate(subtotal: Money): Money {

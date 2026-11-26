@@ -1,11 +1,9 @@
+import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
+import type { WelcomeSurveyStoreState } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
 
-import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
-import {
-  WELCOME_SURVEY_KEY,
-  type WelcomeSurveyStoreState,
-} from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
+import { WELCOME_SURVEY_KEY } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
 
 interface WelcomeModalState {
   survey: WelcomeSurveyStoreState["survey"];

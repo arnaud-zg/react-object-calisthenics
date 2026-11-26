@@ -1,11 +1,12 @@
+import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
+import type { RefObject } from "react";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
-import type { RefObject } from "react";
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { welcomeSurveyStorage } from "@/config/storage.config";
 import { aProduct } from "@/domain/cart/__spec__/productFixtures";
 import { ShoppingCart } from "@/ui/components/cart/ShoppingCart";
-import type { WelcomeModalHandle } from "@/ui/components/WelcomeModal/WelcomeModal.types";
 
 // COMMERCE_CONFIG.freeCourierThreshold is 300, and every real catalog product costs far
 // more than that, so the "how much is left" banner can never appear against real data

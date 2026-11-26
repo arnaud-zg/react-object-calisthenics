@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
+
 import { DevSettingsModal } from "@/ui/components/DevSettingsModal";
 import { DevSettingsProvider } from "@/ui/devSettings/DevSettingsContext";
 
@@ -36,8 +37,6 @@ describe("DevSettingsModal", () => {
     await user.click(screen.getByRole("radio", { name: "Local Storage" }));
 
     expect(screen.getByRole("radio", { name: "Local Storage" })).toBeChecked();
-    expect(localStorage.getItem("dev-settings.welcome-survey-storage")).toBe(
-      "localStorage",
-    );
+    expect(localStorage.getItem("dev-settings.welcome-survey-storage")).toBe("localStorage");
   });
 });

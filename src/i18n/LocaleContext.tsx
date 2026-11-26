@@ -1,6 +1,10 @@
-import { createContext, type ReactNode, useContext, useEffect } from "react";
-import { DEFAULT_LOCALE, type Locale } from "@/i18n/Locale";
-import { en, type Messages } from "@/i18n/messages/en";
+import type { Locale } from "@/i18n/Locale";
+import type { Messages } from "@/i18n/messages/en";
+import type { ReactNode } from "react";
+import { createContext, useContext, useEffect } from "react";
+
+import { DEFAULT_LOCALE } from "@/i18n/Locale";
+import { en } from "@/i18n/messages/en";
 import { fr } from "@/i18n/messages/fr";
 
 const MESSAGES: Record<Locale, Messages> = { en, fr };

@@ -1,4 +1,5 @@
 import { describe, expect, it } from "vitest";
+
 import { Cart } from "../Cart";
 import { CourierPolicy } from "../policy/CourierPolicy";
 import { aProduct } from "./productFixtures";
@@ -127,9 +128,7 @@ describe("Cart", () => {
   });
 
   it("should report nothing left once the free courier threshold is met", () => {
-    const cart = new Cart().addItem(
-      aProduct({ id: "expensive", price: FREE_COURIER_THRESHOLD }),
-    );
+    const cart = new Cart().addItem(aProduct({ id: "expensive", price: FREE_COURIER_THRESHOLD }));
 
     expect(cart.remainingForFreeCourier().toAmount()).toBe(0);
   });

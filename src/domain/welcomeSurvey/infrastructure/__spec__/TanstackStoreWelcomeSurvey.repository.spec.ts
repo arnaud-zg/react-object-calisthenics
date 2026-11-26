@@ -2,6 +2,7 @@
 // environment, which has no localStorage. That intentionally proves the module is safe
 // to import and use during a server-side render (see the SEO PR later in the stack).
 import { describe, expect, it, vi } from "vitest";
+
 import { TanStackStoreWelcomeSurveyRepository } from "../TanstackStoreWelcomeSurvey.repository";
 
 // TanStackStoreWelcomeSurveyRepository wraps one module-level store shared by every
