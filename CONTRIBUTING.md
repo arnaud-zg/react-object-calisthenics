@@ -82,6 +82,13 @@ The rules this repo tries to hold itself to, and where to see them:
 None of this is free: it costs more classes and more indirection than the equivalent procedural
 code. The trade is code whose pieces can be understood, tested, and changed one at a time.
 
+## Changesets
+
+Shiplane versions from `.changeset/*.md` only; commit types release nothing. A pull request that
+changes the built site adds one with `pnpm changeset`: one sentence, for a visitor, which becomes
+the changelog line. When visitors see no difference, the sentence says so. Tests, docs, CI and
+tooling need none.
+
 ## Commits
 
 Conventional Commits, scope required: `type(scope): subject`. Enforced by commitlint in a commit-msg

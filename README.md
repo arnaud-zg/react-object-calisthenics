@@ -123,14 +123,30 @@ ESLint, Prettier, TypeScript, remark and commitlint. `pnpm install` adds its git
 `main`, staged files formatted, commit messages as `type(scope): subject`, and tests before a push.
 Switching branch pulls it.
 
-More on the testing trophy, TDD, and commit conventions in [CONTRIBUTING.md](./CONTRIBUTING.md).
+More on the testing trophy, TDD, and commit conventions in [CONTRIBUTING.md](./CONTRIBUTING.md). The
+other docs are listed in [docs/](./docs/README.md).
 
-## Deployment
+## Analytics
 
-CI (`.github/workflows/ci.yml`) runs typecheck, ESLint, Markdown lint, the Prettier check, tests
-with coverage, the build and the Playwright specs on every push. `.github/workflows/deploy.yml`
-builds and publishes `dist/` to the `gh-pages` branch on pushes to `main`, which GitHub Pages serves
-from.
+[Umami](https://umami.is), added at build time only when `VITE_UMAMI_WEBSITE_ID` is set: copy
+[`.env.example`](./.env.example) to `.env` to fill it. Unset, the build warns and the page carries
+no analytics code. Off on the preview. GitHub Actions reads it from the repository's variables.
+
+## Release
+
+With [Shiplane](https://www.npmjs.com/package/shiplane), from this machine or from GitHub Actions
+(`pnpm shiplane ship --via ci`, or Run workflow on Ship). This machine needs `gh auth login`. CI
+(`.github/workflows/ci.yml`) checks every push and pull request; nothing deploys on a push.
+
+```sh
+pnpm changeset         # in your pull request: what changed
+pnpm release           # on main: opens the release PR; once merged, ships the preview
+pnpm release promote   # ships the preview to production
+```
+
+The preview is at
+[/react-object-calisthenics/preview/](https://arnaud-zg.github.io/react-object-calisthenics/preview/),
+and production ships after it. See what would run with `pnpm shiplane ship --dry-run`.
 
 ## License
 

@@ -1,4 +1,4 @@
-[← Back to README](../README.md)
+[🏠 Docs](README.md) · [Project README](../README.md) · **💡 Architecture**
 
 # Architecture
 

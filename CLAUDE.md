@@ -28,6 +28,16 @@ Run `pnpm verify` before a pull request, and `pnpm build && pnpm test:e2e` after
 change. Tests follow the testing trophy: mostly integration tests in `src/ui`, unit tests in
 `src/domain`, and the three Playwright specs in `e2e/`.
 
-## Releases
+## Releases: changesets, not commits
 
-No changesets: every push to `main` deploys to GitHub Pages.
+Shiplane versions from `.changeset/*.md` only. Commit types (`feat`, `fix`) release nothing.
+
+- A pull request that changes the built site adds a changeset (`pnpm changeset`) for
+  `react-object-calisthenics`: one sentence, for a visitor; it becomes the changelog line.
+- No changeset for what stays out of the build: tests, repository docs, CI, tooling.
+- Never edit a `CHANGELOG.md` or a version by hand: the release pull request does it.
+- A ship goes to `/preview/` first (`BASE_PATH` set, analytics off), then `pnpm release promote`.
+
+## Env
+
+`.env` is local and ignored; `.env.example` documents it. Never commit `.env`.
