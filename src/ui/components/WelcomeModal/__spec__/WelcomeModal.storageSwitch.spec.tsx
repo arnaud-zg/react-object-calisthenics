@@ -67,7 +67,7 @@ describe("switching the welcome survey storage implementation live", () => {
 
     await saveSurvey(user, "expert");
 
-    const stored = JSON.parse(localStorage.getItem(WELCOME_SURVEY_KEY) ?? "");
+    const stored = JSON.parse(localStorage.getItem(WELCOME_SURVEY_KEY) ?? "") as unknown;
     expect(stored).toMatchObject({ state: { survey: { skill: "expert" } } });
     expect(stored).not.toEqual({ survey: { skill: "expert" } });
   });

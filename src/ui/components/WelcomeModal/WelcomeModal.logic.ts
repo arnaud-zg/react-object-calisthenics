@@ -13,7 +13,7 @@ export const useWelcomeModalHandle = () => {
 
   useEffect(() => {
     if (!hasSubmittedData) {
-      ref.current?.open();
+      ref.current.open();
     }
   }, [hasSubmittedData]);
 

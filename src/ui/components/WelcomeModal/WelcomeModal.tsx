@@ -35,7 +35,7 @@ const WelcomeModalComponent = (
 
   const form = useForm({
     defaultValues: welcomeSurvey,
-    onSubmit: async ({ value: survey }) => {
+    onSubmit: ({ value: survey }) => {
       if (!survey) return;
 
       saveSurvey(survey);
@@ -59,7 +59,7 @@ const WelcomeModalComponent = (
         <form
           onSubmit={(e) => {
             e.preventDefault();
-            form.handleSubmit();
+            void form.handleSubmit();
           }}
         >
           <div className="mb-5">
@@ -83,9 +83,11 @@ const WelcomeModalComponent = (
                     {t.welcomeModal.fieldLabel}
                   </label>
                   <select
-                    aria-invalid={!!field.state.meta.errors?.length}
+                    aria-invalid={!!field.state.meta.errors.length}
                     aria-describedby={`${field.name}-error`}
                     id={field.name}
+                    // The type says always set, but with no saved survey the default is undefined.
+                    // eslint-disable-next-line @typescript-eslint/no-unnecessary-condition
                     value={field.state.value ?? ""}
                     onChange={(e) => {
                       const { data: safeValue } = WelcomeSurveyDataSchema.shape.skill.safeParse(
@@ -106,7 +108,7 @@ const WelcomeModalComponent = (
                     <option value="intermediate">{t.skill.label.intermediate}</option>
                     <option value="expert">{t.skill.label.expert}</option>
                   </select>
-                  {field.state.meta.isTouched && field.state.meta.errors?.[0] && (
+                  {field.state.meta.isTouched && field.state.meta.errors[0] && (
                     <p id={`${field.name}-error`} className="mt-1 text-sm text-destructive">
                       {field.state.meta.errors[0]}
                     </p>

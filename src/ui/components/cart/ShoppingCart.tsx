@@ -91,7 +91,7 @@ export const ShoppingCart: FC<ShoppingCartProps> = ({ welcomeModalHandle }) => {
               <li key={product.displayId()}>
                 <ProductCard
                   product={product}
-                  onAddToCart={cart.addItem}
+                  onAddToCart={(product) => cart.addItem(product)}
                   profile={selectedProfile}
                   priorityImage={index < EAGER_IMAGE_COUNT}
                 />

@@ -16,7 +16,7 @@ const loadInitialState = (): WelcomeSurveyStoreState => {
     const stored = localStorage.getItem(WELCOME_SURVEY_KEY);
 
     if (stored) {
-      return JSON.parse(stored);
+      return JSON.parse(stored) as WelcomeSurveyStoreState;
     }
   } catch (error) {
     console.error("Failed to load welcome survey from localStorage:", error);
