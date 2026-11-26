@@ -2,6 +2,7 @@
   "$schema": "https://json.schemastore.org/tsconfig",
   "extends": "@arnaud-zg/configs/tsconfig/react-vitest.json",
   "compilerOptions": {
+    "noUncheckedIndexedAccess": true,
     "tsBuildInfoFile": "./node_modules/.tmp/tsconfig.vitest.tsbuildinfo",
     "jsx": "react-jsx",
     "outDir": "./node_modules/.tmp/vitest",
