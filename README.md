@@ -103,33 +103,34 @@ src/
 └── styles/         # Tailwind entry point
 ```
 
-## Getting started
+## Develop
 
 ```sh
+nvm use        # Node 24
 pnpm install
-pnpm dev
+pnpm dev       # http://localhost:3000/react-object-calisthenics/
+pnpm build     # type-checks, builds, then prerenders every route x locale into dist/
 ```
 
-Bun works too, if you'd rather not install pnpm: `bun install && bunx --bun run dev`.
+```sh
+pnpm verify    # types, lint, Markdown, format and unit and integration tests
+pnpm format    # fix the format; `pnpm lint:fix` for the rest
+pnpm test:e2e  # Playwright smoke tests against a built dist/ (run `pnpm build` first)
+```
 
-| Command              | What it does                                                            |
-| -------------------- | ----------------------------------------------------------------------- |
-| `pnpm dev`           | Starts the dev server on port 3000                                      |
-| `pnpm build`         | Type-checks, builds, then prerenders every route x locale               |
-| `pnpm preview`       | Serves the built `dist/` locally                                        |
-| `pnpm test`          | Runs the unit and integration Vitest projects                           |
-| `pnpm test:coverage` | Same, with coverage thresholds enforced                                 |
-| `pnpm test:e2e`      | Playwright smoke tests against a built `dist/` (run `pnpm build` first) |
-| `pnpm typecheck`     | `tsc --noEmit` across the app, tooling, and tests                       |
-| `pnpm check`         | Biome lint and format check                                             |
+The rules come from [`@arnaud-zg/configs`](https://www.npmjs.com/package/@arnaud-zg/configs):
+ESLint, Prettier, TypeScript, remark and commitlint. `pnpm install` adds its git hooks: no commit on
+`main`, staged files formatted, commit messages as `type(scope): subject`, and tests before a push.
+Switching branch pulls it.
 
 More on the testing trophy, TDD, and commit conventions in [CONTRIBUTING.md](./CONTRIBUTING.md).
 
 ## Deployment
 
-CI (`.github/workflows/ci.yml`) runs typecheck, Biome, markdown lint, tests with coverage, and the
-build on every push. `.github/workflows/deploy.yml` builds and publishes `dist/` to the `gh-pages`
-branch on pushes to `main`, which GitHub Pages serves from.
+CI (`.github/workflows/ci.yml`) runs typecheck, ESLint, Markdown lint, the Prettier check, tests
+with coverage, the build and the Playwright specs on every push. `.github/workflows/deploy.yml`
+builds and publishes `dist/` to the `gh-pages` branch on pushes to `main`, which GitHub Pages serves
+from.
 
 ## License
 

@@ -3,11 +3,13 @@
 ## Getting started
 
 ```sh
+nvm use
 pnpm install
 pnpm dev
 ```
 
-Bun works too, if you'd rather not install pnpm: `bun install && bunx --bun run dev`.
+`pnpm install` also installs the git hooks (Lefthook). The [README](./README.md#develop) lists what
+they check.
 
 ## TDD
 
@@ -30,12 +32,12 @@ Effort is weighted toward the middle, not the extremes:
 
 ```mermaid
 flowchart TD
-  A["Static analysis: TypeScript, Biome"] --> B["Unit: src/domain/**"]
+  A["Static analysis: TypeScript, ESLint"] --> B["Unit: src/domain/**"]
   B --> C["Integration: src/ui/**, real components, mocked storage boundaries"]
-  C --> D["End-to-end: 2 Playwright smoke specs"]
+  C --> D["End-to-end: 3 Playwright specs"]
 ```
 
-- **Static**: `pnpm typecheck` and `pnpm check` catch a whole class of bugs before a test even runs.
+- **Static**: `pnpm typecheck` and `pnpm lint` catch a whole class of bugs before a test even runs.
 - **Unit** (`vitest --project unit`, node environment): every domain class, one behavior per test.
   This is most of the suite, domain logic has no framework to fight.
 - **Integration** (`vitest --project integration`, jsdom): renders real components with
@@ -43,9 +45,9 @@ flowchart TD
   survey save/restore. Framework wiring (React, Radix) is real; only the storage boundary gets
   mocked when a scenario the real data can't reach needs it (see
   `ShoppingCart.freeCourier.spec.tsx`).
-- **End-to-end** (`pnpm test:e2e`, Playwright against a built `vite preview`): two smoke tests, home
-  to shop and add-to-cart to checkout. Enough to catch a broken build, not a replacement for the
-  layers below.
+- **End-to-end** (`pnpm test:e2e`, Playwright against a built `vite preview`): three specs in
+  `e2e/`: home to shop, add-to-cart to checkout, and the prerendered HTML of every route. Enough to
+  catch a broken build, not a replacement for the layers below.
 
 ## Commands
 
@@ -54,10 +56,13 @@ flowchart TD
 | `pnpm test`          | Runs the unit and integration Vitest projects                              |
 | `pnpm test:watch`    | Same, in watch mode                                                        |
 | `pnpm test:coverage` | Runs tests with coverage thresholds enforced                               |
-| `pnpm test:e2e`      | Builds nothing itself, run `pnpm build` first, then the 2 Playwright specs |
+| `pnpm test:e2e`      | Builds nothing itself, run `pnpm build` first, then the 3 Playwright specs |
 | `pnpm typecheck`     | `tsc --noEmit` across the app, tooling, and tests                          |
-| `pnpm check`         | Biome lint + format check                                                  |
-| `pnpm check:fix`     | Biome lint + format, writing fixes                                         |
+| `pnpm lint`          | ESLint, with the React config from `@arnaud-zg/configs`                    |
+| `pnpm lint:fix`      | Same, writing fixes                                                        |
+| `pnpm lint:md`       | remark over every Markdown file                                            |
+| `pnpm format`        | Prettier, writing fixes; `pnpm format:check` only reports                  |
+| `pnpm verify`        | Everything above except e2e, in the order CI runs it                       |
 
 ## Object Calisthenics
 
@@ -79,5 +84,5 @@ code. The trade is code whose pieces can be understood, tested, and changed one 
 
 ## Commits
 
-Conventional Commits, scope required: `type(scope): subject`. Enforced by commitlint via a
-pre-commit hook (Lefthook), not just convention.
+Conventional Commits, scope required: `type(scope): subject`. Enforced by commitlint in a commit-msg
+hook (Lefthook), not just convention.
