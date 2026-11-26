@@ -44,7 +44,8 @@ export default defineConfig(({ mode, isSsrBuild }) => {
   const env = loadEnv(mode, import.meta.dirname, "");
 
   return {
-    base: SITE_CONFIG.basePath,
+    // Set by Shiplane: the folder a preview lives in.
+    base: process.env.BASE_PATH ?? SITE_CONFIG.basePath,
     plugins: [
       tanstackRouter({
         autoCodeSplitting: true,

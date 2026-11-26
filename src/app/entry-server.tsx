@@ -2,8 +2,6 @@ import { StrictMode } from "react";
 import { createMemoryHistory, RouterProvider } from "@tanstack/react-router";
 import { prerenderToNodeStream } from "react-dom/static";
 
-import { SITE_CONFIG } from "@/config/site.config.ts";
-
 import { createAppRouter } from "./router.ts";
 
 export { getHomeSeoMeta, getShopSeoMeta, listProductsForSeo } from "./seo-data.ts";
@@ -17,7 +15,8 @@ export { getHomeSeoMeta, getShopSeoMeta, listProductsForSeo } from "./seo-data.t
  */
 export async function render(url: string) {
   const router = createAppRouter({
-    basepath: SITE_CONFIG.basePath,
+    // Vite's base: SITE_CONFIG.basePath, or the preview's folder when Shiplane sets BASE_PATH.
+    basepath: import.meta.env.BASE_URL,
     history: createMemoryHistory({ initialEntries: [url] }),
     scrollRestoration: false,
   });

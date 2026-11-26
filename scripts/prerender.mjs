@@ -8,7 +8,8 @@ const distDir = join(rootDir, "dist");
 const serverOutDir = join(rootDir, "dist-server");
 
 const SITE_ORIGIN = "https://arnaud-zg.github.io";
-const BASE_PATH = "/react-object-calisthenics/";
+// Set by Shiplane for a preview, as in vite.config.ts; SITE_CONFIG.basePath otherwise.
+const BASE_PATH = process.env.BASE_PATH ?? "/react-object-calisthenics/";
 
 const PAGES = [
   {
