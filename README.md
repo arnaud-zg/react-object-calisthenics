@@ -136,7 +136,8 @@ no analytics code. Off on the preview. GitHub Actions reads it from the reposito
 
 With [Shiplane](https://www.npmjs.com/package/shiplane), from this machine or from GitHub Actions
 (`pnpm shiplane ship --via ci`, or Run workflow on Ship). This machine needs `gh auth login`. CI
-(`.github/workflows/ci.yml`) checks every push and pull request; nothing deploys on a push.
+(`.github/workflows/ci.yml`) runs only when started by hand
+(`gh workflow run ci.yml --ref <branch>`); nothing deploys on a push.
 
 ```sh
 pnpm changeset         # in your pull request: what changed
