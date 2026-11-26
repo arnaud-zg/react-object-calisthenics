@@ -5,3 +5,4 @@ test-results
 pnpm-lock.yaml
 # Written by the TanStack Router plugin.
 src/app/routeTree.gen.ts
+.shiplane

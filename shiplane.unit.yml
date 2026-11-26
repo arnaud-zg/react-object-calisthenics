@@ -1,0 +1,12 @@
+# yaml-language-server: $schema=node_modules/.cache/shiplane/schema.json
+# Every key: shiplane docs web-app
+
+module: web-app
+url: https://arnaud-zg.github.io/react-object-calisthenics/
+env:
+  # Visits to the preview are not counted.
+  ANALYTICS:
+    preview: "off"
+    production: ""
+# Analytics. From the shell or .env on this machine, from the repository's variables on GitHub.
+variables: [VITE_UMAMI_WEBSITE_ID]
