@@ -1,3 +1,1 @@
-import base from "@arnaud-zg/configs/commitlint";
-
-export default base;
+export { default } from "@arnaud-zg/configs/commitlint";

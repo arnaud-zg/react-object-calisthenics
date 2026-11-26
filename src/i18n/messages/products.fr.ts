@@ -75,8 +75,7 @@ export const productContentFr: ProductContent = {
       effects: ["Soigne les alliés au contact."],
     },
     intermediate: {
-      description:
-        "Val'anyr canalise l'énergie sacrée pour protéger les alliés au combat.",
+      description: "Val'anyr canalise l'énergie sacrée pour protéger les alliés au combat.",
       effects: ["Soin continu pour les alliés.", "Chance de bouclier"],
     },
     expert: {
@@ -96,10 +95,7 @@ export const productContentFr: ProductContent = {
     },
     intermediate: {
       description: "Doomhammer renforce la force de son porteur et sa magie terrestre.",
-      effects: [
-        "Rayon de l'onde de choc +15 %",
-        "Chance d'étourdissement sur les coups lourds",
-      ],
+      effects: ["Rayon de l'onde de choc +15 %", "Chance d'étourdissement sur les coups lourds"],
     },
     expert: {
       description:
@@ -139,8 +135,7 @@ export const productContentFr: ProductContent = {
   },
   shadowmourne: {
     beginner: {
-      description:
-        "Une hache avide d'âmes, réputée pour devenir plus puissante à chaque victime.",
+      description: "Une hache avide d'âmes, réputée pour devenir plus puissante à chaque victime.",
       effects: ["Chance d'absorber une âme à l'élimination pour des dégâts bonus."],
     },
     intermediate: {
@@ -185,8 +180,7 @@ export const productContentFr: ProductContent = {
   },
   warglaivesofazzinoth: {
     beginner: {
-      description:
-        "Une paire de glaives verts et infernaux, rapides et vicieux au corps à corps.",
+      description: "Une paire de glaives verts et infernaux, rapides et vicieux au corps à corps.",
       effects: ["Dégâts bonus contre les démons."],
     },
     intermediate: {
@@ -211,8 +205,7 @@ export const productContentFr: ProductContent = {
   },
   dragonwrath: {
     beginner: {
-      description:
-        "Un bâton rayonnant de magie draconique, réputé abriter l'esprit d'un dragon.",
+      description: "Un bâton rayonnant de magie draconique, réputé abriter l'esprit d'un dragon.",
       effects: ["Duplique occasionnellement un sort lancé."],
     },
     intermediate: {
@@ -254,17 +247,13 @@ export const productContentFr: ProductContent = {
   },
   queldelar: {
     beginner: {
-      description:
-        "Une lame prismatique, élégante et bien équilibrée, appréciée des éclaireurs.",
+      description: "Une lame prismatique, élégante et bien équilibrée, appréciée des éclaireurs.",
       effects: ["Dégâts bonus contre les morts-vivants."],
     },
     intermediate: {
       description:
         "Quel'Delar fut forgée comme symbole contre le Fléau, et entaille toujours aussi profondément tout ce qui n'est pas vivant.",
-      effects: [
-        "Dégâts contre les morts-vivants +25 %",
-        "Chance d'aveugler un ennemi au contact",
-      ],
+      effects: ["Dégâts contre les morts-vivants +25 %", "Chance d'aveugler un ennemi au contact"],
     },
     expert: {
       description:
@@ -333,11 +322,7 @@ export const productContentFr: ProductContent = {
     intermediate: {
       description:
         "Felo'melorn fut brisée contre Frostmourne puis reforgée dans la vengeance, sa lame brûlant désormais de la fureur de son porteur.",
-      effects: [
-        "Dégâts de feu +25 %",
-        "Vitesse d'attaque +10 %",
-        "Chance d'enflammer les ennemis",
-      ],
+      effects: ["Dégâts de feu +25 %", "Vitesse d'attaque +10 %", "Chance d'enflammer les ennemis"],
     },
     expert: {
       description:
@@ -352,8 +337,7 @@ export const productContentFr: ProductContent = {
   },
   fangsofashamane: {
     beginner: {
-      description:
-        "Une paire de crocs féraux, réputés porter l'esprit d'une grande panthère.",
+      description: "Une paire de crocs féraux, réputés porter l'esprit d'une grande panthère.",
       effects: ["Dégâts bonus sous forme animale."],
     },
     intermediate: {
@@ -427,10 +411,7 @@ export const productContentFr: ProductContent = {
     intermediate: {
       description:
         "Apocalypse fut forgée par des seigneurs-dragons pour corrompre son porteur, répandant la non-mort à chaque frappe.",
-      effects: [
-        "Dégâts de peste +25 %",
-        "Chance de relever un serviteur mort-vivant mineur",
-      ],
+      effects: ["Dégâts de peste +25 %", "Chance de relever un serviteur mort-vivant mineur"],
     },
     expert: {
       description:
@@ -509,17 +490,13 @@ export const productContentFr: ProductContent = {
   },
   titanstrike: {
     beginner: {
-      description:
-        "Un fusil technomagique alliant mécanique des titans et puissance brute.",
+      description: "Un fusil technomagique alliant mécanique des titans et puissance brute.",
       effects: ["Dégâts bonus contre les bêtes."],
     },
     intermediate: {
       description:
         "Titanstrike canalise une ingénierie forgée par les titans en tirs dévastateurs et précis.",
-      effects: [
-        "Puissance d'attaque à distance +20 %",
-        "Chance de tirer un projectile perforant",
-      ],
+      effects: ["Puissance d'attaque à distance +20 %", "Chance de tirer un projectile perforant"],
     },
     expert: {
       description:

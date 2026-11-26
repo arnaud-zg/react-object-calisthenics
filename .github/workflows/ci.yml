@@ -30,11 +30,14 @@ jobs:
       - name: Typecheck
         run: pnpm typecheck
 
-      - name: Lint and format check
-        run: pnpm check
+      - name: Lint
+        run: pnpm lint
 
-      - name: Lint markdown
+      - name: Lint Markdown
         run: pnpm lint:md
+
+      - name: Check format
+        run: pnpm format:check
 
       - name: Test with coverage
         run: pnpm test:coverage

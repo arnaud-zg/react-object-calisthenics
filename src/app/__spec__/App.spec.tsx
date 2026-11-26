@@ -1,11 +1,8 @@
-import {
-  createMemoryHistory,
-  createRouter,
-  RouterProvider,
-} from "@tanstack/react-router";
+import { createMemoryHistory, createRouter, RouterProvider } from "@tanstack/react-router";
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
+
 import { routeTree } from "@/app/routeTree.gen";
 import { welcomeSurveyStorage } from "@/config/storage.config";
 
@@ -56,17 +53,13 @@ describe("App routing and i18n", () => {
 
     await user.click(screen.getByRole("link", { name: "Français" }));
 
-    expect(
-      await screen.findByRole("heading", { name: "Inventaire Mystique" }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Inventaire Mystique" })).toBeInTheDocument();
   });
 
   it("should render the French shopping cart page", async () => {
     renderAppAt("/fr/shopping-cart");
 
-    expect(
-      await screen.findByRole("heading", { name: "Inventaire Mystique" }),
-    ).toBeInTheDocument();
+    expect(await screen.findByRole("heading", { name: "Inventaire Mystique" })).toBeInTheDocument();
     expect(screen.getByRole("heading", { name: "Votre Inventaire" })).toBeInTheDocument();
   });
 });

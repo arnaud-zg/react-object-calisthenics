@@ -1,17 +1,7 @@
-import {
-  BarChart3,
-  Scroll,
-  Shield,
-  Sparkle,
-  Sparkles,
-  Swords,
-  Wand2,
-} from "lucide-react";
-import type {
-  KnowledgeProfile,
-  Product,
-} from "@/domain/cart/value-objects/Product/Product";
+import type { KnowledgeProfile, Product } from "@/domain/cart/value-objects/Product/Product";
 import type { StatKey } from "@/domain/cart/value-objects/Product/ProductDetails";
+import { BarChart3, Scroll, Shield, Sparkle, Sparkles, Swords, Wand2 } from "lucide-react";
+
 import { useTranslations } from "@/i18n/LocaleContext";
 import { CardContent } from "@/ui/primitives/card";
 
@@ -70,10 +60,7 @@ export function ProductCardContent({ product, profile }: ProductCardContentProps
         <ul className="text-sm list-none flex flex-col gap-1">
           {effects.map((effect) => (
             <li key={effect} className="flex items-center gap-1.5">
-              <Sparkle
-                className="h-3.5 w-3.5 shrink-0 text-muted-foreground"
-                aria-hidden="true"
-              />
+              <Sparkle className="h-3.5 w-3.5 shrink-0 text-muted-foreground" aria-hidden="true" />
               {effect}
             </li>
           ))}

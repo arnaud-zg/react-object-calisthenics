@@ -1,6 +1,8 @@
-import { Moon, Sun, SunMoon } from "lucide-react";
+import type { Theme } from "@/ui/theme/theme";
 import { useState } from "react";
-import { applyTheme, getStoredTheme, storeTheme, type Theme } from "@/ui/theme/theme";
+import { Moon, Sun, SunMoon } from "lucide-react";
+
+import { applyTheme, getStoredTheme, storeTheme } from "@/ui/theme/theme";
 
 const NEXT_THEME: Record<Theme, Theme> = {
   system: "light",

@@ -27,10 +27,7 @@ for (const path of PAGES) {
 
   test(`${path} serves rendered content without running any JavaScript`, async () => {
     const context = await request.newContext({ baseURL: undefined });
-    const url = new URL(
-      path,
-      "http://localhost:4173/react-object-calisthenics/",
-    ).toString();
+    const url = new URL(path, "http://localhost:4173/react-object-calisthenics/").toString();
     const response = await context.get(url);
     const body = await response.text();
 

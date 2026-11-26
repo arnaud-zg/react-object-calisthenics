@@ -1,4 +1,5 @@
 import { z } from "zod";
+
 import { WelcomeSurveyDataSchema } from "@/domain/welcomeSurvey/WelcomeSurvey.data";
 
 export const WELCOME_SURVEY_KEY = "welcome_survey";

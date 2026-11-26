@@ -1,4 +1,5 @@
 import { useMemo, useSyncExternalStore } from "react";
+
 import { WELCOME_SURVEY_STORAGE_IMPLEMENTATIONS } from "@/config/storage.config";
 import { WelcomeSurvey } from "@/domain/welcomeSurvey/WelcomeSurvey";
 import { useDevSettings } from "@/ui/devSettings/DevSettingsContext";

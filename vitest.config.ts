@@ -37,11 +37,7 @@ export default defineConfig({
     coverage: {
       provider: "v8",
       reporter: ["text", "html"],
-      include: [
-        "src/domain/**/*.{ts,tsx}",
-        "src/ui/**/*.{ts,tsx}",
-        "src/i18n/**/*.{ts,tsx}",
-      ],
+      include: ["src/domain/**/*.{ts,tsx}", "src/ui/**/*.{ts,tsx}", "src/i18n/**/*.{ts,tsx}"],
       exclude: ["src/**/__spec__/**", "src/**/*.spec.{ts,tsx}", "src/ui/primitives/**"],
       thresholds: {
         "src/domain/**": {

@@ -1,6 +1,7 @@
-import { ProductCatalog } from "@/data/products.ts";
 import type { Locale } from "@/i18n/Locale.ts";
 import type { Messages } from "@/i18n/messages/en.ts";
+
+import { ProductCatalog } from "@/data/products.ts";
 import { en } from "@/i18n/messages/en.ts";
 import { fr } from "@/i18n/messages/fr.ts";
 

@@ -5,10 +5,7 @@ export interface ProductProfileContent {
   effects: string[];
 }
 
-export type ProductContent = Record<
-  string,
-  Record<KnowledgeProfile, ProductProfileContent>
->;
+export type ProductContent = Record<string, Record<KnowledgeProfile, ProductProfileContent>>;
 
 export const productContentEn: ProductContent = {
   thunderfury: {
@@ -39,8 +36,7 @@ export const productContentEn: ProductContent = {
   },
   ashbringer: {
     beginner: {
-      description:
-        "A holy sword blessed to purge the undead. Known for its radiant power.",
+      description: "A holy sword blessed to purge the undead. Known for its radiant power.",
       effects: ["Bonus against undead enemies."],
     },
     intermediate: {
@@ -51,11 +47,7 @@ export const productContentEn: ProductContent = {
     expert: {
       description:
         "Ashbringer is the embodiment of righteousness. It delivers devastating holy strikes and vanquishes evil.",
-      effects: [
-        "Holy damage +50%",
-        "Instant kill chance on undead",
-        "Grant blessing to allies",
-      ],
+      effects: ["Holy damage +50%", "Instant kill chance on undead", "Grant blessing to allies"],
     },
   },
   sulfuras: {
@@ -64,18 +56,13 @@ export const productContentEn: ProductContent = {
       effects: ["Fire damage over time."],
     },
     intermediate: {
-      description:
-        "Sulfuras channels molten fire into devastating blows that incinerate enemies.",
+      description: "Sulfuras channels molten fire into devastating blows that incinerate enemies.",
       effects: ["Fire blast chance", "Burn enemies for 10s"],
     },
     expert: {
       description:
         "Sulfuras is a weapon of pure elemental fury, capable of burning armies with a single strike.",
-      effects: [
-        "Fire damage +70%",
-        "Area of effect burn",
-        "Ignite enemies on critical strike",
-      ],
+      effects: ["Fire damage +70%", "Area of effect burn", "Ignite enemies on critical strike"],
     },
   },
   valanyr: {
@@ -107,8 +94,7 @@ export const productContentEn: ProductContent = {
       effects: ["Shockwave radius +15%", "Stun chance on heavy attacks"],
     },
     expert: {
-      description:
-        "Doomhammer is the ultimate weapon of war, capable of shaking the very earth.",
+      description: "Doomhammer is the ultimate weapon of war, capable of shaking the very earth.",
       effects: [
         "Shockwave radius +50%",
         "Stun all enemies within range",
@@ -150,10 +136,7 @@ export const productContentEn: ProductContent = {
     intermediate: {
       description:
         "Shadowmourne feeds on the souls of the fallen, each one making the blade sharper and deadlier.",
-      effects: [
-        "Attack power +20% per soul consumed (stacks)",
-        "Chance to unleash a shadow flame",
-      ],
+      effects: ["Attack power +20% per soul consumed (stacks)", "Chance to unleash a shadow flame"],
     },
     expert: {
       description:
@@ -195,11 +178,7 @@ export const productContentEn: ProductContent = {
     intermediate: {
       description:
         "The Warglaives of Azzinoth cut through flesh and fel alike, granting the wielder demonic speed.",
-      effects: [
-        "Attack speed +20%",
-        "Fel damage on hit",
-        "Bonus damage against demons +25%",
-      ],
+      effects: ["Attack speed +20%", "Fel damage on hit", "Bonus damage against demons +25%"],
     },
     expert: {
       description:
@@ -285,11 +264,7 @@ export const productContentEn: ProductContent = {
     intermediate: {
       description:
         "Rhok'delar was grown by the Ancients of Felwood themselves, its living wood channeling nature's own strength into every arrow.",
-      effects: [
-        "Attack speed +15%",
-        "Poison damage on hit",
-        "Bonus damage against demons +20%",
-      ],
+      effects: ["Attack speed +15%", "Poison damage on hit", "Bonus damage against demons +20%"],
     },
     expert: {
       description:
@@ -504,8 +479,7 @@ export const productContentEn: ProductContent = {
       effects: ["Bonus damage against beasts."],
     },
     intermediate: {
-      description:
-        "Titanstrike channels titan-forged engineering into devastating, precise shots.",
+      description: "Titanstrike channels titan-forged engineering into devastating, precise shots.",
       effects: ["Ranged attack power +20%", "Chance to fire a piercing shot"],
     },
     expert: {
@@ -587,8 +561,7 @@ export const productContentEn: ProductContent = {
       effects: ["Heals the wielder's allies over time."],
     },
     intermediate: {
-      description:
-        "T'uure channels naaru radiance to shelter and heal those under its light.",
+      description: "T'uure channels naaru radiance to shelter and heal those under its light.",
       effects: ["Healing done +20%", "Shields the wielder's target"],
     },
     expert: {

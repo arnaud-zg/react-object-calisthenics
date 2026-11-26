@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+
 import { Money } from "@/domain/cart/value-objects/Money";
+
 import { goldSilverCopperFormatter } from "../GoldSilverCopperFormatter";
 
 describe("goldSilverCopperFormatter", () => {

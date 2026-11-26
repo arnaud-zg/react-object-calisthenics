@@ -1,8 +1,7 @@
-import type {
-  KnowledgeProfile,
-  Product,
-} from "@/domain/cart/value-objects/Product/Product";
+import type { KnowledgeProfile, Product } from "@/domain/cart/value-objects/Product/Product";
+
 import { Card } from "@/ui/primitives/card";
+
 import { ProductCardContent } from "./ProductCardContent";
 import { ProductCardFooter } from "./ProductCardFooter";
 import { ProductCardHeader } from "./ProductCardHeader";

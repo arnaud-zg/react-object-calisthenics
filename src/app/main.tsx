@@ -1,10 +1,13 @@
-import { RouterProvider } from "@tanstack/react-router";
 import { StrictMode } from "react";
+import { RouterProvider } from "@tanstack/react-router";
 import ReactDOM from "react-dom/client";
+
 import { ANALYTICS_CONFIG } from "@/config/analytics.config";
-import { SITE_CONFIG } from "@/config/site.config";
+
 import { createAppRouter } from "./router.ts";
+
 import "@/styles/styles.css";
+
 import reportWebVitals from "../reportWebVitals.ts";
 
 const params = new URLSearchParams(window.location.search);
@@ -17,7 +20,8 @@ const rootElement = document.getElementById("app");
 if (rootElement) {
   const wasPrerendered = Boolean(rootElement.innerHTML);
   const router = createAppRouter({
-    basepath: SITE_CONFIG.basePath,
+    // Vite's base: SITE_CONFIG.basePath, or the preview's folder when Shiplane sets BASE_PATH.
+    basepath: import.meta.env.BASE_URL,
     hydratingPrerenderedContent: wasPrerendered,
   });
   const app = (

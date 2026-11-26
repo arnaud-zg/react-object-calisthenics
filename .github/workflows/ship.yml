@@ -1,0 +1,36 @@
+# Ships with shiplane: `pnpm shiplane ship --via ci`, or Run workflow here.
+# Written by `shiplane setup`; `shiplane doctor` keeps the pin current.
+name: Ship
+run-name: Ship ${{ inputs.units || 'every released unit' }} to ${{ inputs.environment }}
+
+on:
+  workflow_dispatch:
+    inputs:
+      units:
+        description: "Units to ship, space separated (empty: every unit the environment lacks)"
+        type: string
+        default: ""
+      environment:
+        description: "Where to ship the ref this runs on"
+        type: choice
+        options: [preview, production]
+        default: preview
+      ref:
+        description: "The tag to ship; shiplane sets it (empty: the ref this runs on)"
+        type: string
+        default: ""
+
+permissions:
+  contents: write
+  deployments: write
+  actions: read
+  pages: write
+
+jobs:
+  ship:
+    uses: arnaud-zg/js-packages/.github/workflows/shiplane-ship.yml@be28b956c2ec7a925523ff4d69dafba6c537cd42 # shiplane@0.6.0-nightly.12
+    with:
+      units: ${{ inputs.units }}
+      environment: ${{ inputs.environment }}
+      ref: ${{ inputs.ref }}
+      variables: VITE_UMAMI_WEBSITE_ID

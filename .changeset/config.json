@@ -1,0 +1,19 @@
+{
+  "changelog": [
+    "@changesets/changelog-github",
+    {
+      "repo": "arnaud-zg/react-object-calisthenics"
+    }
+  ],
+  "commit": false,
+  "fixed": [],
+  "linked": [],
+  "access": "restricted",
+  "baseBranch": "main",
+  "updateInternalDependencies": "patch",
+  "ignore": [],
+  "privatePackages": {
+    "version": true,
+    "tag": false
+  }
+}

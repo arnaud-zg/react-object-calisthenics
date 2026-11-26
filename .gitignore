@@ -27,3 +27,6 @@ playwright-report
 *.njsproj
 *.sln
 *.sw?
+
+# Local settings, see .env.example.
+.env

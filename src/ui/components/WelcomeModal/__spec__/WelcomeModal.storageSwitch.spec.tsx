@@ -1,6 +1,7 @@
 import { render, screen } from "@testing-library/react";
 import userEvent from "@testing-library/user-event";
 import { beforeEach, describe, expect, it } from "vitest";
+
 import { DevSettingsModal } from "@/ui/components/DevSettingsModal";
 import { WelcomeModal } from "@/ui/components/WelcomeModal/WelcomeModal";
 import { DevSettingsProvider } from "@/ui/devSettings/DevSettingsContext";
@@ -66,7 +67,7 @@ describe("switching the welcome survey storage implementation live", () => {
 
     await saveSurvey(user, "expert");
 
-    const stored = JSON.parse(localStorage.getItem(WELCOME_SURVEY_KEY) ?? "");
+    const stored = JSON.parse(localStorage.getItem(WELCOME_SURVEY_KEY) ?? "") as unknown;
     expect(stored).toMatchObject({ state: { survey: { skill: "expert" } } });
     expect(stored).not.toEqual({ survey: { skill: "expert" } });
   });

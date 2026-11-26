@@ -1,6 +1,8 @@
 /** @vitest-environment jsdom */
 import { beforeEach, describe, expect, it, vi } from "vitest";
+
 import { WELCOME_SURVEY_KEY } from "@/domain/welcomeSurvey/WelcomeSurveyStore.config";
+
 import { LocalStorageWelcomeSurveyRepository } from "../LocalStorageWelcomeSurvey.repository";
 
 describe("LocalStorageWelcomeSurveyRepository", () => {

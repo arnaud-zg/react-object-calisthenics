@@ -1,8 +1,10 @@
-import { createContext, type ReactNode, useCallback, useContext, useState } from "react";
+import type { WelcomeSurveyStorageKey } from "@/config/welcomeSurveyStorageKeys";
+import type { ReactNode } from "react";
+import { createContext, useCallback, useContext, useState } from "react";
+
 import {
   DEFAULT_WELCOME_SURVEY_STORAGE_KEY,
   isWelcomeSurveyStorageKey,
-  type WelcomeSurveyStorageKey,
 } from "@/config/welcomeSurveyStorageKeys";
 
 const STORAGE_KEY = "dev-settings.welcome-survey-storage";
@@ -59,9 +61,7 @@ export function DevSettingsProvider({ children }: DevSettingsProviderProps) {
   }, []);
 
   return (
-    <DevSettingsContext.Provider
-      value={{ welcomeSurveyStorageKey, setWelcomeSurveyStorageKey }}
-    >
+    <DevSettingsContext.Provider value={{ welcomeSurveyStorageKey, setWelcomeSurveyStorageKey }}>
       {children}
     </DevSettingsContext.Provider>
   );

@@ -1,11 +1,10 @@
-import {
-  DEFAULT_WELCOME_SURVEY_STORAGE_KEY,
-  type WelcomeSurveyStorageKey,
-} from "@/config/welcomeSurveyStorageKeys";
+import type { WelcomeSurveyStorageKey } from "@/config/welcomeSurveyStorageKeys";
+import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
+
+import { DEFAULT_WELCOME_SURVEY_STORAGE_KEY } from "@/config/welcomeSurveyStorageKeys";
 import { LocalStorageWelcomeSurveyRepository } from "@/domain/welcomeSurvey/infrastructure/LocalStorageWelcomeSurvey.repository";
 import { TanStackStoreWelcomeSurveyRepository } from "@/domain/welcomeSurvey/infrastructure/TanstackStoreWelcomeSurvey.repository";
 import { ZustandWelcomeSurveyRepository } from "@/domain/welcomeSurvey/infrastructure/ZustandWelcomeSurvey.repository";
-import type { WelcomeStorageRepository } from "@/domain/welcomeSurvey/WelcomeSurveyStorage.repository";
 
 export {
   DEFAULT_WELCOME_SURVEY_STORAGE_KEY,

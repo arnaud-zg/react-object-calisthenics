@@ -1,5 +1,7 @@
 import { describe, expect, it } from "vitest";
+
 import { Quantity } from "@/domain/cart/value-objects/Quantity";
+
 import { CartItem } from "../CartItem";
 import { aProduct } from "./productFixtures";
 

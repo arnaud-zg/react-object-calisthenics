@@ -76,8 +76,7 @@ export const fr: Messages = {
     watchVideo: "Regarder la vidéo",
     readLore: "Lire l'histoire",
     loreVideoFor: (name: string) => `Vidéo de l'histoire de ${name}.`,
-    readLoreOf: (name: string) =>
-      `Lire l'histoire de ${name} (ouvre dans un nouvel onglet)`,
+    readLoreOf: (name: string) => `Lire l'histoire de ${name} (ouvre dans un nouvel onglet)`,
     statsHeading: "Statistiques :",
     effectsHeading: "Effets :",
     stat: {

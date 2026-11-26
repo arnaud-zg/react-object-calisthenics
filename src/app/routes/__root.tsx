@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { createRootRoute, Outlet, useLocation } from "@tanstack/react-router";
 import { MotionConfig } from "motion/react";
-import { lazy, Suspense } from "react";
+
 import { SITE_CONFIG } from "@/config/site.config";
 import { LocaleProvider, useTranslations } from "@/i18n/LocaleContext";
 import { CartProvider } from "@/ui/components/cart/CartContext";
@@ -55,19 +56,19 @@ function RootLayout() {
   );
 }
 
-export const Route = createRootRoute({
-  component: () => {
-    const { pathname } = useLocation();
-    const locale = pathname === "/fr" || pathname.startsWith("/fr/") ? "fr" : "en";
+function RootComponent() {
+  const { pathname } = useLocation();
+  const locale = pathname === "/fr" || pathname.startsWith("/fr/") ? "fr" : "en";
 
-    return (
-      <LocaleProvider locale={locale}>
-        <DevSettingsProvider>
-          <CartProvider>
-            <RootLayout />
-          </CartProvider>
-        </DevSettingsProvider>
-      </LocaleProvider>
-    );
-  },
-});
+  return (
+    <LocaleProvider locale={locale}>
+      <DevSettingsProvider>
+        <CartProvider>
+          <RootLayout />
+        </CartProvider>
+      </DevSettingsProvider>
+    </LocaleProvider>
+  );
+}
+
+export const Route = createRootRoute({ component: RootComponent });

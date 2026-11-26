@@ -1,6 +1,7 @@
+import { lazy, Suspense } from "react";
 import { GitHubLogoIcon } from "@radix-ui/react-icons";
 import { Link } from "@tanstack/react-router";
-import { lazy, Suspense } from "react";
+
 import { useLocale, useTranslations } from "@/i18n/LocaleContext";
 import { LanguageSwitcher } from "@/ui/components/LanguageSwitcher";
 import { ThemeToggle } from "@/ui/components/ThemeToggle";
@@ -24,10 +25,7 @@ export default function Header() {
 
   return (
     <header className="sticky top-0 z-30 flex h-14 items-center justify-between gap-4 border-b bg-background/95 px-4 shadow-sm backdrop-blur-sm sm:px-10">
-      <nav
-        aria-label={t.nav.mainNavigation}
-        className="flex flex-row gap-4 font-semibold sm:gap-6"
-      >
+      <nav aria-label={t.nav.mainNavigation} className="flex flex-row gap-4 font-semibold sm:gap-6">
         <Link
           to={homePath}
           className={navLinkClassName}

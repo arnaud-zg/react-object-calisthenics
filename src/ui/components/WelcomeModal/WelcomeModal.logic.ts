@@ -1,6 +1,7 @@
 import { useEffect, useRef } from "react";
-import { WelcomeModal } from "./WelcomeModal";
+
 import type { WelcomeModalHandle } from "./WelcomeModal.types";
+import { WelcomeModal } from "./WelcomeModal";
 
 export const useWelcomeModalHandle = () => {
   const ref = useRef<WelcomeModalHandle>({
@@ -12,7 +13,7 @@ export const useWelcomeModalHandle = () => {
 
   useEffect(() => {
     if (!hasSubmittedData) {
-      ref.current?.open();
+      ref.current.open();
     }
   }, [hasSubmittedData]);
 
