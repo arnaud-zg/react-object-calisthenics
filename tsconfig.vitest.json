@@ -7,7 +7,6 @@
     "outDir": "./node_modules/.tmp/vitest",
     "types": ["vite/client"],
     "verbatimModuleSyntax": true,
-    "baseUrl": ".",
     "paths": {
       "@/*": ["./src/*"]
     }
