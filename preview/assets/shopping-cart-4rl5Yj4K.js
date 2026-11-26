@@ -1,0 +1,1 @@
+import{t as e}from"./ShoppingCartPage-UonGUHkj.js";import"./shopping-cart-J8cuuV7x.js";var t=e;export{t as component};

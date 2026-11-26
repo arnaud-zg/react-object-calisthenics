@@ -1,0 +1,27 @@
+<!doctype html>
+<html lang="en">
+  <head>
+    <meta charset="utf-8" />
+    <title>Redirecting…</title>
+    <script>
+      // This file is a static asset copied as-is by Vite, it cannot import
+      // src/config/site.config.ts. Keep repoBase in sync with SITE_CONFIG.basePath there.
+      const repoBase = "/react-object-calisthenics";
+      const redirectUrl =
+        repoBase +
+        "/index.html?p=" +
+        encodeURIComponent(location.pathname + location.search + location.hash);
+
+      // Redirect to index.html with encoded path
+      window.location.replace(redirectUrl);
+    </script>
+  </head>
+  <body>
+    <span id="message">Redirecting</span>
+    <script>
+      if (location.pathname.startsWith(`${repoBase}/fr`)) {
+        document.getElementById("message").textContent = "Redirection en cours";
+      }
+    </script>
+  </body>
+</html>
