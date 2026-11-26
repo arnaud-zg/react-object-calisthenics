@@ -11,10 +11,9 @@
     "url": "git+https://github.com/arnaud-zg/react-object-calisthenics.git"
   },
   "author": "Arnaud Zheng",
-  "packageManager": "pnpm@10.10.0",
+  "packageManager": "pnpm@12.11.2",
   "engines": {
-    "node": ">=22",
-    "pnpm": ">=10.10.0"
+    "node": ">=22.23.4"
   },
   "scripts": {
     "dev": "vite --port 3000",

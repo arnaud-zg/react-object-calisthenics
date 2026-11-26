@@ -1,0 +1,5 @@
+engineStrict: true
+
+allowBuilds:
+  # Its install script only adds the git hooks, which `pnpm install` does through `prepare`.
+  lefthook: false
